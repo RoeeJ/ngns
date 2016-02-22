@@ -274,7 +274,7 @@ public class MapleMonster extends AbstractLoadedMapleLife {
                 personalExp = Integer.MAX_VALUE;
             }
             attacker.gainExp(personalExp, true, false, highestDamage);
-            attacker.increaseEquipExp(personalExp);//better place
+            //attacker.increaseEquipExp(personalExp);//better place
             attacker.mobKilled(this.getId());
         }
     }

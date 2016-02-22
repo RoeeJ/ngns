@@ -51,6 +51,7 @@ import server.CashShop.CashItemFactory;
 import server.MapleItemInformationProvider;
 import server.MegatronListener;
 import server.TimerManager;
+import server.life.MapleMonsterInformationProvider;
 import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
 import tools.Pair;
@@ -214,9 +215,10 @@ public class Server implements Runnable {
         timeToTake = System.currentTimeMillis();
         System.out.println("Loading Items");
         MapleItemInformationProvider.getInstance().getAllItems();
-
         CashItemFactory.getSpecialCashItems();
         System.out.println("Items loaded in " + ((System.currentTimeMillis() - timeToTake) / 1000.0) + " seconds");
+        timeToTake = System.currentTimeMillis();
+
         try {
             for (int i = 0; i < Integer.parseInt(p.getProperty("worlds")); i++) {
                 System.out.println("Starting world " + i);

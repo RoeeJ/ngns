@@ -424,7 +424,7 @@ public class MapleMap {
 
         final MapleMonsterInformationProvider mi = MapleMonsterInformationProvider.getInstance();
         final List<MonsterDropEntry> dropEntry = new ArrayList<>(mi.retrieveDrop(mob.getId()));
-        Collections.shuffle(dropEntry);
+        //Collections.shuffle(dropEntry);
         for (final MonsterDropEntry de : dropEntry) {
             if (Randomizer.nextInt(999999) < de.chance * chServerrate) {
                 if (droptype == 3) {
@@ -449,7 +449,7 @@ public class MapleMap {
             if (chr.getBuffedValue(MapleBuffStat.MESOUP) != null) {
                 mesos = (int) (mesos * chr.getBuffedValue(MapleBuffStat.MESOUP).doubleValue() / 100.0);
             }
-            spawnMesoDrop(mesos * chr.getMesoRate(), calcDropPos(pos, mob.getPosition()), mob, chr, false, droptype);
+            spawnMesoDrop(mesos * chr.getMesoRate(), calcDropPos(mob.getPosition(), mob.getPosition()), mob, chr, false, droptype);
         }
         final List<MonsterGlobalDropEntry> globalEntry = mi.getGlobalDrop();
         // Global Drops
@@ -556,6 +556,7 @@ public class MapleMap {
     }
 
     public boolean damageMonster(final MapleCharacter chr, final MapleMonster monster, final int damage) {
+        Long startTime = Calendar.getInstance().getTimeInMillis();
         if (monster.getId() == 8800000) {
             for (MapleMapObject object : chr.getMap().getMapObjects()) {
                 MapleMonster mons = chr.getMap().getMonsterByOid(object.getObjectId());
@@ -599,6 +600,7 @@ public class MapleMap {
                     monster.damage(chr, damage, true);
                     if (!monster.isAlive()) {  // monster just died
                         //killMonster(monster, chr, true);
+                        //chr.dropMessage(String.format("time to kill verification %dms",Calendar.getInstance().getTimeInMillis()-startTime));
                         killed = true;
                     }
                 } else if (monster.getId() >= 8810002 && monster.getId() <= 8810009) {
@@ -628,7 +630,7 @@ public class MapleMap {
             }
             return true;
         } else {
-            FilePrinter.printError(FilePrinter.DEBUG + this.getClass().getName() + ".txt", "Remove monster: " + monster.getId() + " from Map ID: " + getId());
+            //FilePrinter.printError(FilePrinter.DEBUG + this.getClass().getName() + ".txt", "Remove monster: " + monster.getId() + " from Map ID: " + getId());
             removeMapObject(monster);
         }
         return false;
@@ -639,6 +641,7 @@ public class MapleMap {
     }
 
     public void killMonster(final MapleMonster monster, final MapleCharacter chr, final boolean withDrops, final boolean secondTime, int animation) {
+        Long startTime = Calendar.getInstance().getTimeInMillis();
         if (monster.getId() == 8810018 && !secondTime) {
             TimerManager.getInstance().schedule(new Runnable() {
                 @Override
@@ -727,31 +730,29 @@ public class MapleMap {
                 }
             }
         }
-        synchronized (this) {
-            // Horntail
-            if (monster.getId() >= 8810002 && monster.getId() <= 8810009) {
-                boolean killHorntail = true;
-                Collection<MapleMapObject> objects = getMapObjects();
-                for (MapleMapObject object : objects) {
-                    MapleMonster mons = getMonsterByOid(object.getObjectId());
-                    if (mons != null) {
-                        if (mons.getId() >= 8810002 && mons.getId() <= 8810009) {
-                            if (mons.isAlive()) {
-                                killHorntail = false;
-                                break;
-                            }
+        // Horntail
+        if (monster.getId() >= 8810002 && monster.getId() <= 8810009) {
+            boolean killHorntail = true;
+            Collection<MapleMapObject> objects = getMapObjects();
+            for (MapleMapObject object : objects) {
+                MapleMonster mons = getMonsterByOid(object.getObjectId());
+                if (mons != null) {
+                    if (mons.getId() >= 8810002 && mons.getId() <= 8810009) {
+                        if (mons.isAlive()) {
+                            killHorntail = false;
+                            break;
                         }
                     }
                 }
+            }
 
-                if (killHorntail) {
-                    objects = getMapObjects();
-                    for (MapleMapObject object : objects) {
-                        MapleMonster mons = getMonsterByOid(object.getObjectId());
-                        if (mons != null) {
-                            if (mons.getId() >= 8810010 && mons.getId() <= 8810018) {
-                                killMonster(mons, chr, withDrops);
-                            }
+            if (killHorntail) {
+                objects = getMapObjects();
+                for (MapleMapObject object : objects) {
+                    MapleMonster mons = getMonsterByOid(object.getObjectId());
+                    if (mons != null) {
+                        if (mons.getId() >= 8810010 && mons.getId() <= 8810018) {
+                            killMonster(mons, chr, withDrops);
                         }
                     }
                 }

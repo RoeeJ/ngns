@@ -1,6 +1,6 @@
 /*
 	This file is part of the OdinMS Maple Story Server
-    Copyright (C) 2008 ~ 2010 Patrick Huy <patrick.huy@frz.cc> 
+    Copyright (C) 2008 ~ 2010 Patrick Huy <patrick.huy@frz.cc>
                        Matthias Butz <matze@odinms.de>
                        Jan Christian Meyer <vimes@odinms.de>
 
@@ -18,20 +18,28 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-package client.sexbot
+package client.sexbot;
 
-import java.awt.Point
+import java.awt.Point;
 
-import server.movement.LifeMovementFragment
-import tools.data.output.LittleEndianWriter
+import server.movement.LifeMovementFragment;
+import tools.data.output.LittleEndianWriter;
 
-class ChangeEquipSpecialAwesome(private val type: Byte) : LifeMovementFragment {
+public class ChangeEquipSpecialAwesome implements LifeMovementFragment {
 
-    override fun serialize(lew: LittleEndianWriter) {
-        lew.write(this.type)
+    private final byte type;
+
+    public ChangeEquipSpecialAwesome(final byte type) {
+        this.type = type;
     }
 
-    override fun getPosition(): Point {
-        return Point(0, 0)
+    @Override
+    public void serialize(LittleEndianWriter lew) {
+        lew.write(this.type);
+    }
+
+    @Override
+    public Point getPosition() {
+        return new Point(0, 0);
     }
 }

@@ -31,6 +31,7 @@ import client.MapleClient;
 import client.inventory.Item;
 import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
+import client.sexbot.ChangeEquipSpecialAwesome;
 import net.server.Server;
 import net.server.channel.Channel;
 import net.server.world.World;
@@ -202,7 +203,7 @@ public class SexBot
                 preThink();
                 try {
                     Thread.sleep(new Random().nextInt(1000+2000));
-                    response[0] =  ChatHandler.Companion.processDefinition(splitted, name);
+                    //response[0] =  ChatHandler.Companion.processDefinition(splitted, name);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -242,7 +243,7 @@ public class SexBot
             }
             case "tell":
             {
-                response[0] = ChatHandler.Companion.generateJoke(splitted[2]);
+                //response[0] = ChatHandler.Companion.generateJoke(splitted[2]);
                 break;
             }
             case "drop":
@@ -294,7 +295,7 @@ public class SexBot
                 if(itemPairs == null || (itemPairs != null && itemPairs.size() == 0)){return "test";}
                 for(Pair<Integer, String> itemPair : itemPairs)
                 {
-                    drops.addAll(MapleMonsterInformationProvider.getInstance().retrieveDropByItemId(itemPair.getLeft()));
+                    //drops.addAll(MapleMonsterInformationProvider.getInstance().retrieveDropByItemId(itemPair.getLeft()));
                 }
                 if(drops.size() == 1) {
                     MapleMonster mob = MapleLifeFactory.getMonster(drops.get(0).mobId);
