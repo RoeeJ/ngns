@@ -81,6 +81,17 @@ public class GameConstants {
 		return rings.contains(ring.toItem().getItemId());
 	}
 
+	public static boolean canBeUsedWithMorph(int skillid) {
+		switch(skillid) {
+			case 2001003 : //magic armor
+			case 12001002: //magic armor
+			case 1001003 : //iron body
+			case 11001001: //iron body
+				return false;
+			default:
+				return true;
+		}
+	}
 	public static boolean isDisabledSkill(int skillid, int mapid) {
 		switch(skillid){
 		case 1020: 

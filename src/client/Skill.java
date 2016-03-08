@@ -32,6 +32,7 @@ public class Skill {
     public Element element;
     public int animationTime;
     public boolean action;
+    private boolean usableWithMorph;
 
     public Skill(int id) {
         this.id = id;
