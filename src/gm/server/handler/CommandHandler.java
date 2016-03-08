@@ -58,7 +58,7 @@ public class CommandHandler implements GMPacketHandler {
                 String user = slea.readMapleAsciiString();
                 for (World world : Server.getInstance().getWorlds()) {
                     if (world.isConnected(user)) {
-                        world.getPlayerStorage().getCharacterByName(user).getClient().disconnect(false, false, false);
+                        world.getPlayerStorage().getCharacterByName(user).getClient().disconnect(false, false);
                         session.write(GMPacketCreator.commandResponse((byte) 1));
                         return;
                     }

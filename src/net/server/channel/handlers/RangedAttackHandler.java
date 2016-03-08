@@ -178,9 +178,6 @@ public final class RangedAttackHandler extends AbstractDealDamageHandler {
                     player.cancelEffectFromBuffStat(MapleBuffStat.DARKSIGHT);
                     player.cancelBuffStats(MapleBuffStat.DARKSIGHT);
                 }
-                if (c.getChannelServer().getSexBot() != null && c.getChannelServer().getSexBot().getFollow().getId() == c.getPlayer().getId()) {
-                    applyAttack(attack, SexBot.getCharacter(c.getChannelServer().getSexBot()), bulletCount);
-                }
                 applyAttack(attack, player, bulletCount);
             }
         }

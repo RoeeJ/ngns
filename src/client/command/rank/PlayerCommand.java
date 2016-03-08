@@ -410,7 +410,7 @@ public class PlayerCommand extends CommandAbstract implements CommandInterface {
                     break;
                 }
                 case "home":{
-                    player.changeMap(970042510);
+                    player.changeMap(400000000);
                     break;
                 }
                 case "joinevent":

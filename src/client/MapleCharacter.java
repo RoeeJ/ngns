@@ -748,7 +748,6 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
             ret.maplemount.setActive(false);
             return ret;
         } catch (SQLException | RuntimeException e) {
-            MegatronListener.getInstance().log("#decepticons", StringUtil.exceptionStacktraceToString(e));
         }
         return null;
     }
@@ -1199,7 +1198,7 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
         TimerManager.getInstance().schedule(new Runnable() {
             @Override
             public void run() {
-                client.disconnect(false, false, false);
+                client.disconnect(false, false);
             }
         }, 5000);
     }
@@ -4439,8 +4438,9 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
         updateSingleStat(MapleStat.HP, hp);
         updateSingleStat(MapleStat.MP, mp);
     }
+
     public void heal() {
-    	setHp(getMaxHp());
+        setHp(getTotalHP());
         setMp(getMaxMp());
         updateSingleStat(MapleStat.HP, hp);
         updateSingleStat(MapleStat.MP, mp);
@@ -5372,6 +5372,10 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
 
     public void incrementEventPoints(int points) {
         setEventPoints(getEventPoints()+points);
+    }
+
+    public int getTotalHP() {
+        return localmaxhp;
     }
 
     public enum FameStatus {

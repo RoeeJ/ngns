@@ -123,7 +123,7 @@ public class MapleItemInformationProvider {
                 }
             }
         } catch (SQLException sqle) {
-            MegatronListener.getInstance().log("decepticons", StringUtil.exceptionStacktraceToString(sqle));
+
         }
         return null;
     }
@@ -141,7 +141,7 @@ public class MapleItemInformationProvider {
                 }
             }
         } catch (SQLException sqle) {
-            MegatronListener.getInstance().log("decepticons", StringUtil.exceptionStacktraceToString(sqle));
+
         }
         return null;
     }
@@ -161,7 +161,6 @@ public class MapleItemInformationProvider {
                 if (pairs.size() > 0) return pairs;
             }
         } catch (SQLException sqle) {
-            MegatronListener.getInstance().log("decepticons", StringUtil.exceptionStacktraceToString(sqle));
         }
         return null;
     }

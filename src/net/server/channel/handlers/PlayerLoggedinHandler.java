@@ -23,6 +23,7 @@ package net.server.channel.handlers;
 
 import client.*;
 import client.inventory.MapleInventoryType;
+import constants.ServerConstants;
 import gm.server.GMServer;
 import net.AbstractMaplePacketHandler;
 import net.server.PlayerBuffValueHolder;
@@ -34,6 +35,7 @@ import net.server.guild.MapleGuild;
 import net.server.world.MaplePartyCharacter;
 import net.server.world.PartyOperation;
 import net.server.world.World;
+import server.TimerManager;
 import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
@@ -217,6 +219,11 @@ public final class PlayerLoggedinHandler extends AbstractMaplePacketHandler {
         player.checkBerserk();
         player.expirationTask();
         player.setRates();
+        player.announce(MaplePacketCreator.PlaySoundWithMuteBGM("Town/Portal1\n"));
+        if(ServerConstants.WZ_LOCKDOWN) {
+            final MapleCharacter finalPlayer = player;
+            TimerManager.getInstance().schedule(()->{finalPlayer.announce(MaplePacketCreator.PlaySoundWithMuteBGM(finalPlayer.getMap().getBackgroundMusic()));},3000);
+        }
         try {
             con = DatabaseConnection.getConnection();
             ps = con.prepareStatement("SELECT muted FROM accounts WHERE id = ?", Statement.RETURN_GENERATED_KEYS);

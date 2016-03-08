@@ -620,7 +620,7 @@ public class MaplePacketCreator {
 
         short toWrite = (short) 0;
         if(c.isClientGM()) {
-            toWrite = c.getAuthByte();
+            toWrite = (byte) c.getAuthByte();
         } else {
             if (c.isGM()) {
                 toWrite = (short) 0x60;
@@ -3518,6 +3518,24 @@ public class MaplePacketCreator {
         mplew.writeInt(reactor.getObjectId());
         mplew.write(reactor.getState());
         mplew.writePos(pos);
+        return mplew.getPacket();
+    }
+
+    // Usage: user.sendPacket(MaplePacketCreator.PlaySoundWithMuteBGM("Bgm00/FloralLife"));
+    public static byte[] PlaySoundWithMuteBGM(String bgm) {
+        final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+        mplew.writeShort(SendOpcode.SHOW_ITEM_GAIN_INCHAT.getValue());
+        mplew.write(0x19);
+        mplew.writeMapleAsciiString(bgm);
+        return mplew.getPacket();
+    }
+
+    public static byte[] PlaySoundWithMuteBGM(int cid, String bgm) {
+        final MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
+        mplew.writeShort(SendOpcode.SHOW_FOREIGN_EFFECT.getValue());
+        mplew.writeInt(cid);
+        mplew.write(0x19);
+        mplew.writeMapleAsciiString(bgm);
         return mplew.getPacket();
     }
 

@@ -89,7 +89,7 @@ public class PlayerStorage {
 	try {	    
             final Iterator<MapleCharacter> chrit = storage.values().iterator();
 	    while (chrit.hasNext()) {
-                chrit.next().getClient().disconnect(true, false, false);
+                chrit.next().getClient().disconnect(true, false);
                 chrit.remove();
             }
 	} finally {

@@ -31,6 +31,7 @@ import scripting.npc.NPCScriptManager;
 import scripting.portal.PortalScriptManager;
 import scripting.reactor.ReactorScriptManager;
 import server.MapleShopFactory;
+import server.TimerManager;
 import server.events.gm.MapleOxQuiz;
 import server.life.MapleLifeFactory;
 import server.life.MapleMonsterInformationProvider;
@@ -239,8 +240,20 @@ public class AdminCommand extends GMCommand implements CommandInterface
                 mpc.updateSingleStat(MapleStat.LEVEL, player.getLevel());
                 mpc.setExp(0);
                 mpc.updateSingleStat(MapleStat.EXP, 0);
+                player.setLevel(Integer.parseInt(splitted[1]));
+                player.gainExp(-player.getExp(), false, false);
+                player.updateSingleStat(MapleStat.LEVEL, player.getLevel());
+                player.setExp(0);
+                player.updateSingleStat(MapleStat.EXP, 0);
 
                 player.dropMessage("Done.");
+                break;
+            }
+            case "bgm":
+            {
+                if(splitted.length == 1) break;
+                String path = splitted[1];
+                player.getMap().broadcastMessage(MaplePacketCreator.musicChange(path));
                 break;
             }
             case "saveall":

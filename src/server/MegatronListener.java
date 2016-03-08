@@ -200,10 +200,4 @@ public class MegatronListener implements SlackMessageListener {
 	private SlackChannel getChannelByName(String name){
 		return getSession().findChannelByName(name);
 	}
-	public void log(String _channel, String message) {
-		SlackChannel channel = getChannelByName(_channel);
-		if(channel != null){
-		getSession().sendMessageOverWebSocket(channel, message,null);
-		}
-	}
 }

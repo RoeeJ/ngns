@@ -44,6 +44,7 @@ public class ServerConstants {
     public static final boolean USE_SLACK = false;
     public static final boolean USE_WEBSOCKET = false;
     public static final boolean USE_MONGO = false;
+    public static final boolean WZ_LOCKDOWN = false;
     public static short VERSION = 83;
     public static String[] WORLD_NAMES = {"Scania", "Bera", "Broa", "Windia", "Khaini", "Bellocan", "Mardia", "Kradia", "Yellonde", "Demethos", "Galicia", "El Nido", "Zenith", "Arcenia", "Kastia", "Judis", "Plana", "Kalluna", "Stius", "Croa", "Medere"};
     public static String hitmanAnswer;

@@ -222,9 +222,13 @@ public class MapleStatEffect {
                 case Beginner.RECOVERY:
                 case Noblesse.RECOVERY:
                 case Legend.RECOVERY:
+                    statups.add(new Pair<>(MapleBuffStat.RECOVERY, Integer.valueOf(x)));
+                    break;
                 case Beginner.ECHO_OF_HERO:
                 case Noblesse.ECHO_OF_HERO:
                 case Legend.ECHO_OF_HERO:
+                    statups.add(new Pair<>(MapleBuffStat.ECHO_OF_HERO, Integer.valueOf(ret.x)));
+                    break;
                 case Beginner.MONSTER_RIDER:
                 case Noblesse.MONSTER_RIDER:
                 case Legend.MONSTER_RIDER:

@@ -57,7 +57,7 @@ public final class ChangeChannelHandler extends AbstractMaplePacketHandler {
             }
         }
         if (chr.isBanned()) {
-            c.disconnect(false, false, false);
+            c.disconnect(false, false);
             return;
         }
         if (!chr.isAlive() || FieldLimit.CHANGECHANNEL.check(chr.getMap().getFieldLimit())) {

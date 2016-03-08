@@ -46,7 +46,7 @@ public final class ItemIdSortHandler extends AbstractMaplePacketHandler {
         chr.getAutobanManager().setTimestamp(4, slea.readInt());
         byte inv = slea.readByte();
         if (inv < 0 || inv > 5) {
-            c.disconnect(false, false, false);
+            c.disconnect(false, false);
             return;
         }
         MapleInventory Inv = chr.getInventory(MapleInventoryType.getByType(inv));

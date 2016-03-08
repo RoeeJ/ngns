@@ -6,25 +6,44 @@
     </artifacts-to-build>
   </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/tools/MaplePacketCreator.java" line="1663" />
+    <bookmark url="file://$PROJECT_DIR$/src/tools/MaplePacketCreator.java" line="1664" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="81c88116-f08f-423b-9316-51033ded4158" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/client/sexbot/ChangeEquipSpecialAwesome.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/sexbot/ChangeEquipSpecialAwesome.kt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/client/sexbot/ChatHandler.kt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/sexbot/SexBot.java" afterPath="$PROJECT_DIR$/src/client/sexbot/SexBot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/Server.java" afterPath="$PROJECT_DIR$/src/net/server/Server.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/channel/handlers/AbstractDealDamageHandler.java" afterPath="$PROJECT_DIR$/src/net/server/channel/handlers/AbstractDealDamageHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/MapleCharacter.java" afterPath="$PROJECT_DIR$/src/client/MapleCharacter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/MapleClient.java" afterPath="$PROJECT_DIR$/src/client/MapleClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/autoban/AutobanManager.java" afterPath="$PROJECT_DIR$/src/client/autoban/AutobanManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/command/CommandAbstract.java" afterPath="$PROJECT_DIR$/src/client/command/CommandAbstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/command/CommandProcessor.java" afterPath="$PROJECT_DIR$/src/client/command/CommandProcessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/command/rank/AdminCommand.java" afterPath="$PROJECT_DIR$/src/client/command/rank/AdminCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/command/rank/GMCommand.java" afterPath="$PROJECT_DIR$/src/client/command/rank/GMCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/command/rank/JrGMCommand.java" afterPath="$PROJECT_DIR$/src/client/command/rank/JrGMCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/client/command/rank/PlayerCommand.java" afterPath="$PROJECT_DIR$/src/client/command/rank/PlayerCommand.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/constants/ServerConstants.java" afterPath="$PROJECT_DIR$/src/constants/ServerConstants.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/gm/server/handler/CommandHandler.java" afterPath="$PROJECT_DIR$/src/gm/server/handler/CommandHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/MapleServerHandler.java" afterPath="$PROJECT_DIR$/src/net/MapleServerHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/PlayerStorage.java" afterPath="$PROJECT_DIR$/src/net/server/PlayerStorage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/channel/handlers/ChangeChannelHandler.java" afterPath="$PROJECT_DIR$/src/net/server/channel/handlers/ChangeChannelHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/channel/handlers/ItemIdSortHandler.java" afterPath="$PROJECT_DIR$/src/net/server/channel/handlers/ItemIdSortHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/channel/handlers/PlayerLoggedinHandler.java" afterPath="$PROJECT_DIR$/src/net/server/channel/handlers/PlayerLoggedinHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/channel/handlers/RangedAttackHandler.java" afterPath="$PROJECT_DIR$/src/net/server/channel/handlers/RangedAttackHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/handlers/login/AcceptToSHandler.java" afterPath="$PROJECT_DIR$/src/net/server/handlers/login/AcceptToSHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/handlers/login/CharSelectedWithPicHandler.java" afterPath="$PROJECT_DIR$/src/net/server/handlers/login/CharSelectedWithPicHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/handlers/login/LoginPasswordHandler.java" afterPath="$PROJECT_DIR$/src/net/server/handlers/login/LoginPasswordHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/net/server/handlers/login/ServerlistRequestHandler.java" afterPath="$PROJECT_DIR$/src/net/server/handlers/login/ServerlistRequestHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/MapleItemInformationProvider.java" afterPath="$PROJECT_DIR$/src/server/MapleItemInformationProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/MapleStatEffect.java" afterPath="$PROJECT_DIR$/src/server/MapleStatEffect.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/MegatronListener.java" afterPath="$PROJECT_DIR$/src/server/MegatronListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/life/MapleMonster.java" afterPath="$PROJECT_DIR$/src/server/life/MapleMonster.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/life/MapleMonsterInformationProvider.java" afterPath="$PROJECT_DIR$/src/server/life/MapleMonsterInformationProvider.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/maps/MapleMap.java" afterPath="$PROJECT_DIR$/src/server/maps/MapleMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tools/DatabaseConnection.java" afterPath="$PROJECT_DIR$/src/tools/DatabaseConnection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/server/maps/MapleMapFactory.java" afterPath="$PROJECT_DIR$/src/server/maps/MapleMapFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tools/MaplePacketCreator.java" afterPath="$PROJECT_DIR$/src/tools/MaplePacketCreator.java" />
     </list>
     <ignored path="NGNS.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path=".idea/dataSources.local.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,68 +61,121 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AbstractDealDamageHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/AbstractDealDamageHandler.java">
+      <file leaf-file-name="ServerlistRequestHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/ServerlistRequestHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="18" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="18" />
+              <caret line="43" column="86" selection-start-line="43" selection-start-column="86" selection-end-line="43" selection-end-column="86" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapleMap.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/server/maps/MapleMap.java">
+      <file leaf-file-name="ServerConstants.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/constants/ServerConstants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
-              <caret line="628" column="0" selection-start-line="628" selection-start-column="0" selection-end-line="628" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/net/server/Server.java">
+      <file leaf-file-name="PlayerLoggedinHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/PlayerLoggedinHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="219" column="48" selection-start-line="219" selection-start-column="48" selection-end-line="219" selection-end-column="48" />
+              <caret line="222" column="27" selection-start-line="222" selection-start-column="27" selection-end-line="222" selection-end-column="27" />
+              <folding>
+                <marker date="1457391753925" expanded="true" signature="4220:4287" placeholder="SELECT Mesos... dueypackages" />
+                <marker date="1457391753925" expanded="true" signature="4499:4555" placeholder="UPDATE dueyp... " />
+                <marker date="1457391753925" expanded="true" signature="9589:9628" placeholder="SELECT muted... accounts" />
+                <marker date="1457391753925" expanded="true" signature="10025:10068" placeholder="SELECT birth... accounts" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SendOpcode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/SendOpcode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+              <folding>
+                <element signature="e#9741#9742#0" expanded="true" />
+                <element signature="e#9773#9774#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ServerStatusRequestHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/ServerStatusRequestHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.09513742">
+              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapleMonster.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/life/MapleMonster.java">
+      <file leaf-file-name="MapleClient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/MapleClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.060606">
-              <caret line="276" column="39" selection-start-line="276" selection-start-column="23" selection-end-line="276" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="669" column="43" selection-start-line="669" selection-start-column="43" selection-end-line="669" selection-end-column="43" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#5049#5050#0" expanded="true" />
+                <element signature="e#5129#5130#0" expanded="true" />
+                <element signature="e#28830#28831#0" expanded="true" />
+                <element signature="e#28868#28869#0" expanded="true" />
+                <marker date="1457479919767" expanded="true" signature="6005:6070" placeholder="SELECT id, n... characters" />
+                <marker date="1457479919767" expanded="true" signature="6731:6787" placeholder="SELECT COUNT... ipbans" />
+                <marker date="1457479919767" expanded="true" signature="8417:8455" placeholder="SELECT macs accounts" />
+                <marker date="1457479919767" expanded="true" signature="9059:9097" placeholder="INSERT INTO ipbans... " />
+                <marker date="1457479919767" expanded="true" signature="9445:9474" placeholder="SELECT filte... macfilters" />
+                <marker date="1457479919767" expanded="true" signature="9702:9738" placeholder="INSERT INTO macbans... " />
+                <marker date="1457479919767" expanded="true" signature="10857:10897" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="11606:11646" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="12551:12686" placeholder="SELECT id, p... accounts" />
+                <marker date="1457479919767" expanded="true" signature="14143:14191" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="15338:15385" placeholder="INSERT INTO iplog... " />
+                <marker date="1457479919767" expanded="true" signature="16136:16179" placeholder="SELECT birth... accounts" />
+                <marker date="1457479919767" expanded="true" signature="17010:17053" placeholder="SELECT `temp... accounts" />
+                <marker date="1457479919767" expanded="true" signature="18427:18468" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="19263:19356" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="20044:20135" placeholder="SELECT logge... accounts" />
+                <marker date="1457479919767" expanded="true" signature="21175:21220" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="29384:29480" placeholder="SELECT id, g... characters" />
+                <marker date="1457479919767" expanded="true" signature="30259:30297" placeholder="DELETE FROM " />
+                <marker date="1457479919767" expanded="true" signature="30450:30485" placeholder="DELETE FROM " />
+                <marker date="1457479919767" expanded="true" signature="33690:33729" placeholder="SELECT `tos`... accounts" />
+                <marker date="1457479919767" expanded="true" signature="34092:34132" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="34717:34768" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="35310:35355" placeholder="SELECT `grea... accounts" />
+                <marker date="1457479919767" expanded="true" signature="36144:36187" placeholder="UPDATE accou... " />
+                <marker date="1457479919767" expanded="true" signature="37239:37290" placeholder="SELECT Sessi... accounts" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseConnection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tools/DatabaseConnection.java">
+      <file leaf-file-name="RecvOpcode.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/RecvOpcode.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SexBot.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/client/sexbot/SexBot.java">
+      <file leaf-file-name="PacketProcessor.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/PacketProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="297" column="22" selection-start-line="297" selection-start-column="22" selection-end-line="297" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <caret line="93" column="77" selection-start-line="93" selection-start-column="77" selection-end-line="93" selection-end-column="77" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -112,17 +184,84 @@
         <entry file="file://$PROJECT_DIR$/src/client/MapleCharacter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5175" column="16" selection-start-line="5175" selection-start-column="16" selection-end-line="5175" selection-end-column="16" />
-              <folding />
+              <caret line="1012" column="39" selection-start-line="1012" selection-start-column="39" selection-end-line="1012" selection-end-column="39" />
+              <folding>
+                <marker date="1457479919760" expanded="true" signature="13805:13843" placeholder="SELECT id FR... accounts" />
+                <marker date="1457479919760" expanded="true" signature="13911:13958" placeholder="SELECT accou... characters" />
+                <marker date="1457479919760" expanded="true" signature="14231:14289" placeholder="UPDATE accou... " />
+                <marker date="1457479919760" expanded="true" signature="15981:16048" placeholder="SELECT `id`,... characters" />
+                <marker date="1457479919760" expanded="true" signature="16954:16994" placeholder="SELECT id FR... characters" />
+                <marker date="1457479919760" expanded="true" signature="17607:17647" placeholder="SELECT name characters" />
+                <marker date="1457479919760" expanded="true" signature="18467:18504" placeholder="SELECT * FRO... characters" />
+                <marker date="1457479919760" expanded="true" signature="25163:25230" placeholder="SELECT mapid... trocklocations" />
+                <marker date="1457479919760" expanded="true" signature="25966:26004" placeholder="SELECT name accounts" />
+                <marker date="1457479919760" expanded="true" signature="26318:26370" placeholder="SELECT `area... area_info" />
+                <marker date="1457479919760" expanded="true" signature="26655:26713" placeholder="SELECT `name... eventstats" />
+                <marker date="1457479919760" expanded="true" signature="27446:27540" placeholder="SELECT name,... characters" />
+                <marker date="1457479919760" expanded="true" signature="27931:27978" placeholder="SELECT * FRO... queststatus" />
+                <marker date="1457479919760" expanded="true" signature="28166:28217" placeholder="SELECT * FRO... questprogress" />
+                <marker date="1457479919760" expanded="true" signature="28271:28322" placeholder="SELECT mapid... medalmaps" />
+                <marker date="1457479919760" expanded="true" signature="29771:29853" placeholder="SELECT skill... skills" />
+                <marker date="1457479919760" expanded="true" signature="30905:30944" placeholder="SELECT muted... accounts" />
+                <marker date="1457479919760" expanded="true" signature="31228:31291" placeholder="SELECT Skill... cooldowns" />
+                <marker date="1457479919760" expanded="true" signature="31914:31952" placeholder="DELETE FROM " />
+                <marker date="1457479919760" expanded="true" signature="32106:32153" placeholder="SELECT * FRO... skillmacros" />
+                <marker date="1457479919760" expanded="true" signature="32671:32733" placeholder="SELECT `key`... keymap" />
+                <marker date="1457479919760" expanded="true" signature="33213:33291" placeholder="SELECT `loca... savedlocations" />
+                <marker date="1457479919760" expanded="true" signature="33692:33789" placeholder="SELECT `char... famelog" />
+                <marker date="1457479919760" expanded="true" signature="41918:41976" placeholder="UPDATE accou... " />
+                <marker date="1457479919760" expanded="true" signature="46557:46599" placeholder="UPDATE accou... " />
+                <marker date="1457479919760" expanded="true" signature="63329:63385" placeholder="DELETE FROM " />
+                <marker date="1457479919760" expanded="true" signature="67491:67557" placeholder="UPDATE chara... " />
+                <marker date="1457479919760" expanded="true" signature="67708:67744" placeholder="DELETE FROM " />
+                <marker date="1457479919760" expanded="true" signature="88933:88977" placeholder="SELECT jobid... unlockedjobs" />
+                <marker date="1457479919760" expanded="true" signature="89663:89720" placeholder="INSERT INTO `unlockedjobs`... " />
+                <marker date="1457479919760" expanded="true" signature="96505:96557" placeholder="UPDATE chara... " />
+                <marker date="1457479919760" expanded="true" signature="97004:97047" placeholder="SELECT secre... accounts" />
+                <marker date="1457479919760" expanded="true" signature="111440:111503" placeholder="INSERT INTO famelog... " />
+                <marker date="1457479919760" expanded="true" signature="120753:120797" placeholder="SELECT id FR... playernpcs" />
+                <marker date="1457479919760" expanded="true" signature="120984:121114" placeholder="INSERT INTO playernpcs... " />
+                <marker date="1457479919760" expanded="true" signature="121925:121997" placeholder="INSERT INTO playernpcs_equip... " />
+                <marker date="1457479919760" expanded="true" signature="122609:122652" placeholder="SELECT * FRO... playernpcs" />
+                <marker date="1457479919760" expanded="true" signature="137630:137708" placeholder="INSERT INTO cooldowns... " />
+                <marker date="1457479919760" expanded="true" signature="138377:138456" placeholder="UPDATE chara... " />
+                <marker date="1457479919760" expanded="true" signature="139332:139520" placeholder="INSERT INTO characters... " />
+                <marker date="1457479919760" expanded="true" signature="140851:140928" placeholder="INSERT INTO keymap... " />
+                <marker date="1457479919760" expanded="true" signature="144453:145202" placeholder="UPDATE chara... " />
+                <marker date="1457479919760" expanded="true" signature="148935:149012" placeholder="INSERT INTO keymap... " />
+                <marker date="1457479919760" expanded="true" signature="149513:149626" placeholder="INSERT INTO skillmacros... " />
+                <marker date="1457479919760" expanded="true" signature="150668:150769" placeholder="INSERT INTO skills... " />
+                <marker date="1457479919760" expanded="true" signature="151314:151407" placeholder="INSERT INTO savedlocations... " />
+                <marker date="1457479919760" expanded="true" signature="152075:152143" placeholder="INSERT INTO trocklocations... " />
+                <marker date="1457479919760" expanded="true" signature="152479:152547" placeholder="INSERT INTO trocklocations... " />
+                <marker date="1457479919760" expanded="true" signature="152994:153078" placeholder="INSERT INTO buddies... " />
+                <marker date="1457479919760" expanded="true" signature="153552:153624" placeholder="INSERT INTO area_info... " />
+                <marker date="1457479919760" expanded="true" signature="154116:154244" placeholder="INSERT INTO queststatus... " />
+                <marker date="1457479919760" expanded="true" signature="154379:154430" placeholder="INSERT INTO questprogress... " />
+                <marker date="1457479919760" expanded="true" signature="154480:154524" placeholder="INSERT INTO medalmaps... " />
+                <marker date="1457479919760" expanded="true" signature="155785:155824" placeholder="UPDATE accou... " />
+                <marker date="1457479919760" expanded="true" signature="158131:158218" placeholder="INSERT INTO notes... " />
+                <marker date="1457479919760" expanded="true" signature="160939:160989" placeholder="UPDATE chara... " />
+                <marker date="1457479919760" expanded="true" signature="161385:161437" placeholder="UPDATE chara... " />
+                <marker date="1457479919760" expanded="true" signature="165972:166022" placeholder="SELECT * FRO... notes" />
+                <marker date="1457479919760" expanded="true" signature="176078:176150" placeholder="UPDATE accou... " />
+                <marker date="1457479919760" expanded="true" signature="179558:179639" placeholder="INSERT INTO logs_events... " />
+                <marker date="1457479919760" expanded="true" signature="180752:180811" placeholder="UPDATE logs_... " />
+                <marker date="1457479919760" expanded="true" signature="181633:181710" placeholder="UPDATE logs_... " />
+                <marker date="1457479919760" expanded="true" signature="182918:182963" placeholder="SELECT event... characters" />
+                <marker date="1457479919760" expanded="true" signature="183512:183558" placeholder="UPDATE chara... " />
+                <marker date="1457479919760" expanded="true" signature="188444:188488" placeholder="SELECT votep... accounts" />
+                <marker date="1457479919760" expanded="true" signature="188921:188968" placeholder="UPDATE accou... " />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MapleItemInformationProvider.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/server/MapleItemInformationProvider.java">
+      <file leaf-file-name="CharlistRequestHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/CharlistRequestHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="753" column="37" selection-start-line="753" selection-start-column="37" selection-end-line="753" selection-end-column="37" />
+              <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="35" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -148,57 +287,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/TouchMonsterDamageHandler.java" />
-        <option value="$PROJECT_DIR$/src/constants/skills/Hero.java" />
-        <option value="$PROJECT_DIR$/src/constants/skills/DragonKnight.java" />
-        <option value="$PROJECT_DIR$/src/constants/skills/Bishop.java" />
-        <option value="$PROJECT_DIR$/src/constants/skills/FPArchMage.java" />
-        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/MovePlayerHandler.java" />
-        <option value="$PROJECT_DIR$/src/net/server/world/MaplePartyCharacter.java" />
-        <option value="$PROJECT_DIR$/src/server/maps/MapleMist.java" />
-        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/DistributeAPHandler.java" />
-        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/SpecialMoveHandler.java" />
-        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/UseCashItemHandler.java" />
-        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/CloseRangeDamageHandler.java" />
-        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/NPCTalkHandler.java" />
-        <option value="$PROJECT_DIR$/src/client/command/rank/GMCommand.java" />
         <option value="$PROJECT_DIR$/src/net/server/channel/handlers/AbstractMovementPacketHandler.java" />
-        <option value="$PROJECT_DIR$/src/net/server/handlers/login/LoginPasswordHandler.java" />
         <option value="$PROJECT_DIR$/src/gm/server/GMServer.java" />
-        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/PlayerLoggedinHandler.java" />
-        <option value="$PROJECT_DIR$/src/client/command/rank/JrGMCommand.java" />
         <option value="$PROJECT_DIR$/src/net/server/channel/handlers/ChangeChannelHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/channel/handlers/ChangeMapHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/handlers/login/AfterLoginHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/handlers/login/CharSelectedHandler.java" />
-        <option value="$PROJECT_DIR$/src/net/server/handlers/login/CharSelectedWithPicHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/handlers/login/PickCharHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/handlers/login/RegisterPicHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/handlers/login/RegisterPinHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/handlers/login/ViewAllCharSelectedWithPicHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/handlers/login/ViewAllPicRegisterHandler.java" />
-        <option value="$PROJECT_DIR$/src/client/MapleCharacter.java" />
-        <option value="$PROJECT_DIR$/src/client/MapleClient.java" />
         <option value="$PROJECT_DIR$/src/server/life/MobSkillFactory.java" />
         <option value="$PROJECT_DIR$/src/net/server/channel/handlers/GeneralchatHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/channel/Channel.java" />
         <option value="$PROJECT_DIR$/src/net/server/channel/handlers/MoveLifeHandler.java" />
         <option value="$PROJECT_DIR$/src/server/life/MobSkill.java" />
         <option value="$PROJECT_DIR$/src/server/life/MapleLifeFactory.java" />
-        <option value="$PROJECT_DIR$/src/server/MapleStatEffect.java" />
-        <option value="$PROJECT_DIR$/src/tools/MaplePacketCreator.java" />
         <option value="$PROJECT_DIR$/src/net/server/channel/handlers/MessengerHandler.java" />
         <option value="$PROJECT_DIR$/src/net/server/world/World.java" />
         <option value="$PROJECT_DIR$/src/net/server/world/MapleMessenger.java" />
         <option value="$PROJECT_DIR$/src/net/server/channel/handlers/AbstractDealDamageHandler.java" />
         <option value="$PROJECT_DIR$/src/client/sexbot/ChangeEquipSpecialAwesome.java" />
-        <option value="$PROJECT_DIR$/src/server/MapleItemInformationProvider.java" />
         <option value="$PROJECT_DIR$/src/server/life/MapleMonsterInformationProvider.java" />
         <option value="$PROJECT_DIR$/src/net/server/Server.java" />
         <option value="$PROJECT_DIR$/src/tools/DatabaseConnection.java" />
         <option value="$PROJECT_DIR$/src/client/sexbot/SexBot.java" />
-        <option value="$PROJECT_DIR$/src/server/life/MapleMonster.java" />
+        <option value="$PROJECT_DIR$/src/server/maps/MapleMapFactory.java" />
+        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/RangedAttackHandler.java" />
         <option value="$PROJECT_DIR$/src/server/maps/MapleMap.java" />
+        <option value="$PROJECT_DIR$/src/net/server/handlers/login/CharSelectedWithPicHandler.java" />
+        <option value="$PROJECT_DIR$/src/client/MapleCharacter.java" />
+        <option value="$PROJECT_DIR$/src/server/MegatronListener.java" />
+        <option value="$PROJECT_DIR$/src/server/MapleItemInformationProvider.java" />
+        <option value="$PROJECT_DIR$/src/client/command/rank/PlayerCommand.java" />
+        <option value="$PROJECT_DIR$/src/client/command/rank/AdminCommand.java" />
+        <option value="$PROJECT_DIR$/src/constants/ServerConstants.java" />
+        <option value="$PROJECT_DIR$/src/net/server/channel/handlers/PlayerLoggedinHandler.java" />
+        <option value="$PROJECT_DIR$/src/client/command/rank/GMCommand.java" />
+        <option value="$PROJECT_DIR$/src/client/command/CommandInterface.java" />
+        <option value="$PROJECT_DIR$/src/client/command/CommandProcessor.java" />
+        <option value="$PROJECT_DIR$/src/client/command/CommandAbstract.java" />
+        <option value="$PROJECT_DIR$/src/server/life/MapleMonsterStats.java" />
+        <option value="$PROJECT_DIR$/src/server/life/MapleMonster.java" />
+        <option value="$PROJECT_DIR$/src/server/MapleStatEffect.java" />
+        <option value="$PROJECT_DIR$/src/client/command/rank/JrGMCommand.java" />
+        <option value="$PROJECT_DIR$/src/tools/MaplePacketCreator.java" />
+        <option value="$PROJECT_DIR$/src/net/server/handlers/login/LoginPasswordHandler.java" />
+        <option value="$PROJECT_DIR$/src/net/PacketProcessor.java" />
+        <option value="$PROJECT_DIR$/src/net/server/handlers/login/ServerlistRequestHandler.java" />
+        <option value="$PROJECT_DIR$/src/client/MapleClient.java" />
+        <option value="$PROJECT_DIR$/src/net/server/handlers/login/ServerStatusRequestHandler.java" />
       </list>
     </option>
   </component>
@@ -244,6 +383,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -258,7 +400,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NGNS" />
+              <option name="myItemId" value="ngns" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -268,7 +410,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NGNS" />
+              <option name="myItemId" value="ngns" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -282,7 +424,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NGNS" />
+              <option name="myItemId" value="ngns" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -300,7 +442,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="NGNS" />
+              <option name="myItemId" value="ngns" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -316,51 +458,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NGNS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NGNS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NGNS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NGNS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sexbot" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -375,6 +474,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -404,6 +504,65 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
@@ -488,6 +647,16 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
+      <module name="" />
+      <setting name="vmparams" value="" />
+      <setting name="cmdLine" value="run-app" />
+      <setting name="depsClasspath" value="false" />
+      <setting name="passParentEnv" value="true" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <setting name="launchBrowser" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -581,45 +750,12 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="NodeJSConfigurationType" factoryName="Node.js" working-dir="">
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -698,37 +834,10 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="mocha-javascript-test-runner" factoryName="Mocha">
-      <node-options />
-      <working-directory>$PROJECT_DIR$</working-directory>
-      <pass-parent-env>true</pass-parent-env>
-      <envs />
-      <ui>bdd</ui>
-      <extra-mocha-options />
-      <test-kind>DIRECTORY</test-kind>
-      <test-directory />
-      <recursive>false</recursive>
-      <method />
-    </configuration>
     <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
       <method />
     </configuration>
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
-      <method />
-    </configuration>
-    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="package" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workingDirectory" value="" />
-      <setting name="searchForTest" value="Across module dependencies" />
-      <setting name="testName" value="" />
-      <setting name="testKind" value="Class" />
-      <setting name="showProgressMessages" value="true" />
-      <envs />
       <method />
     </configuration>
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
@@ -775,37 +884,41 @@
       <workItem from="1455893829125" duration="1521000" />
       <workItem from="1455909452603" duration="1139000" />
       <workItem from="1456101784167" duration="1554000" />
+      <workItem from="1457232161938" duration="4542000" />
+      <workItem from="1457387924135" duration="6280000" />
+      <workItem from="1457470130429" duration="9222000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93814000" />
+    <option name="totallyTimeSpent" value="113858000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46268657" sideWeight="0.4" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46162048" sideWeight="0.38125" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32942432" sideWeight="0.621875" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46162048" sideWeight="0.61875" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.49791667" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2734375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32942432" sideWeight="0.378125" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2734375" sideWeight="0.49369085" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3283582" sideWeight="0.34322917" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2734375" sideWeight="0.50630915" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -830,225 +943,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/net/PacketProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="56" selection-start-line="84" selection-start-column="56" selection-end-line="84" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/command/rank/JrGMCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="578" column="84" selection-start-line="578" selection-start-column="84" selection-end-line="578" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/ChangeChannelHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="94" column="76" selection-start-line="94" selection-start-column="76" selection-end-line="94" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/ChangeMapHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="52" column="66" selection-start-line="52" selection-start-column="66" selection-end-line="52" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/ViewAllPicRegisterHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39698493">
-          <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/ViewAllCharSelectedWithPicHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5477387">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/RegisterPinHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47738692">
-          <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/RegisterPicHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6231156">
-          <caret line="35" column="66" selection-start-line="35" selection-start-column="66" selection-end-line="35" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/PickCharHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6482412">
-          <caret line="54" column="62" selection-start-line="54" selection-start-column="62" selection-end-line="54" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/CharSelectedWithPicHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5477387">
-          <caret line="32" column="0" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/CharSelectedHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5276382">
-          <caret line="47" column="62" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/AfterLoginHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77386934">
-          <caret line="59" column="9" selection-start-line="59" selection-start-column="9" selection-end-line="59" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/PlayerLoggedinHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/AdminLogHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12562814">
-          <caret line="27" column="19" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/constants/ServerConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="37" column="28" selection-start-line="37" selection-start-column="28" selection-end-line="37" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/util/TimeZone.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="128" column="40" selection-start-line="128" selection-start-column="40" selection-end-line="128" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/MapleClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="590" column="23" selection-start-line="590" selection-start-column="23" selection-end-line="590" selection-end-column="23" />
-          <folding>
-            <element signature="e#4656#4657#0" expanded="true" />
-            <element signature="e#4686#4687#0" expanded="true" />
-            <element signature="e#4741#4742#0" expanded="true" />
-            <element signature="e#4768#4769#0" expanded="true" />
-            <element signature="e#4818#4819#0" expanded="true" />
-            <element signature="e#4848#4849#0" expanded="true" />
-            <element signature="e#4889#4890#0" expanded="true" />
-            <element signature="e#4918#4919#0" expanded="true" />
-            <element signature="e#4970#4971#0" expanded="true" />
-            <element signature="e#5006#5007#0" expanded="true" />
-            <element signature="e#5050#5051#0" expanded="true" />
-            <element signature="e#5130#5131#0" expanded="true" />
-            <element signature="e#6527#6528#0" expanded="true" />
-            <element signature="e#6558#6559#0" expanded="true" />
-            <element signature="e#10661#10662#0" expanded="true" />
-            <element signature="e#10687#10688#0" expanded="true" />
-            <element signature="e#11410#11411#0" expanded="true" />
-            <element signature="e#11436#11437#0" expanded="true" />
-            <element signature="e#12162#12163#0" expanded="true" />
-            <element signature="e#12191#12192#0" expanded="true" />
-            <element signature="e#18958#18959#0" expanded="true" />
-            <element signature="e#18986#18987#0" expanded="true" />
-            <element signature="e#19022#19023#0" expanded="true" />
-            <element signature="e#19053#19054#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/UseCatchItemHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="51" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/life/MobSkillFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/GeneralchatHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="69" selection-start-line="60" selection-start-column="69" selection-end-line="60" selection-end-column="69" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/channel/Channel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8358459">
-          <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/MoveLifeHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53433836">
-          <caret line="68" column="10" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/command/rank/GMCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3835846">
-          <caret line="1106" column="58" selection-start-line="1106" selection-start-column="58" selection-end-line="1106" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/RankingWorker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22613065">
-          <caret line="34" column="13" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/life/MapleLifeFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7353434">
           <caret line="70" column="87" selection-start-line="70" selection-start-column="87" selection-end-line="70" selection-end-column="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/life/MapleMonsterStats.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.6080402">
-          <caret line="127" column="21" selection-start-line="127" selection-start-column="20" selection-end-line="127" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1070,33 +968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.061440676">
           <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/RecvOpcode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03177966">
-          <caret line="121" column="13" selection-start-line="121" selection-start-column="4" selection-end-line="121" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tools/MaplePacketCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03177966">
-          <caret line="3978" column="29" selection-start-line="3978" selection-start-column="29" selection-end-line="3978" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/SendOpcode.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03177966">
-          <caret line="186" column="19" selection-start-line="186" selection-start-column="17" selection-end-line="186" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1112,14 +983,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.80932206">
           <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/MapleStatEffect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03177966">
-          <caret line="727" column="17" selection-start-line="727" selection-start-column="17" selection-end-line="727" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1146,7 +1009,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.22245763">
           <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1154,7 +1016,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33262712">
           <caret line="1209" column="4" selection-start-line="1209" selection-start-column="4" selection-end-line="1209" selection-end-column="4" />
-          <folding />
+          <folding>
+            <marker date="1457389641872" expanded="true" signature="5198:5263" placeholder="SELECT `id`,... items" />
+            <marker date="1457389641872" expanded="true" signature="5847:5914" placeholder="SELECT `id`,... items" />
+            <marker date="1457389641872" expanded="true" signature="6643:6713" placeholder="SELECT `id`,... items" />
+            <marker date="1457389641872" expanded="true" signature="34296:34332" placeholder="SELECT * FRO... items" />
+            <marker date="1457389641872" expanded="true" signature="38791:38832" placeholder="SELECT cardi... monstercarddata" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1162,10 +1030,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="11" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
-          <folding>
-            <element signature="e#1267#1268#0" expanded="true" />
-            <element signature="e#1299#1300#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1180,9 +1044,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1191,16 +1053,46 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="297" column="22" selection-start-line="297" selection-start-column="22" selection-end-line="297" selection-end-column="22" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#0#28585#0" expanded="false" />
+            <element signature="e#3250#3251#0" expanded="false" />
+            <element signature="e#3288#3289#0" expanded="false" />
+            <element signature="e#3316#3317#0" expanded="false" />
+            <element signature="e#3338#3339#0" expanded="false" />
+            <element signature="e#3374#3375#0" expanded="false" />
+            <element signature="e#3394#3395#0" expanded="false" />
+            <element signature="e#3426#3427#0" expanded="false" />
+            <element signature="e#3453#3454#0" expanded="false" />
+            <element signature="e#3491#3492#0" expanded="false" />
+            <element signature="e#3520#3521#0" expanded="false" />
+            <element signature="e#3555#3556#0" expanded="false" />
+            <element signature="e#3581#3582#0" expanded="false" />
+            <element signature="e#3612#3613#0" expanded="false" />
+            <element signature="e#3654#3655#0" expanded="false" />
+            <element signature="e#3692#3693#0" expanded="false" />
+            <element signature="e#3717#3718#0" expanded="false" />
+            <element signature="e#3765#3766#0" expanded="false" />
+            <element signature="e#3790#3791#0" expanded="false" />
+            <element signature="e#3820#3821#0" expanded="false" />
+            <element signature="e#3856#3857#0" expanded="false" />
+            <element signature="e#26204#26205#0" expanded="false" />
+            <element signature="e#26236#26237#0" expanded="false" />
+            <element signature="e#26287#26288#0" expanded="false" />
+            <element signature="e#26329#26330#0" expanded="false" />
+            <element signature="e#26531#26532#0" expanded="false" />
+            <element signature="e#26560#26561#0" expanded="false" />
+            <element signature="e#26597#26598#0" expanded="false" />
+            <element signature="e#26636#26637#0" expanded="false" />
+            <element signature="e#26676#26677#0" expanded="false" />
+            <element signature="e#26727#26728#0" expanded="false" />
+            <element signature="e#28253#28254#0" expanded="false" />
+            <element signature="e#28281#28282#0" expanded="false" />
+            <element signature="e#28351#28352#0" expanded="false" />
+            <element signature="e#28385#28386#0" expanded="false" />
+            <element signature="e#28427#28428#0" expanded="false" />
+            <element signature="e#28465#28466#0" expanded="false" />
+            <element signature="e#28528#28529#0" expanded="false" />
+            <element signature="e#28582#28583#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/MapleItemInformationProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="753" column="37" selection-start-line="753" selection-start-column="37" selection-end-line="753" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1209,7 +1101,7 @@
         <state vertical-scroll-proportion="0.025125628">
           <caret line="111" column="42" selection-start-line="111" selection-start-column="42" selection-end-line="111" selection-end-column="42" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1218,48 +1110,524 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14907873">
           <caret line="187" column="34" selection-start-line="187" selection-start-column="29" selection-end-line="187" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar!/java/lang/Exception.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10507881">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/RangedAttackHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9180672">
+          <caret line="179" column="17" selection-start-line="179" selection-start-column="17" selection-end-line="179" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/MagicDamageHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46638656">
+          <caret line="44" column="39" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/maps/MapleMapFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47268906">
+          <caret line="80" column="16" selection-start-line="80" selection-start-column="16" selection-end-line="80" selection-end-column="16" />
+          <folding>
+            <marker date="1457234289050" expanded="true" signature="6828:6866" placeholder="SELECT * FRO... playernpcs" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.031512607">
+          <caret line="219" column="48" selection-start-line="219" selection-start-column="48" selection-end-line="219" selection-end-column="48" />
+          <folding>
+            <marker date="1457231795673" expanded="true" signature="6347:6379" placeholder="UPDATE accou... " />
+            <marker date="1457231795673" expanded="true" signature="6476:6513" placeholder="UPDATE chara... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/GeneralchatHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="11.363636">
+          <caret line="43" column="66" selection-start-line="43" selection-start-column="64" selection-end-line="43" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/CharSelectedWithPicHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/MegatronListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="202" column="0" selection-start-line="202" selection-start-column="0" selection-end-line="202" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/MapleItemInformationProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="162" column="37" selection-start-line="162" selection-start-column="37" selection-end-line="162" selection-end-column="37" />
+          <folding>
+            <marker date="1457389641872" expanded="true" signature="5198:5263" placeholder="SELECT `id`,... items" />
+            <marker date="1457389641872" expanded="true" signature="5847:5914" placeholder="SELECT `id`,... items" />
+            <marker date="1457389641872" expanded="true" signature="6643:6713" placeholder="SELECT `id`,... items" />
+            <marker date="1457389641872" expanded="true" signature="34296:34332" placeholder="SELECT * FRO... items" />
+            <marker date="1457389641872" expanded="true" signature="38791:38832" placeholder="SELECT cardi... monstercarddata" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/command/rank/AdminCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="154" column="13" selection-start-line="154" selection-start-column="13" selection-end-line="154" selection-end-column="13" />
+          <folding>
+            <marker date="1457391473153" expanded="true" signature="7725:7773" placeholder="DELETE FROM " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/command/CommandInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27591974">
+          <caret line="17" column="112" selection-start-line="17" selection-start-column="112" selection-end-line="17" selection-end-column="112" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/command/rank/PlayerCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3478261">
+          <caret line="746" column="0" selection-start-line="746" selection-start-column="0" selection-end-line="746" selection-end-column="0" />
+          <folding>
+            <marker date="1457391258363" expanded="true" signature="22543:22579" placeholder="SELECT * FRO... ep2id" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/maps/MapleMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36956522">
+          <caret line="1244" column="25" selection-start-line="1244" selection-start-column="17" selection-end-line="1244" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/PickCharHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12541807">
+          <caret line="32" column="19" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/life/MapleMonster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="797" column="32" selection-start-line="797" selection-start-column="32" selection-end-line="797" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/MapleStatEffect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="592" column="45" selection-start-line="592" selection-start-column="45" selection-end-line="592" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/command/CommandProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="108" column="27" selection-start-line="108" selection-start-column="27" selection-end-line="108" selection-end-column="27" />
+          <folding>
+            <marker date="1457392999628" expanded="true" signature="2975:3052" placeholder="INSERT INTO logs_command... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/command/rank/GMCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="111" column="13" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
+          <folding>
+            <marker date="1457479919770" expanded="true" signature="8626:8661" placeholder="INSERT INTO items... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/command/rank/JrGMCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="470" column="43" selection-start-line="470" selection-start-column="43" selection-end-line="470" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/MoveLifeHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="118" column="25" selection-start-line="118" selection-start-column="25" selection-end-line="118" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#5705#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/server/life/MapleMonsterStats.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="3" selection-start-line="36" selection-start-column="3" selection-end-line="36" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#7261#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#2178#2179#0" expanded="false" />
+            <element signature="e#2204#2205#0" expanded="false" />
+            <element signature="e#2239#2240#0" expanded="false" />
+            <element signature="e#2269#2270#0" expanded="false" />
+            <element signature="e#2295#2296#0" expanded="false" />
+            <element signature="e#2320#2321#0" expanded="false" />
+            <element signature="e#2353#2354#0" expanded="false" />
+            <element signature="e#2381#2382#0" expanded="false" />
+            <element signature="e#2407#2408#0" expanded="false" />
+            <element signature="e#2432#2433#0" expanded="false" />
+            <element signature="e#2465#2466#0" expanded="false" />
+            <element signature="e#2493#2494#0" expanded="false" />
+            <element signature="e#2522#2523#0" expanded="false" />
+            <element signature="e#2550#2551#0" expanded="false" />
+            <element signature="e#2589#2590#0" expanded="false" />
+            <element signature="e#2623#2624#0" expanded="false" />
+            <element signature="e#2655#2656#0" expanded="false" />
+            <element signature="e#2689#2690#0" expanded="false" />
+            <element signature="e#2740#2741#0" expanded="false" />
+            <element signature="e#2786#2787#0" expanded="false" />
+            <element signature="e#2820#2821#0" expanded="false" />
+            <element signature="e#2853#2854#0" expanded="false" />
+            <element signature="e#2902#2903#0" expanded="false" />
+            <element signature="e#2946#2947#0" expanded="false" />
+            <element signature="e#2987#2988#0" expanded="false" />
+            <element signature="e#3019#3020#0" expanded="false" />
+            <element signature="e#3050#3051#0" expanded="false" />
+            <element signature="e#3077#3078#0" expanded="false" />
+            <element signature="e#3124#3125#0" expanded="false" />
+            <element signature="e#3162#3163#0" expanded="false" />
+            <element signature="e#3196#3197#0" expanded="false" />
+            <element signature="e#3226#3227#0" expanded="false" />
+            <element signature="e#3286#3287#0" expanded="false" />
+            <element signature="e#3333#3334#0" expanded="false" />
+            <element signature="e#3560#3561#0" expanded="false" />
+            <element signature="e#3654#3655#0" expanded="false" />
+            <element signature="e#3695#3696#0" expanded="false" />
+            <element signature="e#3725#3726#0" expanded="false" />
+            <element signature="e#3778#3779#0" expanded="false" />
+            <element signature="e#3816#3817#0" expanded="false" />
+            <element signature="e#3861#3862#0" expanded="false" />
+            <element signature="e#3897#3898#0" expanded="false" />
+            <element signature="e#3931#3932#0" expanded="false" />
+            <element signature="e#3960#3961#0" expanded="false" />
+            <element signature="e#4034#4035#0" expanded="false" />
+            <element signature="e#4071#4072#0" expanded="false" />
+            <element signature="e#4414#4415#0" expanded="false" />
+            <element signature="e#4441#4442#0" expanded="false" />
+            <element signature="e#4481#4482#0" expanded="false" />
+            <element signature="e#4513#4514#0" expanded="false" />
+            <element signature="e#4546#4547#0" expanded="false" />
+            <element signature="e#4577#4578#0" expanded="false" />
+            <element signature="e#4622#4623#0" expanded="false" />
+            <element signature="e#4669#4670#0" expanded="false" />
+            <element signature="e#4704#4705#0" expanded="false" />
+            <element signature="e#4737#4738#0" expanded="false" />
+            <element signature="e#4786#4787#0" expanded="false" />
+            <element signature="e#4837#4838#0" expanded="false" />
+            <element signature="e#5064#5065#0" expanded="false" />
+            <element signature="e#5128#5129#0" expanded="false" />
+            <element signature="e#5160#5161#0" expanded="false" />
+            <element signature="e#5201#5202#0" expanded="false" />
+            <element signature="e#5521#5522#0" expanded="false" />
+            <element signature="e#5567#5568#0" expanded="false" />
+            <element signature="e#5605#5606#0" expanded="false" />
+            <element signature="e#5639#5640#0" expanded="false" />
+            <element signature="e#5682#5683#0" expanded="false" />
+            <element signature="e#5720#5721#0" expanded="false" />
+            <element signature="e#5754#5755#0" expanded="false" />
+            <element signature="e#5787#5788#0" expanded="false" />
+            <element signature="e#5830#5831#0" expanded="false" />
+            <element signature="e#5866#5867#0" expanded="false" />
+            <element signature="e#5907#5908#0" expanded="false" />
+            <element signature="e#5936#5937#0" expanded="false" />
+            <element signature="e#5988#5989#0" expanded="false" />
+            <element signature="e#6024#6025#0" expanded="false" />
+            <element signature="e#6056#6057#0" expanded="false" />
+            <element signature="e#6087#6088#0" expanded="false" />
+            <element signature="e#6132#6133#0" expanded="false" />
+            <element signature="e#6172#6173#0" expanded="false" />
+            <element signature="e#6198#6199#0" expanded="false" />
+            <element signature="e#6223#6224#0" expanded="false" />
+            <element signature="e#6256#6257#0" expanded="false" />
+            <element signature="e#6284#6285#0" expanded="false" />
+            <element signature="e#6324#6325#0" expanded="false" />
+            <element signature="e#6355#6356#0" expanded="false" />
+            <element signature="e#6572#6573#0" expanded="false" />
+            <element signature="e#6610#6611#0" expanded="false" />
+            <element signature="e#6668#6669#0" expanded="false" />
+            <element signature="e#6709#6710#0" expanded="false" />
+            <element signature="e#6778#6779#0" expanded="false" />
+            <element signature="e#6836#6837#0" expanded="false" />
+            <element signature="e#6878#6879#0" expanded="false" />
+            <element signature="e#6918#6919#0" expanded="false" />
+            <element signature="e#6975#6976#0" expanded="false" />
+            <element signature="e#7023#7024#0" expanded="false" />
+            <element signature="e#7060#7061#0" expanded="false" />
+            <element signature="e#7095#7096#0" expanded="false" />
+            <element signature="e#7151#7152#0" expanded="false" />
+            <element signature="e#7183#7184#0" expanded="false" />
+            <element signature="e#7230#7231#0" expanded="false" />
+            <element signature="e#7257#7258#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/AbstractDealDamageHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="18" selection-start-line="36" selection-start-column="14" selection-end-line="36" selection-end-column="18" />
-          <folding />
+          <caret line="331" column="78" selection-start-line="331" selection-start-column="78" selection-end-line="331" selection-end-column="78" />
+          <folding>
+            <element signature="e#0#42284#0" expanded="false" />
+            <element signature="e#2000#2001#0" expanded="false" />
+            <element signature="e#2064#2065#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/net/server/Server.java">
+    <entry file="file://$PROJECT_DIR$/src/client/command/CommandAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="219" column="48" selection-start-line="219" selection-start-column="48" selection-end-line="219" selection-end-column="48" />
+          <caret line="63" column="5" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#3507#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/LoginPasswordHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="106" column="174" selection-start-line="106" selection-start-column="174" selection-end-line="106" selection-end-column="174" />
+          <folding>
+            <marker date="1457479919773" expanded="true" signature="2516:2559" placeholder="SELECT birth... accounts" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tools/MaplePacketCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="707" column="34" selection-start-line="707" selection-start-column="34" selection-end-line="707" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/life/MapleMonster.java">
+    <entry file="file://$PROJECT_DIR$/src/constants/ServerConstants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.060606">
-          <caret line="276" column="39" selection-start-line="276" selection-start-column="23" selection-end-line="276" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="40" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/channel/handlers/PlayerLoggedinHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="222" column="27" selection-start-line="222" selection-start-column="27" selection-end-line="222" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <marker date="1457391753925" expanded="true" signature="4220:4287" placeholder="SELECT Mesos... dueypackages" />
+            <marker date="1457391753925" expanded="true" signature="4499:4555" placeholder="UPDATE dueyp... " />
+            <marker date="1457391753925" expanded="true" signature="9589:9628" placeholder="SELECT muted... accounts" />
+            <marker date="1457391753925" expanded="true" signature="10025:10068" placeholder="SELECT birth... accounts" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/CharlistRequestHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="35" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/ServerlistRequestHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="86" selection-start-line="43" selection-start-column="86" selection-end-line="43" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/SendOpcode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="4" selection-end-line="37" selection-end-column="4" />
+          <folding>
+            <element signature="e#9741#9742#0" expanded="true" />
+            <element signature="e#9773#9774#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/RecvOpcode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="22" selection-start-line="33" selection-start-column="22" selection-end-line="33" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/PacketProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="93" column="77" selection-start-line="93" selection-start-column="77" selection-end-line="93" selection-end-column="77" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/MapleCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5175" column="16" selection-start-line="5175" selection-start-column="16" selection-end-line="5175" selection-end-column="16" />
-          <folding />
+          <caret line="1012" column="39" selection-start-line="1012" selection-start-column="39" selection-end-line="1012" selection-end-column="39" />
+          <folding>
+            <marker date="1457479919760" expanded="true" signature="13805:13843" placeholder="SELECT id FR... accounts" />
+            <marker date="1457479919760" expanded="true" signature="13911:13958" placeholder="SELECT accou... characters" />
+            <marker date="1457479919760" expanded="true" signature="14231:14289" placeholder="UPDATE accou... " />
+            <marker date="1457479919760" expanded="true" signature="15981:16048" placeholder="SELECT `id`,... characters" />
+            <marker date="1457479919760" expanded="true" signature="16954:16994" placeholder="SELECT id FR... characters" />
+            <marker date="1457479919760" expanded="true" signature="17607:17647" placeholder="SELECT name characters" />
+            <marker date="1457479919760" expanded="true" signature="18467:18504" placeholder="SELECT * FRO... characters" />
+            <marker date="1457479919760" expanded="true" signature="25163:25230" placeholder="SELECT mapid... trocklocations" />
+            <marker date="1457479919760" expanded="true" signature="25966:26004" placeholder="SELECT name accounts" />
+            <marker date="1457479919760" expanded="true" signature="26318:26370" placeholder="SELECT `area... area_info" />
+            <marker date="1457479919760" expanded="true" signature="26655:26713" placeholder="SELECT `name... eventstats" />
+            <marker date="1457479919760" expanded="true" signature="27446:27540" placeholder="SELECT name,... characters" />
+            <marker date="1457479919760" expanded="true" signature="27931:27978" placeholder="SELECT * FRO... queststatus" />
+            <marker date="1457479919760" expanded="true" signature="28166:28217" placeholder="SELECT * FRO... questprogress" />
+            <marker date="1457479919760" expanded="true" signature="28271:28322" placeholder="SELECT mapid... medalmaps" />
+            <marker date="1457479919760" expanded="true" signature="29771:29853" placeholder="SELECT skill... skills" />
+            <marker date="1457479919760" expanded="true" signature="30905:30944" placeholder="SELECT muted... accounts" />
+            <marker date="1457479919760" expanded="true" signature="31228:31291" placeholder="SELECT Skill... cooldowns" />
+            <marker date="1457479919760" expanded="true" signature="31914:31952" placeholder="DELETE FROM " />
+            <marker date="1457479919760" expanded="true" signature="32106:32153" placeholder="SELECT * FRO... skillmacros" />
+            <marker date="1457479919760" expanded="true" signature="32671:32733" placeholder="SELECT `key`... keymap" />
+            <marker date="1457479919760" expanded="true" signature="33213:33291" placeholder="SELECT `loca... savedlocations" />
+            <marker date="1457479919760" expanded="true" signature="33692:33789" placeholder="SELECT `char... famelog" />
+            <marker date="1457479919760" expanded="true" signature="41918:41976" placeholder="UPDATE accou... " />
+            <marker date="1457479919760" expanded="true" signature="46557:46599" placeholder="UPDATE accou... " />
+            <marker date="1457479919760" expanded="true" signature="63329:63385" placeholder="DELETE FROM " />
+            <marker date="1457479919760" expanded="true" signature="67491:67557" placeholder="UPDATE chara... " />
+            <marker date="1457479919760" expanded="true" signature="67708:67744" placeholder="DELETE FROM " />
+            <marker date="1457479919760" expanded="true" signature="88933:88977" placeholder="SELECT jobid... unlockedjobs" />
+            <marker date="1457479919760" expanded="true" signature="89663:89720" placeholder="INSERT INTO `unlockedjobs`... " />
+            <marker date="1457479919760" expanded="true" signature="96505:96557" placeholder="UPDATE chara... " />
+            <marker date="1457479919760" expanded="true" signature="97004:97047" placeholder="SELECT secre... accounts" />
+            <marker date="1457479919760" expanded="true" signature="111440:111503" placeholder="INSERT INTO famelog... " />
+            <marker date="1457479919760" expanded="true" signature="120753:120797" placeholder="SELECT id FR... playernpcs" />
+            <marker date="1457479919760" expanded="true" signature="120984:121114" placeholder="INSERT INTO playernpcs... " />
+            <marker date="1457479919760" expanded="true" signature="121925:121997" placeholder="INSERT INTO playernpcs_equip... " />
+            <marker date="1457479919760" expanded="true" signature="122609:122652" placeholder="SELECT * FRO... playernpcs" />
+            <marker date="1457479919760" expanded="true" signature="137630:137708" placeholder="INSERT INTO cooldowns... " />
+            <marker date="1457479919760" expanded="true" signature="138377:138456" placeholder="UPDATE chara... " />
+            <marker date="1457479919760" expanded="true" signature="139332:139520" placeholder="INSERT INTO characters... " />
+            <marker date="1457479919760" expanded="true" signature="140851:140928" placeholder="INSERT INTO keymap... " />
+            <marker date="1457479919760" expanded="true" signature="144453:145202" placeholder="UPDATE chara... " />
+            <marker date="1457479919760" expanded="true" signature="148935:149012" placeholder="INSERT INTO keymap... " />
+            <marker date="1457479919760" expanded="true" signature="149513:149626" placeholder="INSERT INTO skillmacros... " />
+            <marker date="1457479919760" expanded="true" signature="150668:150769" placeholder="INSERT INTO skills... " />
+            <marker date="1457479919760" expanded="true" signature="151314:151407" placeholder="INSERT INTO savedlocations... " />
+            <marker date="1457479919760" expanded="true" signature="152075:152143" placeholder="INSERT INTO trocklocations... " />
+            <marker date="1457479919760" expanded="true" signature="152479:152547" placeholder="INSERT INTO trocklocations... " />
+            <marker date="1457479919760" expanded="true" signature="152994:153078" placeholder="INSERT INTO buddies... " />
+            <marker date="1457479919760" expanded="true" signature="153552:153624" placeholder="INSERT INTO area_info... " />
+            <marker date="1457479919760" expanded="true" signature="154116:154244" placeholder="INSERT INTO queststatus... " />
+            <marker date="1457479919760" expanded="true" signature="154379:154430" placeholder="INSERT INTO questprogress... " />
+            <marker date="1457479919760" expanded="true" signature="154480:154524" placeholder="INSERT INTO medalmaps... " />
+            <marker date="1457479919760" expanded="true" signature="155785:155824" placeholder="UPDATE accou... " />
+            <marker date="1457479919760" expanded="true" signature="158131:158218" placeholder="INSERT INTO notes... " />
+            <marker date="1457479919760" expanded="true" signature="160939:160989" placeholder="UPDATE chara... " />
+            <marker date="1457479919760" expanded="true" signature="161385:161437" placeholder="UPDATE chara... " />
+            <marker date="1457479919760" expanded="true" signature="165972:166022" placeholder="SELECT * FRO... notes" />
+            <marker date="1457479919760" expanded="true" signature="176078:176150" placeholder="UPDATE accou... " />
+            <marker date="1457479919760" expanded="true" signature="179558:179639" placeholder="INSERT INTO logs_events... " />
+            <marker date="1457479919760" expanded="true" signature="180752:180811" placeholder="UPDATE logs_... " />
+            <marker date="1457479919760" expanded="true" signature="181633:181710" placeholder="UPDATE logs_... " />
+            <marker date="1457479919760" expanded="true" signature="182918:182963" placeholder="SELECT event... characters" />
+            <marker date="1457479919760" expanded="true" signature="183512:183558" placeholder="UPDATE chara... " />
+            <marker date="1457479919760" expanded="true" signature="188444:188488" placeholder="SELECT votep... accounts" />
+            <marker date="1457479919760" expanded="true" signature="188921:188968" placeholder="UPDATE accou... " />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/server/maps/MapleMap.java">
+    <entry file="file://$PROJECT_DIR$/src/client/MapleClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="628" column="0" selection-start-line="628" selection-start-column="0" selection-end-line="628" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="669" column="43" selection-start-line="669" selection-start-column="43" selection-end-line="669" selection-end-column="43" />
+          <folding>
+            <element signature="e#5049#5050#0" expanded="true" />
+            <element signature="e#5129#5130#0" expanded="true" />
+            <element signature="e#28830#28831#0" expanded="true" />
+            <element signature="e#28868#28869#0" expanded="true" />
+            <marker date="1457479919767" expanded="true" signature="6005:6070" placeholder="SELECT id, n... characters" />
+            <marker date="1457479919767" expanded="true" signature="6731:6787" placeholder="SELECT COUNT... ipbans" />
+            <marker date="1457479919767" expanded="true" signature="8417:8455" placeholder="SELECT macs accounts" />
+            <marker date="1457479919767" expanded="true" signature="9059:9097" placeholder="INSERT INTO ipbans... " />
+            <marker date="1457479919767" expanded="true" signature="9445:9474" placeholder="SELECT filte... macfilters" />
+            <marker date="1457479919767" expanded="true" signature="9702:9738" placeholder="INSERT INTO macbans... " />
+            <marker date="1457479919767" expanded="true" signature="10857:10897" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="11606:11646" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="12551:12686" placeholder="SELECT id, p... accounts" />
+            <marker date="1457479919767" expanded="true" signature="14143:14191" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="15338:15385" placeholder="INSERT INTO iplog... " />
+            <marker date="1457479919767" expanded="true" signature="16136:16179" placeholder="SELECT birth... accounts" />
+            <marker date="1457479919767" expanded="true" signature="17010:17053" placeholder="SELECT `temp... accounts" />
+            <marker date="1457479919767" expanded="true" signature="18427:18468" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="19263:19356" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="20044:20135" placeholder="SELECT logge... accounts" />
+            <marker date="1457479919767" expanded="true" signature="21175:21220" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="29384:29480" placeholder="SELECT id, g... characters" />
+            <marker date="1457479919767" expanded="true" signature="30259:30297" placeholder="DELETE FROM " />
+            <marker date="1457479919767" expanded="true" signature="30450:30485" placeholder="DELETE FROM " />
+            <marker date="1457479919767" expanded="true" signature="33690:33729" placeholder="SELECT `tos`... accounts" />
+            <marker date="1457479919767" expanded="true" signature="34092:34132" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="34717:34768" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="35310:35355" placeholder="SELECT `grea... accounts" />
+            <marker date="1457479919767" expanded="true" signature="36144:36187" placeholder="UPDATE accou... " />
+            <marker date="1457479919767" expanded="true" signature="37239:37290" placeholder="SELECT Sessi... accounts" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/net/server/handlers/login/ServerStatusRequestHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09513742">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
           <folding />
         </state>
       </provider>

@@ -78,6 +78,7 @@ public class MapleMapFactory {
                 map.setOnUserEnter(MapleDataTool.getString(mapData.getChildByPath("info/onUserEnter"), String.valueOf(mapid)));
                 map.setFieldLimit(MapleDataTool.getInt(mapData.getChildByPath("info/fieldLimit"), 0));
                 map.setMobInterval((short) MapleDataTool.getInt(mapData.getChildByPath("info/createMobInterval"), 5000));
+                map.setBackgroundMusic(MapleDataTool.getString(mapData.getChildByPath("info/bgm")));
                 PortalFactory portalFactory = new PortalFactory();
                 for (MapleData portal : mapData.getChildByPath("portal")) {
                     map.addPortal(portalFactory.makePortal(MapleDataTool.getInt(portal.getChildByPath("pt")), portal));

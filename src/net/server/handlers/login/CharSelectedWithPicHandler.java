@@ -35,7 +35,7 @@ public class CharSelectedWithPicHandler extends AbstractMaplePacketHandler {
             try {
                 c.announce(MaplePacketCreator.getServerIP(InetAddress.getByName(socket[0]), Integer.parseInt(socket[1]), charId));
             } catch (UnknownHostException | NumberFormatException e) {
-                MegatronListener.getInstance().log("decepticons", StringUtil.exceptionStacktraceToString(e));
+
             }
        // } else {
          //   c.announce(MaplePacketCreator.wrongPic());

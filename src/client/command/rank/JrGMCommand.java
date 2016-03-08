@@ -40,6 +40,7 @@ import server.MapleShopFactory;
 import server.MapleTrade;
 import server.life.MapleLifeFactory;
 import server.life.MapleMonster;
+import server.life.MapleMonsterStats;
 import server.maps.HiredMerchant;
 import server.maps.MapleMap;
 import server.maps.MapleMapObject;
@@ -444,6 +445,54 @@ public class JrGMCommand extends GuardCommand implements CommandInterface
             }
             case "spawn":
             {
+                int mid = Integer.parseInt(splitted[1]);
+                int num = Math.min(getOptionalIntArg(splitted, 2, 1), 500);
+                boolean cpq = false;
+
+                if (splitted[0].equals("!spawncpq")) cpq = true;
+                Integer hp = getNamedIntArg(splitted, 1, "hp");
+                Integer exp = getNamedIntArg(splitted, 1, "exp");
+                Double php = getNamedDoubleArg(splitted, 1, "php");
+                Double pexp = getNamedDoubleArg(splitted, 1, "pexp");
+
+                MapleMonster onemob = MapleLifeFactory.getMonster(mid);
+                if (onemob == null) return false;
+
+                int newhp = 0;
+                int newexp = 0;
+
+                double oldExpRatio = ((double) onemob.getHp() / onemob.getExp());
+
+                if (hp != null) {
+                    newhp = hp.intValue();
+                } else if (php != null) {
+                    newhp = (int) (onemob.getMaxHp() * (php.doubleValue() / 100));
+                } else {
+                    newhp = onemob.getMaxHp();
+                }
+                if (exp != null) {
+                    newexp = exp.intValue();
+                } else if (pexp != null) {
+                    newexp = (int) (onemob.getExp() * (pexp.doubleValue() / 100));
+                } else {
+                    newexp = onemob.getExp();
+                }
+
+                if (newhp < 1) {
+                    newhp = 1;
+                }
+
+                MapleMonsterStats overrideStats = new MapleMonsterStats();
+                overrideStats.setHp(newhp);
+                overrideStats.setExp(newexp);
+                overrideStats.setMp(onemob.getMaxMp());
+
+                for (int i = 0; i < num; i++) {
+                    MapleMonster mob = MapleLifeFactory.getMonster(mid);
+                    mob.setHp(newhp);
+                    mob.setOverrideStats(overrideStats);
+                    c.getPlayer().getMap().spawnMonsterOnGroundBelow(mob, c.getPlayer().getPosition());
+                }
                 MapleMonster monster = MapleLifeFactory.getMonster(Integer.parseInt(splitted[1]));
                 if (monster == null) {
                     return true;
@@ -524,7 +573,7 @@ public class JrGMCommand extends GuardCommand implements CommandInterface
                 if (player.gmLevel() < victim.gmLevel()) {
                     victim = player;
                 }
-                victim.getClient().disconnect(false, false, false);
+                victim.getClient().disconnect(false, false);
                 break;
             }
             case "monsterids":

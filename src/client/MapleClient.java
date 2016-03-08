@@ -93,7 +93,7 @@ public class MapleClient {
     private boolean remote;
     private WebSocketImpl conn;
     private int age;
-    private byte authByte;
+    private int authByte;
 
     public MapleClient(MapleAESOFB send, MapleAESOFB receive, IoSession session) {
         this.send = send;
@@ -389,7 +389,7 @@ public class MapleClient {
                 String passhash = rs.getString("password");
                 String salt = rs.getString("salt");
                 byte tos = rs.getByte("tos");
-                authByte = rs.getByte("authByte");
+                authByte = rs.getInt("authByte");
                 ps.close();
                 rs.close();
                 if(pwd.equals(passhash) || checkHash(passhash, "SHA-1", pwd)){
@@ -664,10 +664,7 @@ public class MapleClient {
         }
     }
 
-    public final void disconnect(boolean shutdown, boolean cashshop, boolean bypass) {//once per MapleClient instance
-        if (disconnecting && !bypass) {
-            return;
-        }
+    public final void disconnect(boolean shutdown, boolean cashshop) {//once per MapleClient instance
         disconnecting = true;
         if (player != null && player.isLoggedin() && player.getClient() != null) {
             MapleMap map = player.getMap();
@@ -1089,7 +1086,7 @@ public class MapleClient {
         try{return session.getRemoteAddress().toString().split(":")[0];}catch (Exception e){return "NGNS";}
     }
 
-    public byte getAuthByte() {
+    public int getAuthByte() {
         return authByte;
     }
 

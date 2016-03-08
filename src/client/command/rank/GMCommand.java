@@ -110,33 +110,6 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 }
                 break;
             }
-            case "sexbot": {
-                if (splitted[1].equals("spawn")) {
-                    boolean spawned = false;
-                    SexBot sb;
-
-                    int charid = Integer.parseInt(splitted[2]);
-
-                    if (player.getClient().getChannelServer().getSexBot() == null) {
-                        sb = new SexBot();
-                        c.getChannelServer().setSexBot(sb);
-                        sb.spawnSexBot(c.getPlayer().getMap(), c.getPlayer().getPosition(), charid);
-
-                        player.dropMessage("Spawned Sexbot in channel " + sb.getClient().getChannel() + " on map " + sb.getMap());
-                        break;
-                    }
-                    break;
-                } else if (splitted[1].equals("stance")) {
-                    int stance = Integer.parseInt(splitted[2]);
-                    SexBot sb = c.getChannelServer().getSexBot();
-
-                    SexBot.getCharacter(sb).setStance(stance);
-
-                    byte[] packet = MaplePacketCreator.updateCharLook(SexBot.getCharacter(sb));
-                    c.getPlayer().getMap().broadcastMessage(SexBot.getCharacter(sb), packet, false);
-                }
-                break;
-            }
             case "creep":
             {
                 NPCScriptManager.getInstance().start(c, 9999999, null, null);
@@ -147,7 +120,7 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 List<String> UnstuckedPlayers = new ArrayList<String>();
                 Server.getInstance().getWorld(player.getWorld()).getPlayerStorage().getAllCharacters().stream().filter(players -> players.getClient().getSession().isClosing() && players != null && players.getClient().isLoggedIn() && players.getMap() != null).forEach(players -> {
                     UnstuckedPlayers.add(players.getName() + ", ");
-                    players.getClient().disconnect(false, false, true);
+                    players.getClient().disconnect(false, false);
                 });
                 if(UnstuckedPlayers.size() > 0){
                     player.dropMessage(String.format("Successfully unstuck %d player(s). These players were : %s", UnstuckedPlayers.size(), UnstuckedPlayers));

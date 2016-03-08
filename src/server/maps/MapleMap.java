@@ -120,6 +120,7 @@ public class MapleMap {
     private Thread diseaseThread;
     private Thread vacThread;
     private SpeedTyper speedTyper;
+    private String backgroundMusic;
 
     public MapleMap(int mapid, int world, int channel, int returnMapId, float monsterRate) {
         this.mapid = mapid;
@@ -745,18 +746,19 @@ public class MapleMap {
                     }
                 }
             }
-
-            if (killHorntail) {
-                objects = getMapObjects();
-                for (MapleMapObject object : objects) {
-                    MapleMonster mons = getMonsterByOid(object.getObjectId());
-                    if (mons != null) {
-                        if (mons.getId() >= 8810010 && mons.getId() <= 8810018) {
-                            killMonster(mons, chr, withDrops);
+            try {
+                if (killHorntail) {
+                    objects = getMapObjects();
+                    for (MapleMapObject object : objects) {
+                        MapleMonster mons = getMonsterByOid(object.getObjectId());
+                        if (mons != null) {
+                            if (mons.getId() >= 8810010 && mons.getId() <= 8810018) {
+                                killMonster(mons, chr, withDrops);
+                            }
                         }
                     }
                 }
-            }
+            } catch(Exception e){}
         }
 
         MapleCharacter dropOwner = monster.killBy(chr);
@@ -2331,6 +2333,14 @@ public class MapleMap {
 
     public void setSpeedTyper(SpeedTyper speedTyper) {
         this.speedTyper = speedTyper;
+    }
+
+    public void setBackgroundMusic(String backgroundMusic) {
+        this.backgroundMusic = backgroundMusic;
+    }
+
+    public String getBackgroundMusic() {
+        return backgroundMusic;
     }
 
     private interface DelayedPacketCreation {

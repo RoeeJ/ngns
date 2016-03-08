@@ -37,7 +37,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.Date;
 
 public final class LoginPasswordHandler implements MaplePacketHandler {
 
@@ -110,7 +109,7 @@ public final class LoginPasswordHandler implements MaplePacketHandler {
                 c.setIdleTask(TimerManager.getInstance().schedule(new Runnable() {
                     @Override
                     public void run() {
-                        client.disconnect(false, false, false);
+                        client.disconnect(false, false);
                     }
                 }, 600000));
             } else {
