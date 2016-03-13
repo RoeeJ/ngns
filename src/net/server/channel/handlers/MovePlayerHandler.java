@@ -23,14 +23,13 @@ package net.server.channel.handlers;
 
 import client.MapleCharacter;
 import client.MapleClient;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import server.TimerManager;
 import server.life.MapleMonster;
 import server.maps.MapleMap;
 import server.maps.MapleMapObject;
 import server.maps.MapleMapObjectType;
 import server.movement.LifeMovementFragment;
-import tools.FilePrinter;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
@@ -39,7 +38,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class MovePlayerHandler extends AbstractMovementPacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c, int header) {
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         slea.skip(9);
         List<LifeMovementFragment> res = parseMovement(slea);
         if (res != null) {
@@ -61,10 +61,10 @@ public final class MovePlayerHandler extends AbstractMovementPacketHandler {
                     updatePosition(res, monster, 0);
                 }
             }
-            if (c.getChannelServer().getSexBot() != null) {
-                if (c.getChannelServer().getSexBot().getFollow() == c.getPlayer()) {
-                    if (c.getPlayer().getMap() == SexBot.getCharacter(c.getChannelServer().getSexBot()).getMap() && !c.getChannelServer().getSexBot().isPatroling()) {
-                        final MapleCharacter player2 = SexBot.getCharacter(c.getChannelServer().getSexBot());
+            if (c.getChannelServer().getMuriel() != null) {
+                if (c.getChannelServer().getMuriel().getFollow() == c.getPlayer()) {
+                    if (c.getPlayer().getMap() == Muriel.getCharacter(c.getChannelServer().getMuriel()).getMap() && !c.getChannelServer().getMuriel().isPatroling()) {
+                        final MapleCharacter player2 = Muriel.getCharacter(c.getChannelServer().getMuriel());
                         final List<LifeMovementFragment> res2 = res;
 
                         TimerManager.getInstance().schedule(() -> {
@@ -74,14 +74,14 @@ public final class MovePlayerHandler extends AbstractMovementPacketHandler {
                             Point newpos = player2.getPosition();
                             newpos.x = newpos.x + 30;
                             player2.getMap().movePlayer(player2, newpos);
-                            if (c.getChannelServer().getSexBot().isRecording()) {
-                                c.getChannelServer().getSexBot().record(res2);
-                                c.getPlayer().dropMessage(c.getChannelServer().getSexBot().getRecordingSize());
+                            if (c.getChannelServer().getMuriel().isRecording()) {
+                                c.getChannelServer().getMuriel().record(res2);
+                                c.getPlayer().dropMessage(c.getChannelServer().getMuriel().getRecordingSize());
                             }
                         }, 500);
 
                     } else {
-                        c.getChannelServer().getSexBot().setFollow(null);
+                        c.getChannelServer().getMuriel().setFollow(null);
                     }
                 }
             }

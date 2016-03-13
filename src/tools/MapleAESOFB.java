@@ -148,7 +148,7 @@ public class MapleAESOFB {
     }
 
     public static byte[] getNewIv(byte oldIv[]) {
-        byte[] in = {(byte) 0xf2, 0x53, (byte) 0x50, (byte) 0xc6};
+        byte[] in = {(byte) 0xde, (byte) 0xad, (byte) 0xbe, (byte) 0xef};
         for (int x = 0; x < 4; x++) {
             funnyShit(oldIv[x], in);
         }

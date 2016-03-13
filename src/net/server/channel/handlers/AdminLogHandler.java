@@ -28,7 +28,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class AdminLogHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         //harhar
     }
 }

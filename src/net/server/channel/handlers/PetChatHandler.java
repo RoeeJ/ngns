@@ -30,7 +30,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class PetChatHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         long petId = slea.readLong();
         int petIndex = c.getPlayer().getPetIndex(petId);
         if (petIndex < 0) {

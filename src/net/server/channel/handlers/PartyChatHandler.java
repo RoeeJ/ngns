@@ -32,8 +32,9 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class PartyChatHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter player = c.getPlayer();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         int type = slea.readByte(); // 0 for buddys, 1 for partys
         int numRecipients = slea.readByte();
         int recipients[] = new int[numRecipients];

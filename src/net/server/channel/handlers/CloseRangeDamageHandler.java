@@ -26,7 +26,7 @@ import client.MapleCharacter.CancelCooldownAction;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
 import client.inventory.MapleWeaponType;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import com.google.common.collect.Lists;
 import constants.GameConstants;
 import constants.skills.*;
@@ -48,11 +48,10 @@ public final class CloseRangeDamageHandler extends AbstractDealDamageHandler {
     }
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter player = c.getPlayer();
         Item weapon = player.getInventory(MapleInventoryType.EQUIPPED).getItem((byte)-11);
         AttackInfo attack = parseDamage(slea, player, false,false);
-        final boolean[] feg = {false};
         if(GameConstants.isDisabledSkill(attack.skill, player.getMapId())){return;}
         if(GameConstants.isCrasher(attack.skill)){return;}
         if (weapon != null) {
@@ -62,9 +61,9 @@ public final class CloseRangeDamageHandler extends AbstractDealDamageHandler {
                 }
             }
         }
-        if (c.getChannelServer().getSexBot() != null && c.getChannelServer().getSexBot().getFollow() != null && c.getChannelServer().getSexBot().getFollow().getId() == c.getPlayer().getId()) {
+        if (c.getChannelServer().getMuriel() != null && c.getChannelServer().getMuriel().getFollow() != null && c.getChannelServer().getMuriel().getFollow().getId() == c.getPlayer().getId()) {
             TimerManager.getInstance().schedule(() -> {
-                player.getMap().broadcastMessage(SexBot.getCharacter(c.getChannelServer().getSexBot()), MaplePacketCreator.closeRangeAttack(SexBot.getCharacter(c.getChannelServer().getSexBot()), attack.skill, attack.skilllevel, attack.stance, attack.numAttackedAndDamage, attack.allDamage, attack.speed, attack.direction, attack.display), false, true);
+                player.getMap().broadcastMessage(Muriel.getCharacter(c.getChannelServer().getMuriel()), MaplePacketCreator.closeRangeAttack(Muriel.getCharacter(c.getChannelServer().getMuriel()), attack.skill, attack.skilllevel, attack.stance, attack.numAttackedAndDamage, attack.allDamage, attack.speed, attack.direction, attack.display), false, true);
             }, 500);
         }
         player.getMap().broadcastMessage(player, MaplePacketCreator.closeRangeAttack(player, attack.skill, attack.skilllevel, attack.stance, attack.numAttackedAndDamage, attack.allDamage, attack.speed, attack.direction, attack.display), false, true);
@@ -158,8 +157,8 @@ public final class CloseRangeDamageHandler extends AbstractDealDamageHandler {
             player.cancelEffectFromBuffStat(MapleBuffStat.DARKSIGHT);
             player.cancelBuffStats(MapleBuffStat.DARKSIGHT);
         }
-        if (c.getChannelServer().getSexBot() != null && c.getChannelServer().getSexBot().getFollow() != null && c.getChannelServer().getSexBot().getFollow().getId() == c.getPlayer().getId()) {
-            applyAttack(attack, SexBot.getCharacter(c.getChannelServer().getSexBot()), attackCount);
+        if (c.getChannelServer().getMuriel() != null && c.getChannelServer().getMuriel().getFollow() != null && c.getChannelServer().getMuriel().getFollow().getId() == c.getPlayer().getId()) {
+            applyAttack(attack, Muriel.getCharacter(c.getChannelServer().getMuriel()), attackCount);
         }
         applyAttack(attack, player, attackCount);
     }

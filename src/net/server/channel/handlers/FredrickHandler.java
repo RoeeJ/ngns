@@ -44,7 +44,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public class FredrickHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
         byte operation = slea.readByte();
 

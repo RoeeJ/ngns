@@ -39,10 +39,11 @@ public final class BBSOperationHandler extends AbstractMaplePacketHandler {
     }
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         if (c.getPlayer().getGuildId() < 1) {
             return;
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         byte mode = slea.readByte();
         int localthreadid = 0;
         switch (mode) {

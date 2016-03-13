@@ -27,7 +27,7 @@ import client.inventory.Item;
 import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
 import client.inventory.MapleWeaponType;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import constants.ItemConstants;
 import constants.skills.*;
 import server.MapleInventoryManipulator;
@@ -41,7 +41,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class RangedAttackHandler extends AbstractDealDamageHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter player = c.getPlayer();
         AttackInfo attack = parseDamage(slea, player, true,false);
         if (attack.skill == Buccaneer.ENERGY_ORB || attack.skill == ThunderBreaker.SPARK || attack.skill == Shadower.TAUNT || attack.skill == NightLord.TAUNT) {
@@ -146,9 +146,9 @@ public final class RangedAttackHandler extends AbstractDealDamageHandler {
                         packet = MaplePacketCreator.rangedAttack(player, attack.skill, attack.skilllevel, attack.stance, attack.numAttackedAndDamage, visProjectile, attack.allDamage, attack.speed, attack.direction, attack.display);
                         break;
                 }
-                SexBot sexbot = c.getChannelServer().getSexBot();
-                if (sexbot != null && sexbot.getFollow() != null && c.getChannelServer().getSexBot().getFollow().getId() == c.getPlayer().getId()) {
-                    player.getMap().broadcastMessage(c.getChannelServer().getSexBot().getFollow(), packet, false, true);
+                Muriel sexbot = c.getChannelServer().getMuriel();
+                if (sexbot != null && sexbot.getFollow() != null && c.getChannelServer().getMuriel().getFollow().getId() == c.getPlayer().getId()) {
+                    player.getMap().broadcastMessage(c.getChannelServer().getMuriel().getFollow(), packet, false, true);
                 }
                 player.getMap().broadcastMessage(player, packet, false, true);
                 if (effect != null) {

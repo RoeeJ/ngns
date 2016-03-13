@@ -449,7 +449,6 @@ public class JrGMCommand extends GuardCommand implements CommandInterface
                 int num = Math.min(getOptionalIntArg(splitted, 2, 1), 500);
                 boolean cpq = false;
 
-                if (splitted[0].equals("!spawncpq")) cpq = true;
                 Integer hp = getNamedIntArg(splitted, 1, "hp");
                 Integer exp = getNamedIntArg(splitted, 1, "exp");
                 Double php = getNamedDoubleArg(splitted, 1, "php");
@@ -489,22 +488,12 @@ public class JrGMCommand extends GuardCommand implements CommandInterface
 
                 for (int i = 0; i < num; i++) {
                     MapleMonster mob = MapleLifeFactory.getMonster(mid);
-                    mob.setHp(newhp);
-                    mob.setOverrideStats(overrideStats);
-                    c.getPlayer().getMap().spawnMonsterOnGroundBelow(mob, c.getPlayer().getPosition());
-                }
-                MapleMonster monster = MapleLifeFactory.getMonster(Integer.parseInt(splitted[1]));
-                if (monster == null) {
-                    return true;
-                }
-                if (splitted.length > 2) {
-                    for (int i = 0; i < Integer.parseInt(splitted[2]); i++) {
-                        player.getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(Integer.parseInt(splitted[1])), player.getPosition());
+                    if(mob != null) {
+                        mob.setHp(newhp);
+                        mob.setOverrideStats(overrideStats);
+                        c.getPlayer().getMap().spawnMonsterOnGroundBelow(mob, c.getPlayer().getPosition());
                     }
-                } else {
-                    player.getMap().spawnMonsterOnGroundBelow(MapleLifeFactory.getMonster(Integer.parseInt(splitted[1])), player.getPosition());
                 }
-                break;
             }
             case "levelup":
             {

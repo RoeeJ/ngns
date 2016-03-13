@@ -23,18 +23,18 @@ package net.server.channel.handlers;
 
 import client.MapleCharacter;
 import client.MapleClient;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import net.AbstractMaplePacketHandler;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class CharInfoRequestHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.readInt();
         int cid = slea.readInt();
         MapleCharacter player = (MapleCharacter) c.getPlayer().getMap().getMapObject(cid);
-        if (c.getChannelServer().getSexBot() != null && SexBot.getCharacter(c.getChannelServer().getSexBot()).getId() == player.getId()) {
-            MapleCharacter sb = SexBot.getCharacter(c.getChannelServer().getSexBot());
+        if (c.getChannelServer().getMuriel() != null && Muriel.getCharacter(c.getChannelServer().getMuriel()).getId() == player.getId()) {
+            MapleCharacter sb = Muriel.getCharacter(c.getChannelServer().getMuriel());
             sb.getMap().broadcastMessage(MaplePacketCreator.getChatText(sb.getId(), "Dont touch me, perv!", false, 1));
             c.getPlayer().setHp(c.getPlayer().getHp() - c.getPlayer().getMaxHp() / 10);
             c.getPlayer().dropMessage(String.format("%s slaps you and hits your for 10%% of your hitpoints!", sb.getName()));

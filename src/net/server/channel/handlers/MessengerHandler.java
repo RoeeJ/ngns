@@ -31,12 +31,13 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class MessengerHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         String input;
         byte mode = slea.readByte();
         MapleCharacter player = c.getPlayer();
         World world = c.getWorldServer();
         MapleMessenger messenger = player.getMessenger();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         switch (mode) {
             case 0x00:
                 if (messenger == null) {

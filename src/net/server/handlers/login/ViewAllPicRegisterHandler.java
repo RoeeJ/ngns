@@ -13,7 +13,7 @@ public final class ViewAllPicRegisterHandler extends AbstractMaplePacketHandler 
 
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.readByte();
         int charId = slea.readInt();
         c.setWorld(slea.readInt()); //world

@@ -38,7 +38,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class CancelBuffHandler extends AbstractMaplePacketHandler implements MaplePacketHandler {
     
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int sourceid = slea.readInt();
         switch (sourceid) {
             case FPArchMage.BIG_BANG:
@@ -54,5 +54,6 @@ public final class CancelBuffHandler extends AbstractMaplePacketHandler implemen
                 c.getPlayer().cancelEffect(SkillFactory.getSkill(sourceid).getEffect(1), false, -1);
                 break;
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
     }
 }

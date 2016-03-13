@@ -33,7 +33,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author kevintjuh93
  */
 public class UseGachaExpHandler extends AbstractMaplePacketHandler {
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         if (c.getPlayer().getGachaExp() == 0) {
             c.getPlayer().dropMessage(1, "Packet editing is for faggots like you.");
             AutobanFactory.GACHA_EXP.autoban(c.getPlayer(), "Packet editing is for faggots like this nib.");

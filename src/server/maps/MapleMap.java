@@ -29,7 +29,7 @@ import client.inventory.Equip;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
 import client.inventory.MaplePet;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import client.status.MonsterStatus;
 import client.status.MonsterStatusEffect;
 import constants.ItemConstants;
@@ -486,10 +486,10 @@ public class MapleMap {
         if (chr != null && chr.getNTI()) {
             chr.getMap().broadcastMessage(MaplePacketCreator.getChatText(chr.getId(), MapleItemInformationProvider.getItemPairById(idrop.getItemId()).getRight(), false, 0));
         }
-        if (chr.getClient().getChannelServer().getSexBot() != null && chr.getClient().getChannelServer().getSexBot().isMonitoringDrops()) {
+        if (chr.getClient().getChannelServer().getMuriel() != null && chr.getClient().getChannelServer().getMuriel().isMonitoringDrops()) {
             Pair<Integer, String> itemPair = MapleItemInformationProvider.getItemPairById(idrop.getItemId());
             String answer = String.format("%s:%d", itemPair.getRight(), itemPair.getLeft());
-            chr.getMap().broadcastMessage(MaplePacketCreator.getChatText(SexBot.getCharacter(chr.getClient().getChannelServer().getSexBot()).getId(), answer, false, 0));
+            chr.getMap().broadcastMessage(MaplePacketCreator.getChatText(Muriel.getCharacter(chr.getClient().getChannelServer().getMuriel()).getId(), answer, false, 0));
         }
         final MapleMapItem mdrop = new MapleMapItem(idrop, dropPos, mob, chr, droptype, false, questid);
         spawnAndAddRangedMapObject(mdrop, new DelayedPacketCreation() {
@@ -1005,6 +1005,7 @@ public class MapleMap {
     public void spawnMonsterOnGroundBelow(MapleMonster mob, Point pos) {
         Point spos = new Point(pos.x, pos.y - 1);
         spos = calcPointBelow(spos);
+        spos = spos != null ? spos : pos;
         spos.y--;
         mob.setPosition(spos);
         spawnMonster(mob);
@@ -1276,10 +1277,10 @@ public class MapleMap {
         //dropRoll();
         final Point droppos = calcDropPos(pos, pos);
         final MapleMapItem drop = new MapleMapItem(item, droppos, dropper, owner, (byte) (ffaDrop ? 2 : 0), playerDrop);
-        if (owner.getClient().getChannelServer().getSexBot() != null && owner.getClient().getChannelServer().getSexBot().isMonitoringDrops()) {
+        if (owner.getClient().getChannelServer().getMuriel() != null && owner.getClient().getChannelServer().getMuriel().isMonitoringDrops()) {
             Pair<Integer, String> itemPair = MapleItemInformationProvider.getItemPairById(item.getItemId());
             String answer = String.format("%s:%d", itemPair.getRight(), itemPair.getLeft());
-            owner.getMap().broadcastMessage(MaplePacketCreator.getChatText(SexBot.getCharacter(owner.getClient().getChannelServer().getSexBot()).getId(), answer, false, 0));
+            owner.getMap().broadcastMessage(MaplePacketCreator.getChatText(Muriel.getCharacter(owner.getClient().getChannelServer().getMuriel()).getId(), answer, false, 0));
         }
         spawnAndAddRangedMapObject(drop, new DelayedPacketCreation() {
             @Override

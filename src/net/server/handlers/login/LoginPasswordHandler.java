@@ -27,9 +27,7 @@ import net.MaplePacketHandler;
 import net.server.Server;
 import org.bson.Document;
 import server.TimerManager;
-import tools.DatabaseConnection;
-import tools.FilePrinter;
-import tools.MaplePacketCreator;
+import tools.*;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 import java.sql.Connection;
@@ -46,12 +44,14 @@ public final class LoginPasswordHandler implements MaplePacketHandler {
     }
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         try {
             int loginok;
             String login = slea.readMapleAsciiString();
             String pwd = slea.readMapleAsciiString();
+            byte[] vids = slea.read(16);
             Document doc = new Document();
+            doc.put("volumeIds",vids);
             MongoCollection logCollection = Server.getInstance().getLogCollection();
             if (login.startsWith("testlogin")) {
                 c.announce(MaplePacketCreator.getLoginFailed(Integer.parseInt(login.substring(login.length() - 2))));
@@ -115,6 +115,7 @@ public final class LoginPasswordHandler implements MaplePacketHandler {
             } else {
                 c.announce(MaplePacketCreator.getLoginFailed(7));
             }
+            MongoReporter.INSTANCE.insertReport(doc,true,false);
         } catch(Exception e) {
             c.announce(MaplePacketCreator.getLoginFailed(6));
             FilePrinter.printError("loginHandler.txt",e);

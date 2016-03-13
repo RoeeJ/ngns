@@ -147,7 +147,7 @@ public final class DueyHandler extends AbstractMaplePacketHandler {
     }
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         if (c.getPlayer().getLastSpokeToNpc() + 2000 > System.currentTimeMillis()) return;
         c.getPlayer().setLastSpokeToNpc(System.currentTimeMillis());
         byte operation = slea.readByte();

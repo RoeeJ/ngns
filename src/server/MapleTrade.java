@@ -259,7 +259,7 @@ public class MapleTrade {
                             }
                         }
                     }
-                    SlackReporter.getInstance().log("TradeBot","#trades",String.format("[Trade Successful]%s gave %s %d Mesos [%s], got %d Mesos and [%s] in return", local.getChr().getName(), partner.getChr().getName(),local.exchangeMeso,lsb.reverse().deleteCharAt(0).reverse().toString(),partner.exchangeMeso,psb.reverse().deleteCharAt(0).reverse().toString()));
+                    //SlackReporter.getInstance().log("TradeBot","#trades",String.format("[Trade Successful]%s gave %s %d Mesos [%s], got %d Mesos and [%s] in return", local.getChr().getName(), partner.getChr().getName(),local.exchangeMeso,lsb.reverse().deleteCharAt(0).reverse().toString(),partner.exchangeMeso,psb.reverse().deleteCharAt(0).reverse().toString()));
                 }
             });
             local.complete2();

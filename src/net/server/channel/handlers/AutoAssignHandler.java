@@ -39,7 +39,7 @@ import java.util.List;
 public class AutoAssignHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         List<Pair<MapleStat, Integer>> stats = new ArrayList<Pair<MapleStat, Integer>>();
         //TODO:make sure nothing broke
         MapleCharacter chr = c.getPlayer();
@@ -72,6 +72,7 @@ public class AutoAssignHandler extends AbstractMaplePacketHandler {
             //chr.dropMessage("nowai bruh.");
             c.announce(MaplePacketCreator.enableActions());
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
     }
 
     private int gainStatByType(MapleCharacter chr, MapleStat type, int gain) {

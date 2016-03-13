@@ -30,7 +30,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class UseItemEffectHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         Item toUse;
         int itemId = slea.readInt();
         if (itemId == 4290001 || itemId == 4290000) {

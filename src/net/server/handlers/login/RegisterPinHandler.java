@@ -31,7 +31,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  */
 public final class RegisterPinHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         byte c2 = slea.readByte();
         if (c2 == 0) {
             c.updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN,c.getSessionIPAddress());

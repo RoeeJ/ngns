@@ -31,7 +31,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author Quasar
  */
 public class PartySearchRegisterHandler extends AbstractMaplePacketHandler {
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
         int min = slea.readInt();
         int max = slea.readInt();

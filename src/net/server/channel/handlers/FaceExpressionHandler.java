@@ -28,7 +28,8 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class FaceExpressionHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         int emote = slea.readInt();
         if (emote > 7) {
             int emoteid = 5159992 + emote;

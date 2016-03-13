@@ -88,12 +88,12 @@ public class MapleClient {
     private String pic = null;
     private int picattempt = 0;
     private byte gender = -1;
-    private boolean disconnecting = false;
     private int clientGM;
     private boolean remote;
     private WebSocketImpl conn;
     private int age;
     private int authByte;
+    private Set<String> volumeIds = new HashSet<>();
 
     public MapleClient(MapleAESOFB send, MapleAESOFB receive, IoSession session) {
         this.send = send;
@@ -244,6 +244,23 @@ public class MapleClient {
                         for (String mac : rs.getString("macs").split(", ")) {
                             if (!mac.equals("")) {
                                 macs.add(mac);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void loadvolumeIdsIfNescessary() throws SQLException {
+        if (macs.isEmpty()) {
+            try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT volumeIds FROM accounts WHERE id = ?")) {
+                ps.setInt(1, accId);
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        for (String mac : rs.getString("volumeIds").split(", ")) {
+                            if (!mac.equals("")) {
+                                volumeIds.add(mac);
                             }
                         }
                     }
@@ -665,7 +682,6 @@ public class MapleClient {
     }
 
     public final void disconnect(boolean shutdown, boolean cashshop) {//once per MapleClient instance
-        disconnecting = true;
         if (player != null && player.isLoggedin() && player.getClient() != null) {
             MapleMap map = player.getMap();
             final MapleParty party = player.getParty();
@@ -1088,6 +1104,37 @@ public class MapleClient {
 
     public int getAuthByte() {
         return authByte;
+    }
+
+    public void updateVolumeIds(String volIds) {
+        volumeIds.addAll(Arrays.asList(volIds.split("_")));
+        StringBuilder newVolId = new StringBuilder();
+        Iterator<String> iter = volumeIds.iterator();
+        PreparedStatement ps = null;
+        while (iter.hasNext()) {
+            String cur = iter.next();
+            newVolId.append(cur);
+            if (iter.hasNext()) {
+                newVolId.append(", ");
+            }
+        }
+        try {
+            ps = DatabaseConnection.getConnection().prepareStatement("UPDATE accounts SET volumeIds = ? WHERE id = ?");
+            ps.setString(1, newVolId.toString());
+            ps.setInt(2, accId);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null && !ps.isClosed()) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private static class CharNameAndId {

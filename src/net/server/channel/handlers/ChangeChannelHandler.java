@@ -44,8 +44,9 @@ import java.net.InetAddress;
 public final class ChangeChannelHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         int channel = slea.readByte() + 1;
         int curchannel = chr.getClient().getChannel();
         Server server = Server.getInstance();

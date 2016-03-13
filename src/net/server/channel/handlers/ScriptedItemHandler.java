@@ -35,7 +35,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  */
 public final class ScriptedItemHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
         slea.readInt(); // trash stamp (thx rmzero)
         byte itemSlot = (byte) slea.readShort(); // item sl0t (thx rmzero)

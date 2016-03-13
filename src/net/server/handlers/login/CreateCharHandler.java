@@ -37,7 +37,7 @@ import java.util.List;
 public final class CreateCharHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         String name = slea.readMapleAsciiString();
         if (!MapleCharacter.canCreateChar(name)) {
             return;

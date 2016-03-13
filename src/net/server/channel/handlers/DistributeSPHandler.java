@@ -27,7 +27,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class DistributeSPHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.readInt();
         int skillid = slea.readInt();
         MapleCharacter player = c.getPlayer();

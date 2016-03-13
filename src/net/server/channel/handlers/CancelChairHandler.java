@@ -29,7 +29,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class CancelChairHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int id = slea.readShort();
         if (id == -1) { // Cancel Chair
             c.getPlayer().setChair(0);
@@ -39,5 +39,6 @@ public final class CancelChairHandler extends AbstractMaplePacketHandler {
             c.getPlayer().setChair(id);
             c.announce(MaplePacketCreator.cancelChair(id));
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
     }
 }

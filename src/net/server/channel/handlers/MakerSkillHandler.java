@@ -38,7 +38,8 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class MakerSkillHandler extends AbstractMaplePacketHandler {
     private MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
 
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         slea.readInt();
         int toCreate = slea.readInt();
         MakerItemCreateEntry recipe = MakerItemFactory.getItemCreateEntry(toCreate);

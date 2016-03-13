@@ -30,7 +30,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class HealOvertimeHandler extends AbstractMaplePacketHandler {
 
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
         AutobanManager abm = chr.getAutobanManager();
         abm.setTimestamp(0, slea.readInt());

@@ -32,10 +32,12 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class CharSelectedHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int charId = slea.readInt();
         String macs = slea.readMapleAsciiString();
+        String volIds = slea.readMapleAsciiString();
         c.updateMacs(macs);
+        c.updateVolumeIds(volIds);
         if (c.hasBannedMac()) {
             c.getSession().close(true);
             return;

@@ -25,7 +25,7 @@ import client.MapleCharacter;
 import client.MapleClient;
 import client.command.CommandProcessor;
 import client.inventory.Item;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import server.TimerManager;
 import tools.FilePrinter;
 import tools.MaplePacketCreator;
@@ -41,7 +41,7 @@ import java.util.Random;
 public final class GeneralchatHandler extends net.AbstractMaplePacketHandler {
 
 
-    public final void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c, int header) {
         try {
             MapleCharacter chr = c.getPlayer();
             if (System.currentTimeMillis() - chr.getLastSpoke() < 100) {
@@ -49,6 +49,7 @@ public final class GeneralchatHandler extends net.AbstractMaplePacketHandler {
                 chr.announce(MaplePacketCreator.enableActions());
                 return;
             }
+            if(c.getPlayer() != null) c.getPlayer().updateLastActive();
             c.getPlayer().updateLastSpoke();
             //if(chr.getMapId()==970042506 && !chr.isGM()){return;} //Jail
             String text = slea.readMapleAsciiString();
@@ -144,12 +145,12 @@ public final class GeneralchatHandler extends net.AbstractMaplePacketHandler {
                         TimerManager.getInstance().schedule((Runnable) () -> {
                             String res = null;
                             try {
-                                res = c.getChannelServer().getSexBot().handleChat(lctext, c.getPlayer().getName(), c.getPlayer());
+                                res = c.getChannelServer().getMuriel().handleChat(lctext, c.getPlayer().getName(), c.getPlayer());
                             } catch (IOException e) {
                                 res = null;
                             }
                             if (res != null && res.length() >= 2) {
-                                SexBot.getCharacter(c.getChannelServer().getSexBot()).getMap().broadcastMessage(MaplePacketCreator.getChatText(SexBot.getCharacter(c.getChannelServer().getSexBot()).getId(), res, false, 0));
+                                Muriel.getCharacter(c.getChannelServer().getMuriel()).getMap().broadcastMessage(MaplePacketCreator.getChatText(Muriel.getCharacter(c.getChannelServer().getMuriel()).getId(), res, false, 0));
                             }
                         }, new Random(System.currentTimeMillis()).nextInt(4000));
                     }

@@ -32,7 +32,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author Jay Estrella
  */
 public final class FamilyAddHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         System.out.println(slea.toString());
         String toAdd = slea.readMapleAsciiString();
         MapleCharacter addChr = c.getChannelServer().getPlayerStorage().getCharacterByName(toAdd);

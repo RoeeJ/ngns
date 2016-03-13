@@ -24,7 +24,6 @@ package net.server.channel.handlers;
 import java.awt.Point;
 import java.util.List;
 
-import net.server.channel.handlers.AbstractMovementPacketHandler;
 import server.life.MapleMonster;
 import server.life.MobSkill;
 import server.life.MobSkillFactory;
@@ -39,7 +38,7 @@ import client.MapleClient;
 
 public final class MoveLifeHandler extends AbstractMovementPacketHandler {
     public final void handlePacket(SeekableLittleEndianAccessor slea,
-                                   MapleClient c) {
+                                   MapleClient c, int header) {
         int objectid = slea.readInt();
         short moveid = slea.readShort();
         MapleMapObject mmo = c.getPlayer().getMap().getMapObject(objectid);

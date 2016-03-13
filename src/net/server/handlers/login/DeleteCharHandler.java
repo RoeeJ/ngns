@@ -29,7 +29,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class DeleteCharHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         String pic = slea.readMapleAsciiString();
         int cid = slea.readInt();
         if (c.checkPic(pic)) {

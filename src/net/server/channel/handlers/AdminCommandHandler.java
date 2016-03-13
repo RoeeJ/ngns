@@ -43,10 +43,11 @@ import java.util.List;
 public final class AdminCommandHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         if (!c.getPlayer().isGM()) {
             return;
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         byte mode = slea.readByte();
         String victim;
         MapleCharacter target;

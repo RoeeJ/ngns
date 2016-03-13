@@ -27,7 +27,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 import net.AbstractMaplePacketHandler;
 
 public final class SkillMacroHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int num = slea.readByte();
         for (int i = 0; i < num; i++) {
             String name = slea.readMapleAsciiString();

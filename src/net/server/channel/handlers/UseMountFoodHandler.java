@@ -33,7 +33,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author PurpleMadness
  */
 public final class UseMountFoodHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.skip(6);
         int itemid = slea.readInt();
         if (c.getPlayer().getInventory(MapleInventoryType.USE).findById(itemid) != null) {

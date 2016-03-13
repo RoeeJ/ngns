@@ -60,7 +60,7 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
     }
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
 
         MapleCharacter chr = c.getPlayer();
         CashShop cs = chr.getCashShop();
@@ -68,6 +68,7 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
             c.announce(MaplePacketCreator.enableActions());
             return;
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         final int action = slea.readByte();
         if (action == 0x03 || action == 0x1E) {
             slea.readByte();

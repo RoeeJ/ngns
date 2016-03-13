@@ -3,9 +3,7 @@ package net.server.handlers.login;
 import client.MapleClient;
 import net.AbstractMaplePacketHandler;
 import net.server.Server;
-import server.MegatronListener;
 import tools.MaplePacketCreator;
-import tools.StringUtil;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 import java.net.InetAddress;
@@ -14,7 +12,7 @@ import java.net.UnknownHostException;
 public class CharSelectedWithPicHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
 
         String pic = slea.readMapleAsciiString();
         int charId = slea.readInt();

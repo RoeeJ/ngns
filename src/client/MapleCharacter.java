@@ -61,6 +61,7 @@ import java.sql.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.*;
+import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.concurrent.ScheduledFuture;
@@ -215,6 +216,7 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     private transient long lastSmega;
     private transient MapleCharacter watcher;
     private transient MapleCharacter send;
+    private Date lastActive;
 
     private MapleCharacter() {
         setStance(0);
@@ -5376,6 +5378,14 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
 
     public int getTotalHP() {
         return localmaxhp;
+    }
+
+    public Date getLastActive() {
+        return lastActive;
+    }
+
+    public void updateLastActive() {
+        this.lastActive = Calendar.getInstance().getTime();
     }
 
     public enum FameStatus {

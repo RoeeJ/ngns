@@ -23,6 +23,7 @@ package net.server;
 
 import client.MapleCharacter;
 import client.SkillFactory;
+import client.sexbot.Muriel;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.ullink.slack.simpleslackapi.SlackSession;
@@ -39,7 +40,6 @@ import net.server.guild.MapleGuildCharacter;
 import net.server.world.World;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.buffer.SimpleBufferAllocator;
-import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketAcceptor;
@@ -51,12 +51,13 @@ import server.CashShop.CashItemFactory;
 import server.MapleItemInformationProvider;
 import server.MegatronListener;
 import server.TimerManager;
-import server.life.MapleMonsterInformationProvider;
+import server.maps.MapleMapFactory;
 import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
 import tools.Pair;
 import tools.WSServer;
 
+import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -66,6 +67,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.List;
 
 public class Server implements Runnable {
 
@@ -241,6 +243,9 @@ public class Server implements Runnable {
                 }
                 world.setServerMessage(p.getProperty("servermessage" + i));
                 System.out.println("Finished loading world " + i + "\r\n");
+                Muriel muriel = new Muriel();
+                muriel.spawn(world.getChannel(1).getMapFactory().getMap(100000000),new Point(-526,274));
+                world.getChannel(1).setMuriel(muriel);
             }
         } catch (Exception e) {
             System.out.println("Error in moople.ini, start CreateINI.bat to re-make the file.");
@@ -273,7 +278,13 @@ public class Server implements Runnable {
     public MongoCollection<Document> getLogCollection() {
         if (mongoClient == null)
             initMongo();
-        return mongoClient.getDatabase("meteor").getCollection("items");
+        return mongoClient.getDatabase("NGNS").getCollection("logs");
+    }
+
+    public MongoCollection<Document> getPacketCollection() {
+        if (mongoClient == null)
+            initMongo();
+        return mongoClient.getDatabase("NGNS").getCollection("packets");
     }
 
     public void initMongo() {

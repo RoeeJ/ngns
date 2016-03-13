@@ -28,7 +28,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 import tools.data.output.MaplePacketLittleEndianWriter;
 
 public final class NPCAnimation extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MaplePacketLittleEndianWriter mplew = new MaplePacketLittleEndianWriter();
         int length = (int) slea.available();
         if (length == 6) { // NPC Talk

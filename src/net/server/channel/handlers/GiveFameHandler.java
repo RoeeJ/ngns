@@ -24,19 +24,19 @@ package net.server.channel.handlers;
 import client.MapleCharacter;
 import client.MapleClient;
 import client.MapleStat;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import net.AbstractMaplePacketHandler;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class GiveFameHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter target = (MapleCharacter) c.getPlayer().getMap().getMapObject(slea.readInt());
         int mode = slea.readByte();
         int famechange = 2 * mode - 1;
         MapleCharacter player = c.getPlayer();
-        if (c.getChannelServer().getSexBot() != null && SexBot.getCharacter(c.getChannelServer().getSexBot()).getId() == target.getId()) {
-            SexBot.getCharacter(c.getChannelServer().getSexBot()).getMap().broadcastMessage(MaplePacketCreator.getChatText(SexBot.getCharacter(c.getChannelServer().getSexBot()).getId(), "noty " + player.getName(), false, 1));
+        if (c.getChannelServer().getMuriel() != null && Muriel.getCharacter(c.getChannelServer().getMuriel()).getId() == target.getId()) {
+            Muriel.getCharacter(c.getChannelServer().getMuriel()).getMap().broadcastMessage(MaplePacketCreator.getChatText(Muriel.getCharacter(c.getChannelServer().getMuriel()).getId(), "noty " + player.getName(), false, 1));
             return;
         }
         if ((target == player || player.getLevel() < 15)) {
@@ -47,6 +47,7 @@ public final class GiveFameHandler extends AbstractMaplePacketHandler {
             player.dropMessage("No fame hacking, asshole!"); //TODO: add to megatron's logs
             return;
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         switch (player.canGiveFame(target)) {
             case OK:
                 if (Math.abs(target.getFame() + famechange) < 30001) {

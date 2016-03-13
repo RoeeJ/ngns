@@ -37,7 +37,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class PetFoodHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
         AutobanManager abm = chr.getAutobanManager();
         if (abm.getLastSpam(2) + 500 > System.currentTimeMillis()) {

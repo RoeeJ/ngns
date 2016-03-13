@@ -34,7 +34,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  */
 public final class SnowballHandler extends AbstractMaplePacketHandler{
 
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         //D3 00 02 00 00 A5 01
         MapleCharacter chr = c.getPlayer();
         MapleMap map = chr.getMap();

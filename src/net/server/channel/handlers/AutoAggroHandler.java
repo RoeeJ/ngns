@@ -29,7 +29,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class AutoAggroHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int oid = slea.readInt();
         MapleMonster monster = c.getPlayer().getMap().getMonsterByOid(oid);
         if (monster != null && monster.getController() != null) {

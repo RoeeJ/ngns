@@ -32,7 +32,7 @@ public final class LoginRequiringNoOpHandler implements MaplePacketHandler {
         return instance;
     }
 
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
     }
 
     public boolean validateState(MapleClient c) {

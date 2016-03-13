@@ -38,7 +38,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author kevintjuh93
  */
 public final class MonsterCarnivalHandler extends AbstractMaplePacketHandler{
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
         MonsterCarnival carnival = chr.getCarnival();
         int tab = slea.readByte();

@@ -29,7 +29,8 @@ import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class ChangeMapSpecialHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         slea.readByte();
         String startwp = slea.readMapleAsciiString();
         slea.readShort();

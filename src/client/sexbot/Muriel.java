@@ -31,7 +31,6 @@ import client.MapleClient;
 import client.inventory.Item;
 import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
-import client.sexbot.ChangeEquipSpecialAwesome;
 import net.server.Server;
 import net.server.channel.Channel;
 import net.server.world.World;
@@ -40,7 +39,6 @@ import org.slf4j.LoggerFactory;
 import server.MapleItemInformationProvider;
 import server.life.MapleLifeFactory;
 import server.life.MapleMonster;
-import server.life.MapleMonsterInformationProvider;
 import server.life.MonsterDropEntry;
 import server.maps.AnimatedMapleMapObject;
 import server.maps.MapleMap;
@@ -63,9 +61,9 @@ import java.util.List;
  * Sexbot is a fake character (bot) that interacts with players in different ways
  * Sexbot is by Sathon aka Ethan Jenkins
  */
-public class SexBot
+public class Muriel
 {
-	private static final Logger log = LoggerFactory.getLogger(SexBot.class);
+	private static final Logger log = LoggerFactory.getLogger(Muriel.class);
     private static Thread patrolThread;
     private MapleClient c;
     private MapleCharacter player;
@@ -83,7 +81,7 @@ public class SexBot
     private Boolean lock = false;
     //private TimerManager smegaTimer;
 
-	public SexBot()
+	public Muriel()
 	{
 		this.spawned = false;
 		this.c = new MapleClient(null, null, new MockIOSession());
@@ -91,8 +89,11 @@ public class SexBot
 		follow = null;
 	}
 
-    public static MapleCharacter getCharacter(SexBot instance) {
+    public static MapleCharacter getCharacter(Muriel instance) {
         return instance.player;
+    }
+    public MapleCharacter getCharacter() {
+        return player;
     }
 
     public int getMap()
@@ -510,7 +511,7 @@ public class SexBot
                 preThink();
                 try {
                     Thread.sleep(new Random().nextInt(1000+2000));
-                    WolframProcessor.process(StringUtil.joinStringFrom(splitted, 1), SexBot.getCharacter(this));
+                    WolframProcessor.process(StringUtil.joinStringFrom(splitted, 1), Muriel.getCharacter(this));
                     //else response[0] = ChatHandler.processChat(splitted, name);
                     return "";
                 } catch (InterruptedException e) {
@@ -547,11 +548,12 @@ public class SexBot
     /* Spawn Sexbot
      *Sexbot is by Sathon aka Ethan Jenkins
      */
-	public void spawnSexBot(MapleMap map, Point spawnPoint, int cid)
+	public void spawn(MapleMap map, Point spawnPoint)
 	{
+        if(spawned) return;
 		try
 		{
-			this.player = MapleCharacter.loadCharFromDB(cid, this.c, true);
+			this.player = MapleCharacter.loadCharFromDB(30001, this.c, true);
 			this.c.setPlayer(this.player);
 		}
 
@@ -607,15 +609,12 @@ public class SexBot
 		lmf.add(alm2);
 		lmf.add(alm3);
 
-        byte[] packet = MaplePacketCreator.movePlayer(SexBot.getCharacter(this).getId(), lmf);
-        System.out.println("Spawning4");
-        SexBot.getCharacter(this).getMap().broadcastMessage(SexBot.getCharacter(this), packet);
-        System.out.println("Spawning5");
-        SexBot.getCharacter(this).setPosition(spawnPoint);
-        System.out.println("Spawning6");
-        SexBot.getCharacter(this).setStance(4);
-        System.out.println("Spawning7");
-        SexBot.getCharacter(this).getMap().movePlayer(SexBot.getCharacter(this), SexBot.getCharacter(this).getPosition());
+        byte[] packet = MaplePacketCreator.movePlayer(Muriel.getCharacter(this).getId(), lmf);
+        Muriel.getCharacter(this).getMap().broadcastMessage(Muriel.getCharacter(this), packet);
+        Muriel.getCharacter(this).setPosition(spawnPoint);
+        Muriel.getCharacter(this).setStance(4);
+        Muriel.getCharacter(this).getMap().movePlayer(Muriel.getCharacter(this), Muriel.getCharacter(this).getPosition());
+        System.out.println(String.format("Muriel spawned in map %d x:%d y:%d", getCharacter().getMapId(),getCharacter().getPosition().x,getCharacter().getPosition().y));
     }
 
     public boolean isRecording() {
@@ -648,9 +647,9 @@ public class SexBot
                 public void run() {
                     try {
                         for (List<LifeMovementFragment> res : moves) {
-                            byte[] packet = MaplePacketCreator.movePlayer(getCharacter(SexBot.this).getId(), res);
-                            getCharacter(SexBot.this).getMap().broadcastMessage(getCharacter(SexBot.this), packet, false);
-                            updatePosition(res, getCharacter(SexBot.this), 0);
+                            byte[] packet = MaplePacketCreator.movePlayer(getCharacter(Muriel.this).getId(), res);
+                            getCharacter(Muriel.this).getMap().broadcastMessage(getCharacter(Muriel.this), packet, false);
+                            updatePosition(res, getCharacter(Muriel.this), 0);
                             player.getMap().movePlayer(player, player.getPosition());
                             Thread.sleep(500);
                         }

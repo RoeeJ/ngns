@@ -32,7 +32,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author Xotic & BubblesDev
  */
 public final class MobDamageMobFriendlyHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int attacker = slea.readInt();
         slea.readInt(); //charId
         int damaged = slea.readInt();

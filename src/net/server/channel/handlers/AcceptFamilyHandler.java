@@ -34,7 +34,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class AcceptFamilyHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         //System.out.println(slea.toString());
         int inviterId = slea.readInt();
 //        String inviterName = slea.readMapleAsciiString();

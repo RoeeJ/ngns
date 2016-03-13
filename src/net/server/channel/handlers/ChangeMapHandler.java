@@ -38,9 +38,9 @@ import java.net.UnknownHostException;
 public final class ChangeMapHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
-
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         if (chr.isBanned()) {
             return;
         }

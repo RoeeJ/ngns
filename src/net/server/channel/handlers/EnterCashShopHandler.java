@@ -35,10 +35,10 @@ import tools.data.input.SeekableLittleEndianAccessor;
  */
 public class EnterCashShopHandler extends AbstractMaplePacketHandler {
     @Override
-	public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+	public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
             try {
 		MapleCharacter mc = c.getPlayer();
-
+		if(c.getPlayer() != null) c.getPlayer().updateLastActive();
 		if (mc.getCashShop().isOpened()) return;
                 
 		Server.getInstance().getPlayerBuffStorage().addBuffsToStorage(mc.getId(), mc.getAllBuffs());

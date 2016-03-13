@@ -56,7 +56,7 @@ public final class SummonDamageHandler extends AbstractMaplePacketHandler {
     }
 
     @Override
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int oid = slea.readInt();
         MapleCharacter player = c.getPlayer();
         if (!player.isAlive()) {

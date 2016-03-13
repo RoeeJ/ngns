@@ -33,12 +33,13 @@ import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class PartyOperationHandler extends AbstractMaplePacketHandler {
 
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int operation = slea.readByte();
         MapleCharacter player = c.getPlayer();
         World world = c.getWorldServer();
         MapleParty party = player.getParty();
         MaplePartyCharacter partyplayer = player.getMPC();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         switch (operation) {
             case 1: { // create
                 if (player.getParty() == null) {

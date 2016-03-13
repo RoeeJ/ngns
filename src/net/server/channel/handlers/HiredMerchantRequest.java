@@ -38,7 +38,7 @@ import java.util.Arrays;
  * @author XoticStory
  */
 public final class HiredMerchantRequest extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         if (!(c.getPlayer().getGMRank() == GMRank.DEVELOPER)) {
             c.announce(MaplePacketCreator.getWhisper("Cthulu", c.getChannel(), "Player stores are disabled for now."));
             return;

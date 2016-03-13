@@ -40,9 +40,10 @@ import tools.data.input.SeekableLittleEndianAccessor;
  */
 public final class StorageHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         byte mode = slea.readByte();
         final MapleStorage storage = chr.getStorage();
         if (mode == 4) { // take out

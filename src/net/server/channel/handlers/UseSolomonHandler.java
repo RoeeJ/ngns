@@ -37,7 +37,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class UseSolomonHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.readInt();
         byte slot = (byte) slea.readShort();
         int itemId = slea.readInt();

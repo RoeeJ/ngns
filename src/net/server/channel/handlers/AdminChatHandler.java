@@ -12,10 +12,11 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public class AdminChatHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         if (!c.getPlayer().isGM()) {//if ( (signed int)CWvsContext::GetAdminLevel((void *)v294) > 2 )
             return;
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         byte mode = slea.readByte();
         //not saving slides...
         byte[] packet = MaplePacketCreator.serverNotice(slea.readByte(), slea.readMapleAsciiString());//maybe I should make a check for the slea.readByte()... but I just hope gm's don't fuck things up :)

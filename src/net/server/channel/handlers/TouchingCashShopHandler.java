@@ -31,7 +31,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author Acrylic (Terry Han)
  */
 public final class TouchingCashShopHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         c.announce(MaplePacketCreator.showCash(c.getPlayer()));
     }
 }

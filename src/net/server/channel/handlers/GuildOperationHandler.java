@@ -81,7 +81,7 @@ public final class GuildOperationHandler extends AbstractMaplePacketHandler {
     private long nextPruneTime = System.currentTimeMillis() + 20 * 60 * 1000;
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         if (System.currentTimeMillis() >= nextPruneTime) {
             Iterator<Invited> itr = invited.iterator();
             Invited inv;

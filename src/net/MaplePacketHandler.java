@@ -25,6 +25,6 @@ import client.MapleClient;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public interface MaplePacketHandler {
-    void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c);
+    void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header);
     boolean validateState(MapleClient c);
 }

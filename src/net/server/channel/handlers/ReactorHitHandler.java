@@ -30,8 +30,9 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author Lerk
  */
 public final class ReactorHitHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         //CD 00 6B 00 00 00 01 00 00 00 03 00 00 00 20 03 F7 03 00 00
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         int oid = slea.readInt();
         int charPos = slea.readInt();
         short stance = slea.readShort();

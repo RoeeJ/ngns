@@ -20,7 +20,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public class WeddingHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         //System.out.println("Wedding Packet: " + slea);
         MapleCharacter chr = c.getPlayer();
         byte operation = slea.readByte();

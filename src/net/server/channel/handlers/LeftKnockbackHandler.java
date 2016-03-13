@@ -32,7 +32,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author kevintjuh93
  */
 public class LeftKnockbackHandler extends AbstractMaplePacketHandler {
-        public void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c) {
+        public void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c, int header) {
             c.announce(MaplePacketCreator.leftKnockBack());
             c.announce(MaplePacketCreator.enableActions());
         }

@@ -34,6 +34,7 @@ public final class PacketProcessor {
 
     private final static Map<String, PacketProcessor> instances = new LinkedHashMap<>();
     private MaplePacketHandler[] handlers;
+    private DefaultPacketHandler defaultHandler;
 
     private PacketProcessor() {
         int maxRecvOp = 0;
@@ -63,8 +64,9 @@ public final class PacketProcessor {
         MaplePacketHandler handler = handlers[packetId];
         if (handler != null) {
             return handler;
+        } else {
+            return defaultHandler;
         }
-        return null;
     }
 
     public void registerHandler(RecvOpcode code, MaplePacketHandler handler) {
@@ -77,6 +79,7 @@ public final class PacketProcessor {
 
     public void reset(int channel) {
         handlers = new MaplePacketHandler[handlers.length];
+        defaultHandler = new DefaultPacketHandler();
 
         registerHandler(RecvOpcode.PONG, new KeepAliveHandler());
         registerHandler(RecvOpcode.CUSTOM_PACKET, new CustomPacketHandler());

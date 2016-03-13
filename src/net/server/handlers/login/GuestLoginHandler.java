@@ -32,9 +32,9 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class GuestLoginHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         c.announce(MaplePacketCreator.sendGuestTOS());
         //System.out.println(slea.toString());
-        new LoginPasswordHandler().handlePacket(slea, c);
+        new LoginPasswordHandler().handlePacket(slea, c, header);
     }
 }

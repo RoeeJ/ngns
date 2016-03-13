@@ -32,7 +32,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class DistributeAPHandler extends AbstractMaplePacketHandler {
     private static final int max = 999;
 
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.readInt();
         int num = slea.readInt();
         if (c.getPlayer().getRemainingAp() > 0) {

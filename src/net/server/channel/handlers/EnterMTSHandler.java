@@ -42,7 +42,7 @@ import java.util.List;
 
 public final class EnterMTSHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
         if (!chr.isAlive()) {
             c.announce(MaplePacketCreator.enableActions());
@@ -53,7 +53,7 @@ public final class EnterMTSHandler extends AbstractMaplePacketHandler {
             c.announce(MaplePacketCreator.enableActions());
             return;
         }
-        
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         Server.getInstance().getPlayerBuffStorage().addBuffsToStorage(chr.getId(), chr.getAllBuffs());
         chr.cancelExpirationTask();
         chr.saveToDB();

@@ -33,11 +33,12 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author Matze
  */
 public final class ItemMoveHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
     	if(System.currentTimeMillis() - c.getPlayer().getLastEquipped() < 500){
     		//c.getPlayer().dropMessage("nowai bruh.");
     		return;
     	}
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
     	c.getPlayer().updateLastEquipped();
         slea.skip(4); 
         MapleInventoryType type = MapleInventoryType.getByType(slea.readByte());

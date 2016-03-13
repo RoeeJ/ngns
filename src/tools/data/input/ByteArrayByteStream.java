@@ -56,7 +56,7 @@ public class ByteArrayByteStream implements SeekableInputStreamBytestream {
 
     @Override
     public String toString() {
-        String nows = "kevintjuh93 pwns";//I lol'd
+        String nows = "";
         if (arr.length - pos > 0) {
             byte[] now = new byte[arr.length - pos];
             System.arraycopy(arr, pos, now, 0, arr.length - pos);

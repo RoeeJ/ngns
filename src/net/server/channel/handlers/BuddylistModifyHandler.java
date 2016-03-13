@@ -76,7 +76,8 @@ public class BuddylistModifyHandler extends AbstractMaplePacketHandler {
     }
 
     @Override
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         int mode = slea.readByte();
         MapleCharacter player = c.getPlayer();
         BuddyList buddylist = player.getBuddylist();

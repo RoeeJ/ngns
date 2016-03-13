@@ -45,9 +45,10 @@ import java.util.Arrays;
  */
 public final class PlayerInteractionHandler extends AbstractMaplePacketHandler {
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         byte mode = slea.readByte();
         MapleCharacter chr = c.getPlayer();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         if (mode == Action.CREATE.getCode()) {
             byte createType = slea.readByte();
             if (createType == 3) {// trade

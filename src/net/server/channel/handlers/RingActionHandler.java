@@ -35,7 +35,7 @@ import tools.MaplePacketCreator;
  * @author Jvlaple
  */
 public final class RingActionHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         byte mode = slea.readByte();
         MapleCharacter player = c.getPlayer();
         switch (mode) {

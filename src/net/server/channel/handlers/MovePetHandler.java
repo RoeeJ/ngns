@@ -21,7 +21,6 @@
 */
 package net.server.channel.handlers;
 
-import net.server.channel.handlers.AbstractMovementPacketHandler;
 import java.util.List;
 import client.MapleCharacter;
 import client.MapleClient;
@@ -30,7 +29,7 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class MovePetHandler extends AbstractMovementPacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int petId = slea.readInt();
         slea.readLong();
 //        Point startPos = StreamUtil.readShortPoint(slea);

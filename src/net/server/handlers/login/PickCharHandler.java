@@ -33,7 +33,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class PickCharHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int charId = slea.readInt();
         int world = slea.readInt();//Wuuu? ):
         c.setWorld(world);

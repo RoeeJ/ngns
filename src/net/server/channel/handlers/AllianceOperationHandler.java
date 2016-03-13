@@ -38,7 +38,7 @@ import tools.data.output.MaplePacketLittleEndianWriter;
 public final class AllianceOperationHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleAlliance alliance = null;
         if (c.getPlayer().getGuild() != null && c.getPlayer().getGuild().getAllianceId() > 0) {
             alliance = Server.getInstance().getAlliance(c.getPlayer().getGuild().getAllianceId());
@@ -127,6 +127,7 @@ public final class AllianceOperationHandler extends AbstractMaplePacketHandler {
                 c.getPlayer().dropMessage("Feature not available");
         }
         alliance.saveToDB();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
     }
 
     private static byte[] sendShowInfo(int allianceid, int playerid) {

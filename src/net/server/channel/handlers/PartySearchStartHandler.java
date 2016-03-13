@@ -28,7 +28,6 @@ import java.util.Collection;
 import net.AbstractMaplePacketHandler;
 import net.server.world.MapleParty;
 import net.server.world.MaplePartyCharacter;
-import net.server.world.PartyOperation;
 import server.maps.MapleMap;
 import server.maps.MapleMapObject;
 import tools.MaplePacketCreator;
@@ -40,7 +39,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author BubblesDev
  */
 public class PartySearchStartHandler extends AbstractMaplePacketHandler {
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int min = slea.readInt();
         int max = slea.readInt();
         slea.readInt(); // members

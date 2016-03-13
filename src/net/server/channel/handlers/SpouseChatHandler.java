@@ -29,7 +29,7 @@ import net.AbstractMaplePacketHandler;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class SpouseChatHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         System.out.println(slea.toString());
 //        slea.readMapleAsciiString();//recipient
 //        String msg = slea.readMapleAsciiString();

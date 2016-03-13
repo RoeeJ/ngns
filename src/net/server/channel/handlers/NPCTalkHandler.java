@@ -32,11 +32,12 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class NPCTalkHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         if (!c.getPlayer().isAlive() || (c.getPlayer().getLastSpokeToNpc() + 2000 > System.currentTimeMillis())) {
             c.announce(MaplePacketCreator.enableActions());
             return;
         }
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         int oid = slea.readInt();
         MapleMapObject obj = c.getPlayer().getMap().getMapObject(oid);
         if (obj instanceof MapleNPC) {

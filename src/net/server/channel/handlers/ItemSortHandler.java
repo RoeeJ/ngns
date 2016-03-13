@@ -33,7 +33,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class ItemSortHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
         chr.getAutobanManager().setTimestamp(2, slea.readInt());
         byte inv = slea.readByte();

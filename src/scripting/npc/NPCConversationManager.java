@@ -263,6 +263,7 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
     }
 
     public void setFace(int face) {
+        if(face == 0) return;
         getPlayer().setFace(face);
         getPlayer().updateSingleStat(MapleStat.FACE, face);
         getPlayer().equipChanged();

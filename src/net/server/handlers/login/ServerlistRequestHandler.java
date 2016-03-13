@@ -26,14 +26,13 @@ import constants.ServerConstants;
 import net.AbstractMaplePacketHandler;
 import net.server.Server;
 import net.server.world.World;
-import server.TimerManager;
 import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class ServerlistRequestHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         Server server = Server.getInstance();
 
         for (World world : server.getWorlds()) {

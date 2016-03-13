@@ -53,9 +53,10 @@ public final class PlayerLoggedinHandler extends AbstractMaplePacketHandler {
     }
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         final int cid = slea.readInt();
         final Server server = Server.getInstance();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         MapleCharacter player = c.getWorldServer().getPlayerStorage().getCharacterById(cid);
         if (player == null) {
             try {

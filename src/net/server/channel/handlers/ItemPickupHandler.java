@@ -43,7 +43,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class ItemPickupHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(final SeekableLittleEndianAccessor slea, final MapleClient c) {
+    public final void handlePacket(final SeekableLittleEndianAccessor slea, final MapleClient c, int header) {
         slea.readInt(); //Timestamp
         slea.readByte();
         Point cpos = slea.readPos();

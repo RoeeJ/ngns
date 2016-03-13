@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package net.server.channel;
 
 import client.MapleCharacter;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import constants.ServerConstants;
 import net.MapleServerHandler;
 import net.mina.MapleCodecFactory;
@@ -31,7 +31,6 @@ import net.server.world.MapleParty;
 import net.server.world.MaplePartyCharacter;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.buffer.SimpleBufferAllocator;
-import org.apache.mina.core.service.IoAcceptor;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketAcceptor;
@@ -74,7 +73,7 @@ public final class Channel {
     private String[] lastEvent = new String[3];
     private long lastEventTime;
     private boolean eventKill;
-    private SexBot sexBot = null;
+    private Muriel muriel = null;
     private boolean scramble;
 
     public Channel(final int world, final int channel) {
@@ -144,12 +143,12 @@ public final class Channel {
         return world;
     }
 
-    public SexBot getSexBot() {
-        return this.sexBot;
+    public Muriel getMuriel() {
+        return this.muriel;
     }
 
-    public void setSexBot(SexBot newsb) {
-        this.sexBot = newsb;
+    public void setMuriel(Muriel newsb) {
+        this.muriel = newsb;
     }
     public void addPlayer(MapleCharacter chr) {
         players.addPlayer(chr);

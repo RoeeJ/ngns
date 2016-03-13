@@ -24,7 +24,7 @@ package net.server.channel.handlers;
 import client.ChatLog;
 import client.MapleCharacter;
 import client.MapleClient;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import net.AbstractMaplePacketHandler;
 import net.server.world.World;
 import server.TimerManager;
@@ -44,27 +44,28 @@ import java.util.Random;
  * @author Matze
  */
 public final class WhisperHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c, int header) {
         byte mode = slea.readByte();
+        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         if (mode == 6) { // whisper
             String recipient = slea.readMapleAsciiString();
             final String text = slea.readMapleAsciiString();
-            if (c.getChannelServer().getSexBot() != null && recipient.equalsIgnoreCase(SexBot.getCharacter(c.getChannelServer().getSexBot()).getName())) {
-                c.announce(MaplePacketCreator.getWhisperReply(SexBot.getCharacter(c.getChannelServer().getSexBot()).getName(), (byte) 1));
+            if (c.getChannelServer().getMuriel() != null && recipient.equalsIgnoreCase(Muriel.getCharacter(c.getChannelServer().getMuriel()).getName())) {
+                c.announce(MaplePacketCreator.getWhisperReply(Muriel.getCharacter(c.getChannelServer().getMuriel()).getName(), (byte) 1));
                 TimerManager.getInstance().schedule(new Runnable() {
                     public void run() {
                         String res = null;
                         try {
-                            res = c.getChannelServer().getSexBot().handleChat(("sexbot, " + text).toLowerCase(), c.getPlayer().getName(), c.getPlayer());
+                            res = c.getChannelServer().getMuriel().handleChat(("sexbot, " + text).toLowerCase(), c.getPlayer().getName(), c.getPlayer());
                         } catch (IOException e) {
                             res = null;
                         }
                         if (res != null && res.length() > 0) {
-                            c.announce(MaplePacketCreator.getWhisper(SexBot.getCharacter(c.getChannelServer().getSexBot()).getName(), c.getChannel(), res));
+                            c.announce(MaplePacketCreator.getWhisper(Muriel.getCharacter(c.getChannelServer().getMuriel()).getName(), c.getChannel(), res));
                         }
                     }
                 }, new Random(System.currentTimeMillis()).nextInt(4000));
-                //try {c.getWorldServer().whisper("Muriel",c.getPlayer().getName(),c.getChannel(),c.getChannelServer().getSexBot().handleChat(recipient, text, c.getPlayer()));} catch (IOException e) {}
+                //try {c.getWorldServer().whisper("Muriel",c.getPlayer().getName(),c.getChannel(),c.getChannelServer().getMuriel().handleChat(recipient, text, c.getPlayer()));} catch (IOException e) {}
                 return;
             }
             MapleCharacter player = c.getChannelServer().getPlayerStorage().getCharacterByName(recipient);

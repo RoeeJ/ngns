@@ -25,14 +25,14 @@ import java.sql.PreparedStatement;
 import client.MapleClient;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import tools.DatabaseConnection;
 import tools.data.input.SeekableLittleEndianAccessor;
 import net.AbstractMaplePacketHandler;
 import tools.MaplePacketCreator;
 
 public final class NoteActionHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int action = slea.readByte();
         if (action == 0 && c.getPlayer().getCashShop().getAvailableNotes() > 0) {
             String charname = slea.readMapleAsciiString();

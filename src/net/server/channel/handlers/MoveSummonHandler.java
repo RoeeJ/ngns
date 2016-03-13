@@ -21,7 +21,6 @@
 */
 package net.server.channel.handlers;
 
-import net.server.channel.handlers.AbstractMovementPacketHandler;
 import java.awt.Point;
 import java.util.Collection;
 import java.util.List;
@@ -33,7 +32,7 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class MoveSummonHandler extends AbstractMovementPacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int oid = slea.readInt();
         Point startPos = new Point(slea.readShort(), slea.readShort());
         List<LifeMovementFragment> res = parseMovement(slea);

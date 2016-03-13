@@ -16,7 +16,7 @@ public class ViewAllCharSelectedWithPicHandler extends AbstractMaplePacketHandle
     private static Logger log = LoggerFactory.getLogger(ViewAllCharSelectedWithPicHandler.class);
 
     @Override
-    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
 
         String pic = slea.readMapleAsciiString();
         int charId = slea.readInt();

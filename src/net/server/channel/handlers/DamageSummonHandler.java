@@ -31,7 +31,7 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class DamageSummonHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int skillid = slea.readInt(); //Bugged? might not be skillid.
         int unkByte = slea.readByte();
         int damage = slea.readInt();

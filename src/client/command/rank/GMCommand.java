@@ -26,10 +26,11 @@ import client.command.CommandInterface;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
 import client.inventory.MaplePet;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import com.google.common.collect.Lists;
 import net.server.Server;
 import net.server.channel.Channel;
+import net.server.world.World;
 import provider.MapleData;
 import scripting.npc.NPCScriptManager;
 import server.MapleInventoryManipulator;
@@ -101,12 +102,12 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 break;
             }
             case "sbfollow": {
-                cserv.getSexBot().setFollow(player);
+                cserv.getMuriel().setFollow(player);
                 break;
             }
             case "sbspeak": {
                 if (splitted.length >= 2) {
-                    SexBot.getCharacter(cserv.getSexBot()).getMap().broadcastMessage(MaplePacketCreator.getChatText(SexBot.getCharacter(c.getChannelServer().getSexBot()).getId(), StringUtil.joinStringFrom(splitted, 1), false, 1));
+                    Muriel.getCharacter(cserv.getMuriel()).getMap().broadcastMessage(MaplePacketCreator.getChatText(Muriel.getCharacter(c.getChannelServer().getMuriel()).getId(), StringUtil.joinStringFrom(splitted, 1), false, 1));
                 }
                 break;
             }
@@ -393,6 +394,18 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 }
                 break;
             }
+            case "checkafk": {
+                if(splitted.length == 2) {
+                    MapleCharacter victim = Server.getInstance().getWorld(0).getPlayerStorage().getCharacterByName(splitted[1]);
+                    if(victim != null) {
+                        Pair<Long, String> timediff = DateTimeUtils.getInstance().getTimeDifference(victim.getLastActive(),Calendar.getInstance().getTime());
+                        player.dropMessage(String.format("It has been %s since %s was last active",timediff.getRight(),victim.getName()));
+                    } else {
+                        player.dropMessage(String.format("%s is either offline or an invalid IGN",splitted[1]));
+                    }
+                }
+                break;
+            }
             case "gmgo": {
                 int gotomap = 0;
                 if (splitted.length != 2) {
@@ -612,7 +625,10 @@ public class GMCommand extends JrGMCommand implements CommandInterface
             }
             case "clearallinv":
             {
-
+                player.getInventory(MapleInventoryType.EQUIP).allInventories().stream().forEach((inv) -> {
+                    inv.list().stream().forEach((item) -> MapleInventoryManipulator.removeById(c,inv.getType(),item.getItemId(),item.getQuantity(),false,false));
+                });
+                break;
             }
             case "servermessage":
             {
@@ -803,22 +819,22 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 break;
             }
             case "sbp": {
-                if (cserv.getSexBot().isPatroling()) {
+                if (cserv.getMuriel().isPatroling()) {
                     player.dropMessage("Skynet is already patroling.");
                     break;
                 } else {
-                    cserv.getSexBot().patrol();
+                    cserv.getMuriel().patrol();
                 }
             }
             case "sbpause": {
-                cserv.getSexBot().record(new ArrayList<LifeMovementFragment>());
+                cserv.getMuriel().record(new ArrayList<LifeMovementFragment>());
                 break;
             }
             case "sbsm": {
                 try {
                     FileOutputStream fout = new FileOutputStream("/server/movements.dat");
                     ObjectOutputStream oos = new ObjectOutputStream(fout);
-                    oos.writeObject(cserv.getSexBot().getRecords());
+                    oos.writeObject(cserv.getMuriel().getRecords());
                     oos.flush();
                     oos.close();
                     player.dropMessage("Saved successfully!");
@@ -831,7 +847,7 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 try {
                     FileInputStream fin = new FileInputStream("/server/movements.dat");
                     ObjectInputStream oin = new ObjectInputStream(fin);
-                    cserv.getSexBot().setRecords((java.util.List<java.util.List<LifeMovementFragment>>) oin.readObject());
+                    cserv.getMuriel().setRecords((java.util.List<java.util.List<LifeMovementFragment>>) oin.readObject());
                     oin.close();
                     player.dropMessage("Loaded successfully!");
                 } catch (Exception e) {
@@ -840,11 +856,11 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 break;
             }
             case "sbrs": {
-                player.dropMessage(cserv.getSexBot().getRecordingSize());
+                player.dropMessage(cserv.getMuriel().getRecordingSize());
                 break;
             }
             case "sbrr": {
-                cserv.getSexBot().resetRecords();
+                cserv.getMuriel().resetRecords();
                 break;
             }
             case "customskill": {
@@ -853,19 +869,19 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 break;
             }
             case "sbdm": {
-                cserv.getSexBot().doMoves();
+                cserv.getMuriel().doMoves();
                 break;
             }
             case "sbrm": {
-                cserv.getSexBot().setRecording(true);
+                cserv.getMuriel().setRecording(true);
                 break;
             }
             case "sbsrm": {
-                cserv.getSexBot().setRecording(false);
+                cserv.getMuriel().setRecording(false);
                 break;
             }
             case "sbwh": {
-                SexBot.getCharacter(cserv.getSexBot()).changeMap(player.getMap());
+                Muriel.getCharacter(cserv.getMuriel()).changeMap(player.getMap());
                 break;
             }
             case "gdn": {

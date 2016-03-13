@@ -37,7 +37,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author Penguins (Acrylic)
  */
 public final class CouponCodeHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.skip(2);
         String code = slea.readMapleAsciiString();
         boolean validcode = false;

@@ -49,7 +49,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class TakeDamageHandler extends AbstractMaplePacketHandler {
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         try{
         MapleCharacter player = c.getPlayer();
         slea.readInt();

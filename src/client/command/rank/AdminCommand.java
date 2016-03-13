@@ -23,7 +23,7 @@ package client.command.rank;
 
 import client.*;
 import client.command.CommandInterface;
-import client.sexbot.SexBot;
+import client.sexbot.Muriel;
 import net.server.Server;
 import net.server.channel.Channel;
 import net.server.world.World;
@@ -31,7 +31,6 @@ import scripting.npc.NPCScriptManager;
 import scripting.portal.PortalScriptManager;
 import scripting.reactor.ReactorScriptManager;
 import server.MapleShopFactory;
-import server.TimerManager;
 import server.events.gm.MapleOxQuiz;
 import server.life.MapleLifeFactory;
 import server.life.MapleMonsterInformationProvider;
@@ -129,7 +128,7 @@ public class AdminCommand extends GMCommand implements CommandInterface
             case "speak":
             {
                 MapleCharacter victim = cserv.getPlayerStorage().getCharacterByName(splitted[1]);
-                if (cserv.getSexBot() != null && SexBot.getCharacter(cserv.getSexBot()).getId() == victim.getId()) {
+                if (cserv.getMuriel() != null && Muriel.getCharacter(cserv.getMuriel()).getId() == victim.getId()) {
                     break;
                 }
                 victim.getMap().broadcastMessage(MaplePacketCreator.getChatText(victim.getId(), StringUtil.joinStringFrom(splitted, 2) , victim.isGM(), 0));
@@ -213,39 +212,22 @@ public class AdminCommand extends GMCommand implements CommandInterface
             case "godmode":
             {
                 if (splitted.length == 2) {
-                    if (splitted[1].equals("on")) {
-                        player.setGodMode(true);
-                        player.dropMessage("Godmode on");
-                    } else if (splitted[1].equals("off")) {
-                        player.setGodMode(false);
-                        player.dropMessage("Godmode off");
-                    } else {
-                        player.dropMessage("Use the following syntax: !god <on/off>");
-                    }
+                    player.setGodMode(splitted[1].equals("on"));
+                    player.dropMessage("Godmode " + (splitted[1].equals("on") ? "on" : "off"));
                 } else {
-                    if (player.getGodMode() == true) {
-                        player.dropMessage("Godmode is currently on");
-                    } else {
-                        player.dropMessage("Godmode is currently off");
-                    }
+                    player.dropMessage("Godmode is currently " + (player.getGodMode() ? "on" : "off"));
                 }
                 break;
             }
             case "levelperson":
             {
                 MapleCharacter mpc = cserv.getPlayerStorage().getCharacterByName(splitted[1]);
-            
+
                 mpc.setLevel(Integer.parseInt(splitted[2]));
                 mpc.gainExp(-player.getExp(), false, false);
                 mpc.updateSingleStat(MapleStat.LEVEL, player.getLevel());
                 mpc.setExp(0);
                 mpc.updateSingleStat(MapleStat.EXP, 0);
-                player.setLevel(Integer.parseInt(splitted[1]));
-                player.gainExp(-player.getExp(), false, false);
-                player.updateSingleStat(MapleStat.LEVEL, player.getLevel());
-                player.setExp(0);
-                player.updateSingleStat(MapleStat.EXP, 0);
-
                 player.dropMessage("Done.");
                 break;
             }

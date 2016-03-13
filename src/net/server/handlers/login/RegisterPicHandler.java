@@ -16,7 +16,7 @@ public final class RegisterPicHandler extends AbstractMaplePacketHandler {
     private static Logger log = LoggerFactory.getLogger(RegisterPicHandler.class);
 
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.readByte();
         int charId = slea.readInt();
         String macs = slea.readMapleAsciiString();

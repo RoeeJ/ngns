@@ -29,7 +29,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
  * @author BubblesDev
  */
 public final class PetExcludeItemsHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.readLong();
         byte amount = slea.readByte();
         for (int i = 0; i < amount; i++) {

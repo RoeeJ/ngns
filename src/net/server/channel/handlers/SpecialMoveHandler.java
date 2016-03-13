@@ -53,7 +53,7 @@ import tools.data.input.SeekableLittleEndianAccessor;
 public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
     
     @Override
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         try {
             MapleCharacter chr = c.getPlayer();
             chr.getAutobanManager().setTimestamp(4, slea.readInt());

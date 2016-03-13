@@ -44,7 +44,7 @@ import tools.MaplePacketCreator;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class SkillEffectHandler extends AbstractMaplePacketHandler {
-    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c) {
+    public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         int skillId = slea.readInt();
         if(GameConstants.isDisabledSkill(skillId, c.getPlayer().getMapId())){return;}
         int level = slea.readByte();
