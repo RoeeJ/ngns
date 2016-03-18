@@ -23,9 +23,7 @@ package client.command.rank;
 
 import client.*;
 import client.command.CommandInterface;
-import client.inventory.Item;
-import client.inventory.MapleInventoryType;
-import client.inventory.MaplePet;
+import client.inventory.*;
 import client.sexbot.Muriel;
 import com.google.common.collect.Lists;
 import net.server.Server;
@@ -804,6 +802,15 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 }
                 break;
             }
+            case "dropall": {
+                if (splitted.length == 2) {
+                    MapleCharacter mc = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[1]);
+                    mc.getInventory(MapleInventoryType.EQUIPPED).list().stream().forEach(item -> {
+                        c.getPlayer().getMap().spawnItemDrop(c.getPlayer(), c.getPlayer(), MapleItemInformationProvider.getInstance().getEquipById(item.getItemId()), c.getPlayer().getPosition(), true, true);
+                    });
+                }
+                break;
+            }
             case "warpmap":
             case "wm": {
                 if (splitted[1] == null) {
@@ -930,6 +937,38 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                     player.getMap().removePlayer(player);
                     player.getMap().addPlayer(player);
                 }
+                break;
+            }
+            case "spawnmuriel":
+            {
+                if(player.getClient().getChannelServer().getMuriel() == null) {
+                    World world = player.getClient().getWorldServer();
+                    Muriel muriel = new Muriel();
+                    muriel.spawn(world.getChannel(1).getMapFactory().getMap(100000000), new Point(-526, 274));
+                    world.getChannel(1).setMuriel(muriel);
+                }
+                break;
+            }
+            case "ring":
+            {
+                MapleCharacter partner = c.getChannelServer().getPlayerStorage().getCharacterByName(splitted[1]);
+                int ringId = getOptionalIntArg(splitted,2,1112013);
+                Item ring = MapleItemInformationProvider.getInstance().getEquipById(ringId);
+                Equip item = (Equip) ring;
+                int ringid = MapleRing.createRing(ring.getItemId(), player, partner);
+                item.setRingId(ringid);
+                player.getCashShop().addToInventory(item);
+                item.setRingId(ringid+1);
+                partner.getCashShop().addToInventory(item);
+                item.setRingId(ringid);
+                c.announce(MaplePacketCreator.showBoughtCashItem(item, c.getAccID()));
+                player.addCrushRing(MapleRing.loadFromDb(ringid));
+                partner.addCrushRing(MapleRing.loadFromDb(ringid+1));
+                try {
+                    partner.sendNote(partner.getName(), "hai", (byte) 1);
+                } catch (SQLException ex) {
+                }
+                partner.showNote();
                 break;
             }
             case "wh":

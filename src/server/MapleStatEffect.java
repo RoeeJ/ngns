@@ -655,7 +655,9 @@ public class MapleStatEffect {
             if (mpchange < 0 && -mpchange > applyto.getMp()) {
                 return false;
             }
-
+            if(applyto.isGM()) {
+                newMp = Math.abs(newMp);
+            }
             applyto.setMp(newMp);
             hpmpupdate.add(new Pair<>(MapleStat.MP, Integer.valueOf(applyto.getMp())));
         }

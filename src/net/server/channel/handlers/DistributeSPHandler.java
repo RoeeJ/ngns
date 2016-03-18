@@ -30,7 +30,9 @@ public final class DistributeSPHandler extends AbstractMaplePacketHandler {
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         slea.readInt();
         int skillid = slea.readInt();
+        //12000000
         MapleCharacter player = c.getPlayer();
+        if(!player.getJob().isA(MapleJob.getById(skillid/10000))) return;
         int remainingSp = player.getRemainingSp();
         boolean isBeginnerSkill = false;
         if (skillid % 10000000 > 999 && skillid % 10000000 < 1003) {

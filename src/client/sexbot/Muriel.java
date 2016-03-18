@@ -197,6 +197,7 @@ public class Muriel
             getCharacter(this).getMap().broadcastMessage(c.getPlayer(), MaplePacketCreator.facialExpression(c.getPlayer(), 5), false);
             return "ITS OVER NINE THOUSAND!!!";
         }
+        if(!player.isGM()) return response[0];
         switch(splitted[1])
         {
             case "define":

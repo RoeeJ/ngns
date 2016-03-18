@@ -243,9 +243,9 @@ public class Server implements Runnable {
                 }
                 world.setServerMessage(p.getProperty("servermessage" + i));
                 System.out.println("Finished loading world " + i + "\r\n");
-                Muriel muriel = new Muriel();
-                muriel.spawn(world.getChannel(1).getMapFactory().getMap(100000000),new Point(-526,274));
-                world.getChannel(1).setMuriel(muriel);
+//                Muriel muriel = new Muriel();
+//                muriel.spawn(world.getChannel(1).getMapFactory().getMap(100000000),new Point(-526,274));
+//                world.getChannel(1).setMuriel(muriel);
             }
         } catch (Exception e) {
             System.out.println("Error in moople.ini, start CreateINI.bat to re-make the file.");

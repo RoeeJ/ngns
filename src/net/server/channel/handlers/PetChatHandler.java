@@ -40,7 +40,7 @@ public final class PetChatHandler extends AbstractMaplePacketHandler {
         int nAction = slea.readByte();
         String sChat = slea.readMapleAsciiString();
         if (nAction < 1 || PetDataFactory.IsValidPetAction(petId, nAction)) {
-            c.getPlayer().getMap().broadcastMessage(c.getPlayer(), MaplePacketCreator.petChat(c.getPlayer().getId(), petIndex, nType, nAction, sChat, false));
+            c.announce(MaplePacketCreator.petChat(c.getPlayer().getId(), petIndex, nType, nAction, sChat, false));
         }
     }
 }

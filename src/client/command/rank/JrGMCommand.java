@@ -494,6 +494,7 @@ public class JrGMCommand extends GuardCommand implements CommandInterface
                         c.getPlayer().getMap().spawnMonsterOnGroundBelow(mob, c.getPlayer().getPosition());
                     }
                 }
+                break;
             }
             case "levelup":
             {

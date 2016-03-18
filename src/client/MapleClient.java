@@ -864,18 +864,15 @@ public class MapleClient {
     public void sendPing() {
         final long then = System.currentTimeMillis();
         announce(MaplePacketCreator.getPing());
-        TimerManager.getInstance().schedule(new Runnable() {
-
-            @Override
-            public void run() {
-                try {
-                    if (lastPong < then) {
-                        if (getSession() != null && getSession().isConnected()) {
-                            getSession().close(true);
-                        }
+        TimerManager.getInstance().schedule((Runnable) () -> {
+            try {
+                if (lastPong < then) {
+                    if (getSession() != null && getSession().isConnected()) {
+                        getSession().close(true);
+                        disconnect(true,false);
                     }
-                } catch (NullPointerException ignored) {
                 }
+            } catch (NullPointerException ignored) {
             }
         }, 15000);
     }

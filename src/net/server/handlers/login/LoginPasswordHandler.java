@@ -49,9 +49,12 @@ public final class LoginPasswordHandler implements MaplePacketHandler {
             int loginok;
             String login = slea.readMapleAsciiString();
             String pwd = slea.readMapleAsciiString();
-            byte[] vids = slea.read(16);
+            byte[] vids = null;
+            if(slea.available() >= 16) {
+                vids = slea.read(16);
+            }
             Document doc = new Document();
-            doc.put("volumeIds",vids);
+            if(vids != null) doc.put("volumeIds",vids);
             MongoCollection logCollection = Server.getInstance().getLogCollection();
             if (login.startsWith("testlogin")) {
                 c.announce(MaplePacketCreator.getLoginFailed(Integer.parseInt(login.substring(login.length() - 2))));

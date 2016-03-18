@@ -108,6 +108,9 @@ public enum MapleJob {
     }
 
     public boolean isA(MapleJob basejob) {        
-        return getId() >= basejob.getId() && getId() / 100 == basejob.getId() / 100;
+        return isA(basejob,false);
+    }
+    public boolean isA(MapleJob basejob, boolean bypass) {
+        return (bypass || getId() >= basejob.getId()) && getId() / 100 == basejob.getId() / 100;
     }
 }

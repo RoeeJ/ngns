@@ -217,6 +217,7 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     private transient MapleCharacter watcher;
     private transient MapleCharacter send;
     private Date lastActive;
+    private boolean saving;
 
     private MapleCharacter() {
         setStance(0);
@@ -4035,6 +4036,8 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     }
 
     public void saveToDB() {
+        if(saving) return;
+        saving = true;
         Connection con = DatabaseConnection.getConnection();
         try {
             con.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
@@ -4170,7 +4173,6 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
                     itemsWithType.add(new Pair<>(item, iv.getType()));
                 }
             }
-
             ItemFactory.INVENTORY.saveItems(itemsWithType, id);
             deleteWhereCharacterId(con, "DELETE FROM skills WHERE characterid = ?");
             ps = con.prepareStatement("INSERT INTO skills (characterid, skillid, skilllevel, masterlevel, expiration) VALUES (?, ?, ?, ?, ?)");
@@ -4279,6 +4281,7 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
             ps.close();
             con.commit();
         } catch (SQLException | RuntimeException t) {
+            saving = false;
             FilePrinter.printError(FilePrinter.SAVE_CHAR, t, "Error saving " + name + " Level: " + level + " Job: " + job.getId());
             try {
                 con.rollback();
@@ -4291,8 +4294,10 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
                 con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             } catch (Exception e) {
                 e.printStackTrace();
+                saving = false;
             }
         }
+        saving = false;
     }
 
     public void sendPolice(int greason, String reason, int duration) {

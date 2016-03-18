@@ -64,7 +64,7 @@ public class MapleAESOFB {
         }
         try {
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
-        } catch (InvalidKeyException e) {
+        } catch (InvalidKeyException ignored) {
         }
         this.setIv(iv);
         this.mapleVersion = (short) (((mapleVersion >> 8) & 0xFF) | ((mapleVersion << 8) & 0xFF00));

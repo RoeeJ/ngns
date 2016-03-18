@@ -45,7 +45,6 @@ public final class ItemMoveHandler extends AbstractMaplePacketHandler {
         byte src = (byte) slea.readShort();
         byte action = (byte) slea.readShort();
         short quantity = slea.readShort();
-        FilePrinter.print("itemmove.txt", String.format("%s->%d(a:%d,q:%d)", c.getPlayer().getName(), src, action, quantity));
         if (src < 0 && action > 0) {
             MapleInventoryManipulator.unequip(c, src, action);
         } else if (action < 0) {

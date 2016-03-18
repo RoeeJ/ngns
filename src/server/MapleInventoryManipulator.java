@@ -24,14 +24,8 @@ package server;
 import client.MapleBuffStat;
 import client.MapleClient;
 import client.inventory.*;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Range;
-import com.google.common.primitives.Bytes;
 import constants.ItemConstants;
 import tools.MaplePacketCreator;
-import tools.Randomizer;
 
 import java.awt.*;
 import java.util.*;
@@ -327,42 +321,21 @@ public class MapleInventoryManipulator {
         } else if ((((source.getItemId() >= 1902000 && source.getItemId() <= 1902002) || source.getItemId() == 1912000) && c.getPlayer().isCygnus()) || ((source.getItemId() >= 1902005 && source.getItemId() <= 1902007) || source.getItemId() == 1912005) && !c.getPlayer().isCygnus()) {// Adventurer taming equipment
             return;
         }
-        /*
-        switch(Byte.parseByte(String.valueOf(source.getItemId()).substring(2, 3)))
-        {
-            case 0:{dst= (byte) (0xff);break;}
-            case 1:{dst= (byte) (0xFE & 0xff);break;}
-            case 2:{dst= (byte) (0xFD & 0xff);break;}
-            case 3:{dst= (byte) (0xFC & 0xff);break;}
-            case 4:{dst= (byte) (0xFB & 0xff);break;}
-            case 5:{dst= (byte) (0xFB & 0xff);break;}
-            case 6:{dst= (byte) (0xFA & 0xff);break;}
-            case 7:{dst= (byte) (0xF9 & 0xff);break;}
-            case 8:{dst= (byte) (0xF8 & 0xff);break;}
-            case 9:{dst= (byte) (0xF6 & 0xff);break;}
-            case 10:{dst= (byte) (0xF7 & 0xff);break;}
-            case 12:{dst= (byte) (0xEF & 0xff);break;}
-            case 13:{dst= (byte) (0xCE & 0xff);break;}
-            case 14:{dst= (byte) (0xCF & 0xff);break;}
-            case 80:{dst= (byte) (0xF2 & 0xff);break;}
-            case 90:{dst= (byte) (0xEE & 0xff);break;}
-            case 91:{dst= (byte) (0xED & 0xff);break;}
-            default:{
-                byte type = source.getType();
-                if(type==11){
-                    if(!((dst >= 0xF0) && (dst <= 0xF3))){
-                        dst = (byte) (Lists.newArrayList(0xF0,0xF1,0xF3,0xF4).get(Randomizer.nextInt(3)).byteValue() & 0xff);
-                        break;
-                    }
-                }
-                else if(type >= 30 && type <= 70){
-                    dst = (byte) (0xF5 & 0xff);
+//        System.out.println(String.format("slot:%d itemid:%d islot:%s", dst,source.getItemId(),source.getEquipType()));
+        MapleEquipSlot equipSlot = source.getEquipType();
+        if(equipSlot != null && !Objects.equals(equipSlot.slot, "Ri")) {
+            boolean isValidSlot = false;
+            for (int i = 0; i < equipSlot.slots.length; i++) {
+                if (dst == equipSlot.slots[i] || dst == (equipSlot.slots[i] - 100)) {
+                    isValidSlot = true;
                     break;
                 }
-                break;
+            }
+            if (!isValidSlot) {
+                c.getPlayer().dropMessage(String.format("Expected slot: %d got slot:%d islot:%s", equipSlot.slots[0], dst, equipSlot.slot));
+                dst = equipSlot.slots[Math.max(0,new Random().nextInt(equipSlot.slots.length)-1)];
             }
         }
-        */
         boolean itemChanged = false;
         if (MapleItemInformationProvider.getInstance().isUntradeableOnEquip(source.getItemId())) {
             source.setFlag((byte) ItemConstants.UNTRADEABLE);

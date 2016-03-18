@@ -31,7 +31,6 @@ import provider.*;
 import tools.DatabaseConnection;
 import tools.Pair;
 import tools.Randomizer;
-import tools.StringUtil;
 
 import java.io.File;
 import java.sql.PreparedStatement;
@@ -82,6 +81,7 @@ public class MapleItemInformationProvider {
     protected List<Pair<Integer, String>> itemNameCache = new ArrayList<>();
     protected Map<Integer, Boolean> consumeOnPickupCache = new HashMap<>();
     protected Map<Integer, Boolean> isQuestItemCache = new HashMap<>();
+    private Map<Integer, MapleEquipSlot> typeCache = new HashMap<>();
 
     private MapleItemInformationProvider() {
         loadCardIdData();
@@ -431,7 +431,28 @@ public class MapleItemInformationProvider {
         priceCache.put(itemId, pEntry);
         return pEntry;
     }
-
+    public String getEquipSlot(int itemId) {
+        try {
+            return MapleDataTool.getString(getItemData(itemId).getChildByPath("info/islot"));
+        }catch(Exception e) {
+            return null;
+        }
+    }
+    public MapleEquipSlot getEquipISlot(int itemId) {
+        try {
+        if(typeCache.containsKey(itemId)) {
+            //return typeCache.get(itemId);
+        }
+            MapleData item = getItemData(itemId);
+            MapleEquipSlot type = MapleEquipSlot.fromSlot(MapleDataTool.getString(item.getChildByPath("info/islot")));
+            if (type != null) {
+                typeCache.put(itemId, type);
+            }
+            return type;
+        }catch(Exception e) {
+            return null;
+        }
+    }
     protected Map<String, Integer> getEquipStats(int itemId) {
         if (equipStatsCache.containsKey(itemId)) {
             return equipStatsCache.get(itemId);

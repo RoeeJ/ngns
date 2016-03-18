@@ -174,7 +174,7 @@ public final class GeneralchatHandler extends net.AbstractMaplePacketHandler {
             }
         } catch(Exception e) {
             //THIS SHOULD NOT HAPPEN!
-            FilePrinter.printError("SHOULD_NOT_HAPPEN",e);
+            //FilePrinter.printError("SHOULD_NOT_HAPPEN",e);
             c.announce(MaplePacketCreator.enableActions());
         }
     }

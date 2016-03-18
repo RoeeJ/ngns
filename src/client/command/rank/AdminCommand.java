@@ -22,7 +22,11 @@
 package client.command.rank;
 
 import client.*;
+import client.Event;
 import client.command.CommandInterface;
+import client.inventory.Equip;
+import client.inventory.MapleInventory;
+import client.inventory.MapleInventoryType;
 import client.sexbot.Muriel;
 import net.server.Server;
 import net.server.channel.Channel;
@@ -30,6 +34,7 @@ import net.server.world.World;
 import scripting.npc.NPCScriptManager;
 import scripting.portal.PortalScriptManager;
 import scripting.reactor.ReactorScriptManager;
+import server.MapleInventoryManipulator;
 import server.MapleShopFactory;
 import server.events.gm.MapleOxQuiz;
 import server.life.MapleLifeFactory;
@@ -41,6 +46,7 @@ import tools.DatabaseConnection;
 import tools.MaplePacketCreator;
 import tools.StringUtil;
 
+import java.awt.*;
 import java.rmi.RemoteException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -104,6 +110,39 @@ public class AdminCommand extends GMCommand implements CommandInterface
             case "gc":
             {
                 System.gc();
+                break;
+            }
+            case "equipslot":
+            {
+                byte invslot = (byte) getNamedIntArg(splitted,0,"invslot",255);
+                if(invslot == 255) {
+                    player.dropMessage(String.format("usage: %s%s invslot <invslot> eqpslot <eqpslot>", heading,splitted[0]));
+                    break;
+                }
+                MapleInventory equipinv= player.getInventory(MapleInventoryType.EQUIPPED);
+                Equip equip = (Equip) equipinv.getItem(invslot);
+
+                byte eqpslot = (byte) getNamedIntArg(splitted,0,"eqpslot",255);
+                if(eqpslot == 255) {
+                    player.dropMessage(String.format("usage: %s%s invslot <invslot> eqpslot <eqpslot>", heading,splitted[0]));
+                    break;
+                }
+                MapleInventory equippedinv = player.getInventory(MapleInventoryType.EQUIPPED);
+                Equip equipped = (Equip) equippedinv.getItem(eqpslot);
+
+                player.dropMessage(String.format("%d %d", invslot,eqpslot));
+                StringBuilder sb = new StringBuilder();
+                sb.append(String.format("equip is %snull", equip == null ? "" : "not ")).append('\n');
+                sb.append(String.format("equipped is %snull", equipped == null ? "" : "not "));
+                player.dropMessage(sb.toString());
+
+                equip.setPosition(invslot);
+                equipinv.addFromDB(equipped);
+                equippedinv.removeSlot(eqpslot);
+
+                equipped.setPosition(eqpslot);
+                equippedinv.addFromDB(equipped);
+                equipinv.removeSlot(invslot);
                 break;
             }
             case "npc":

@@ -24,6 +24,8 @@ package client.inventory;
 import client.MapleClient;
 import java.util.LinkedList;
 import java.util.List;
+
+import server.MapleEquipSlot;
 import server.MapleItemInformationProvider;
 import tools.MaplePacketCreator;
 import tools.Pair;
@@ -103,6 +105,10 @@ public class Equip extends Item {
     @Override
     public byte getType() {
         return 1;
+    }
+
+    public MapleEquipSlot getEquipType() {
+        return MapleItemInformationProvider.getInstance().getEquipISlot(getItemId());
     }
 
     public byte getUpgradeSlots() {

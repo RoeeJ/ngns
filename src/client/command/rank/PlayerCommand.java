@@ -10,6 +10,7 @@ import client.command.CommandInterface;
 import client.inventory.MapleInventoryType;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import constants.UnlockableJob;
 import net.server.Server;
 import net.server.channel.Channel;
@@ -744,9 +745,8 @@ public class PlayerCommand extends CommandAbstract implements CommandInterface {
                 {
                     try {
                         Gson gson = new Gson();
-                        String charinfo = gson.toJsonTree(player).getAsString();
-                        player.dropMessage(charinfo);
-                        player.dropMessage("werk");
+                        JsonElement charinfo = gson.toJsonTree(player);
+                        System.out.println(charinfo);
                     }catch (Exception e){
                         e.printStackTrace();
                     }

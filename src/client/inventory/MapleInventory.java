@@ -246,4 +246,10 @@ public class MapleInventory implements Iterable<Item> {
     public void checked(boolean yes) {
         checked = yes;
     }
+
+    public MapleInventory copy() {
+        MapleInventory inventory = new MapleInventory(type,slotLimit);
+        this.inventory.forEach((slot, item) -> inventory.addItem(item.copy()));
+        return inventory;
+    }
 }
