@@ -442,7 +442,7 @@ public class CashShop {
             itemsWithType.add(new Pair<>(item, MapleItemInformationProvider.getInstance().getInventoryType(item.getItemId())));
         }
 
-        factory.saveItems(itemsWithType, accountId);
+        factory.saveItems(itemsWithType, accountId,con);
         ps = con.prepareStatement("DELETE FROM `wishlists` WHERE `charid` = ?");
         ps.setInt(1, characterId);
         ps.executeUpdate();

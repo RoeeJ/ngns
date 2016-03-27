@@ -142,11 +142,6 @@ public class PlayerCommand extends CommandAbstract implements CommandInterface {
                     
                     break;
                 }
-                case "shop":
-                {
-                    NPCScriptManager.getInstance().start(c, 9010002, null, null);
-                    break;
-                }
                 case "howoldami": {
                     player.dropMessage(String.format("You're %d years old!", c.getAge()));
                     break;

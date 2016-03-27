@@ -52,8 +52,7 @@ public final class FamilyUseHandler extends AbstractMaplePacketHandler {
         } else {
             int erate = type == 3 ? 150 : (type == 4 || type == 6 || type == 8 || type == 10 ? 200 : 100);
             int drate = type == 2 ? 150 : (type == 4 || type == 5 || type == 7 || type == 9 ? 200 : 100);
-            if (type > 8) {
-            } else {
+            if (type <= 8) {
                 c.announce(useRep(drate == 100 ? 2 : (erate == 100 ? 3 : 4), type, erate, drate, ((type > 5 || type == 4) ? 2 : 1) * 15 * 60 * 1000));
             }
         }

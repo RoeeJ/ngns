@@ -26,9 +26,11 @@ import client.MapleClient;
 import client.command.CommandProcessor;
 import client.inventory.Item;
 import client.sexbot.Muriel;
+import org.bson.Document;
 import server.TimerManager;
 import tools.FilePrinter;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 import java.io.IOException;
@@ -43,7 +45,9 @@ public final class GeneralchatHandler extends net.AbstractMaplePacketHandler {
 
     public final void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c, int header) {
         try {
+            Document doc = new Document("action","GENERAL_CHAT");
             MapleCharacter chr = c.getPlayer();
+            doc.put("char",chr.toLogFormat());
             if (System.currentTimeMillis() - chr.getLastSpoke() < 100) {
                 //chr.dropMessage("nowai bruh");
                 chr.announce(MaplePacketCreator.enableActions());
@@ -53,6 +57,7 @@ public final class GeneralchatHandler extends net.AbstractMaplePacketHandler {
             c.getPlayer().updateLastSpoke();
             //if(chr.getMapId()==970042506 && !chr.isGM()){return;} //Jail
             String text = slea.readMapleAsciiString();
+            doc.put("text",text);
             byte show = slea.readByte();
             final String[] ctext = {text.charAt(0) == '$' ? tools.AES.encrypt(chr.getKey(), text.substring(1)) : text};
             final String lctext = text.toLowerCase();
@@ -69,10 +74,7 @@ public final class GeneralchatHandler extends net.AbstractMaplePacketHandler {
             }
 
             if (!commandProcessed && !c.isMuted()) {
-                SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm:ss");
-
-                Date now = new Date();
-                FilePrinter.print("chatlog.txt", String.format("%s %s:%s", sdfTime.format(now), chr.getName(), text));
+                MongoReporter.INSTANCE.insertReport(doc);
                 chr.getMap().getCharacters().stream().forEach(player -> {
                     String ptext = player.getKey() != null ? tools.AES.decrypt(player.getKey(), ctext[0]) : ctext[0];
                     try {

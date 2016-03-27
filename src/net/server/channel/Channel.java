@@ -109,6 +109,7 @@ public final class Channel {
             System.out.println("Shutting down Channel " + channel + " on World " + world);
 
             closeAllMerchants();
+            System.out.println(String.format("Closed all merchants on channel %d on world %d",channel,world));
             players.disconnectAll();
             acceptor.unbind();
 

@@ -26,7 +26,9 @@ import client.MapleClient;
 import client.MapleJob;
 import client.MapleStat;
 import net.AbstractMaplePacketHandler;
+import org.bson.Document;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class DistributeAPHandler extends AbstractMaplePacketHandler {
@@ -45,40 +47,50 @@ public final class DistributeAPHandler extends AbstractMaplePacketHandler {
     }
 
     static boolean addStat(MapleClient c, int id) {
+        Document doc = new Document("action","AP_DISTRIBUTE");
         switch (id) {
             case 64: // Str
                 if (c.getPlayer().getStr() >= max) {
                     return false;
                 }
                 c.getPlayer().addStat(1, 1);
+                doc.put("stat","STR");
                 break;
             case 128: // Dex
                 if (c.getPlayer().getDex() >= max) {
                     return false;
                 }
                 c.getPlayer().addStat(2, 1);
+                doc.put("stat","DEX");
                 break;
             case 256: // Int
                 if (c.getPlayer().getInt() >= max) {
                     return false;
                 }
                 c.getPlayer().addStat(3, 1);
+                doc.put("stat","INT");
                 break;
             case 512: // Luk
                 if (c.getPlayer().getLuk() >= max) {
                     return false;
                 }
                 c.getPlayer().addStat(4, 1);
+                doc.put("stat","LUK");
                 break;
             case 2048: // HP
                 addHP(c.getPlayer(), addHP(c));
+                doc.put("stat","HP");
                 break;
             case 8192: // MP
                 addMP(c.getPlayer(), addMP(c));
+                doc.put("stat","MP");
                 break;
             default:
                 c.announce(MaplePacketCreator.updatePlayerStats(MaplePacketCreator.EMPTY_STATUPDATE, true,c.getPlayer()));
                 return false;
+        }
+        if(doc.containsKey("stat")) {
+            MongoReporter.INSTANCE.insertReport(doc);
         }
         return true;
     }

@@ -24,6 +24,7 @@ package client;
 import client.autoban.AutobanManager;
 import client.command.GMRank;
 import client.inventory.*;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import constants.ExpTable;
 import constants.ItemConstants;
@@ -217,7 +218,6 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     private transient MapleCharacter watcher;
     private transient MapleCharacter send;
     private Date lastActive;
-    private boolean saving;
 
     private MapleCharacter() {
         setStance(0);
@@ -1184,7 +1184,7 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     }
 
     public void Jail() {
-        changeMap(970042506);
+        changeMap(400000008);
     }
 
     public void Unjail() {
@@ -1198,12 +1198,7 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     public void kick(String text) {
         announce(MaplePacketCreator.sendPolice("You have been kicked for: \r\n\r\n" + text));
 
-        TimerManager.getInstance().schedule(new Runnable() {
-            @Override
-            public void run() {
-                client.disconnect(false, false);
-            }
-        }, 5000);
+        TimerManager.getInstance().schedule((Runnable) () -> client.disconnect(false, false), 5000);
     }
 
     public boolean resetAp(String type) {
@@ -3975,7 +3970,13 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
                 itemsWithType.addAll(iv.list().stream().map(item -> new Pair<>(item, iv.getType())).collect(Collectors.toList()));
             }
 
-            ItemFactory.INVENTORY.saveItems(itemsWithType, id);
+            (new Thread(()->{
+                try {
+                    ItemFactory.INVENTORY.saveItems(itemsWithType, id,con);
+                } catch (SQLException e) {
+                    FilePrinter.printError("saveItems",e);
+                }
+            })).start();
 
             /*//jobs start with skills :|
              ps = con.prepareStatement("INSERT INTO skills (characterid, skillid, skilllevel, masterlevel, expiration) VALUES (?, ?, ?, ?, ?)");
@@ -4036,8 +4037,6 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     }
 
     public void saveToDB() {
-        if(saving) return;
-        saving = true;
         Connection con = DatabaseConnection.getConnection();
         try {
             con.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
@@ -4173,7 +4172,13 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
                     itemsWithType.add(new Pair<>(item, iv.getType()));
                 }
             }
-            ItemFactory.INVENTORY.saveItems(itemsWithType, id);
+            (new Thread(()->{
+                try {
+                    ItemFactory.INVENTORY.saveItems(itemsWithType, id,con);
+                } catch (SQLException e) {
+                    FilePrinter.printError("saveItems",e);
+                }
+            })).start();
             deleteWhereCharacterId(con, "DELETE FROM skills WHERE characterid = ?");
             ps = con.prepareStatement("INSERT INTO skills (characterid, skillid, skilllevel, masterlevel, expiration) VALUES (?, ?, ?, ?, ?)");
             ps.setInt(1, id);
@@ -4281,7 +4286,6 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
             ps.close();
             con.commit();
         } catch (SQLException | RuntimeException t) {
-            saving = false;
             FilePrinter.printError(FilePrinter.SAVE_CHAR, t, "Error saving " + name + " Level: " + level + " Job: " + job.getId());
             try {
                 con.rollback();
@@ -4294,10 +4298,8 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
                 con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             } catch (Exception e) {
                 e.printStackTrace();
-                saving = false;
             }
         }
-        saving = false;
     }
 
     public void sendPolice(int greason, String reason, int duration) {
@@ -5391,6 +5393,14 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
 
     public void updateLastActive() {
         this.lastActive = Calendar.getInstance().getTime();
+    }
+
+    public Map toLogFormat() {
+        return ImmutableMap.of(
+                "id",id,
+                "name",name,
+                "accountid",accountid
+        );
     }
 
     public enum FameStatus {

@@ -23,13 +23,17 @@ package net.server.channel.handlers;
 
 import client.*;
 import net.AbstractMaplePacketHandler;
+import org.bson.Document;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class DistributeSPHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
+        Document doc = new Document("action","SP_DISTRUBUTE");
         slea.readInt();
         int skillid = slea.readInt();
+        doc.put("skillid",skillid);
         //12000000
         MapleCharacter player = c.getPlayer();
         if(!player.getJob().isA(MapleJob.getById(skillid/10000))) return;
@@ -45,11 +49,6 @@ public final class DistributeSPHandler extends AbstractMaplePacketHandler {
         }
         Skill skill = SkillFactory.getSkill(skillid);
         int curLevel = player.getSkillLevel(skill);
-        if (skill != null) {
-            player.dropMessage(String.format("skillid:%d, curlvl:%d, maxlvl:%d", skill.getId(), curLevel, skill.getMaxLevel()));
-        } else {
-            player.dropMessage("Skill is null!");
-        }
         if ((remainingSp > 0 && curLevel + 1 <= (skill.isFourthJob() ? player.getMasterLevel(skill) : skill.getMaxLevel()))) {
             if (!isBeginnerSkill) {
                 player.setRemainingSp(player.getRemainingSp() - 1);
@@ -57,5 +56,6 @@ public final class DistributeSPHandler extends AbstractMaplePacketHandler {
             player.updateSingleStat(MapleStat.AVAILABLESP, player.getRemainingSp());
             player.changeSkillLevel(skill, (byte) (curLevel + 1), player.getMasterLevel(skill), player.getSkillExpiration(skill));
         }
+        MongoReporter.INSTANCE.insertReport(doc);
     }
 }

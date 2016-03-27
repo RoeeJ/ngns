@@ -971,6 +971,13 @@ public class GMCommand extends JrGMCommand implements CommandInterface
                 partner.showNote();
                 break;
             }
+            case "bgm":
+            {
+                if(splitted.length == 1) break;
+                String path = splitted[1];
+                player.getMap().broadcastMessage(MaplePacketCreator.musicChange(path));
+                break;
+            }
             case "wh":
             {
                 for (int i = 1; i < splitted.length; i++) {

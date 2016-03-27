@@ -21,10 +21,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package client.inventory;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import com.google.common.collect.ImmutableMap;
+
+import java.util.*;
 
 public class Item implements Comparable<Item> {
 
@@ -168,5 +167,12 @@ public class Item implements Comparable<Item> {
 
     public MaplePet getPet() {
         return pet;
+    }
+
+    public ImmutableMap<String, Number> toLogFormat() {
+        return ImmutableMap.of(
+                "id",getItemId(),
+                "quantity",quantity
+        );
     }
 }

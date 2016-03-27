@@ -115,7 +115,7 @@ public class BuddylistModifyHandler extends AbstractMaplePacketHandler {
                             ps.setInt(1, charWithId.getId());
                             ResultSet rs = ps.executeQuery();
                             if (!rs.next()) {
-                                throw new RuntimeException("Result set expected");
+                                throw new RuntimeException("Result set yeexpected");
                             } else if (rs.getInt("buddyCount") >= charWithId.getBuddyCapacity()) {
                                 buddyAddResult = BuddyAddResult.BUDDYLIST_FULL;
                             }

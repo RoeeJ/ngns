@@ -270,13 +270,6 @@ public class AdminCommand extends GMCommand implements CommandInterface
                 player.dropMessage("Done.");
                 break;
             }
-            case "bgm":
-            {
-                if(splitted.length == 1) break;
-                String path = splitted[1];
-                player.getMap().broadcastMessage(MaplePacketCreator.musicChange(path));
-                break;
-            }
             case "saveall":
             {
                 for (World world : Server.getInstance().getWorlds()) {

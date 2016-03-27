@@ -28,20 +28,24 @@ import client.inventory.Equip;
 import client.inventory.Item;
 import client.inventory.MapleInventory;
 import client.inventory.MapleInventoryType;
+import com.google.common.collect.ImmutableMap;
 import constants.GameConstants;
 import net.AbstractMaplePacketHandler;
+import org.bson.Document;
 import server.CashShop;
 import server.CashShop.CashItem;
 import server.CashShop.CashItemFactory;
 import server.MapleInventoryManipulator;
 import server.MapleItemInformationProvider;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public final class CashOperationHandler extends AbstractMaplePacketHandler {
 
@@ -69,8 +73,11 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
             return;
         }
         if(c.getPlayer() != null) c.getPlayer().updateLastActive();
+        Document doc = new Document("action","CS_OPERATION");
+        doc.put("char",chr.toLogFormat());
         final int action = slea.readByte();
         if (action == 0x03 || action == 0x1E) {
+            doc.put("operation","PURCHASE");
             slea.readByte();
             final int useNX = slea.readInt();
             final int snCS = slea.readInt();
@@ -80,23 +87,36 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
                 return;
             }
             if (action == 0x03) { // Item
+                doc.put("type","ITEM");
                 Item item = cItem.toItem();
+                doc.put("item", ImmutableMap.of("id",item.getItemId(),"quantity",item.getQuantity()));
                 cs.addToInventory(item);
                 c.announce(MaplePacketCreator.showBoughtCashItem(item, c.getAccID()));
             } else { // Package
+                doc.put("type","PACKAGE");
                 List<Item> cashPackage = CashItemFactory.getPackage(cItem.getItemId());
                 for (Item item : cashPackage) {
                     cs.addToInventory(item);
                 }
+                doc.put("item",cashPackage.stream().map(
+                        (item)-> ImmutableMap.of("id",item.getItemId(),"quantity",item.getQuantity())
+                ).collect(Collectors.toList()));
                 c.announce(MaplePacketCreator.showBoughtCashPackage(cashPackage, c.getAccID()));
             }
             cs.gainCash(useNX, -cItem.getPrice());
             c.announce(MaplePacketCreator.showCash(chr));
+            doc.put("price",cItem.getPrice());
+            MongoReporter.INSTANCE.insertReport(doc);
         } else if (action == 0x04) {//TODO check for gender
             int birthday = slea.readInt();
             CashItem cItem = CashItemFactory.getItem(slea.readInt());
             Map<String, String> recipient = MapleCharacter.getCharacterFromDatabase(slea.readMapleAsciiString());
             String message = slea.readMapleAsciiString();
+            doc.putAll(ImmutableMap.of(
+                    "operation","GIFT",
+                    "message",message,
+                    "char",chr.toLogFormat()
+            ));
             if (!canBuy(cItem, cs.getCash(4)) || message.length() < 1 || message.length() > 73) {
                 //c.announce(MaplePacketCreator.serverNotice(1,"nowai bruh."));
                 return;
@@ -111,14 +131,15 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
                 c.announce(MaplePacketCreator.showCashShopMessage((byte) 0xA8));
                 return;
             }
+            doc.put("recipient",ImmutableMap.of("id",recipient.get("id"),"name",recipient.get("name"),"accountid",recipient.get("accountid")));
+            MongoReporter.INSTANCE.insertReport(doc);
             cs.gift(Integer.parseInt(recipient.get("id")), chr.getName(), message, cItem.getSN());
             c.announce(MaplePacketCreator.showGiftSucceed(recipient.get("name"), cItem));
             cs.gainCash(4, -cItem.getPrice());
             c.announce(MaplePacketCreator.showCash(chr));
             try {
                 chr.sendNote(recipient.get("name"), chr.getName() + " has sent you a gift! Go check out the Cash Shop.", (byte) 0); //fame or not
-            } catch (SQLException ex) {
-            }
+            } catch (SQLException ignored) { }
             MapleCharacter receiver = c.getChannelServer().getPlayerStorage().getCharacterByName(recipient.get("name"));
             if (receiver != null) receiver.showNote();
         } else if (action == 0x05) { // Modify wish list
@@ -216,6 +237,7 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
             mi.removeSlot(item.getPosition());
             c.announce(MaplePacketCreator.putIntoCashInventory(item, c.getAccID()));
         } else if (action == 0x1D) { //crush ring (action 28)
+            doc.put("operation","CRUSH_RING");
             if (checkBirthday(c, slea.readInt())) {
                 int toCharge = slea.readInt();
                 int SN = slea.readInt();
@@ -233,11 +255,18 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
                     Equip item = (Equip) ring.toItem();
                     int ringid = MapleRing.createRing(ring.getItemId(), chr, partner);
                     item.setRingId(ringid);
+                    doc.putAll(ImmutableMap.of(
+                            "price",toCharge,
+                            "char",chr.toLogFormat(),
+                            "partner",partner.toLogFormat(),
+                            "ringIds",new int[] {ringid,ringid+1}
+                    ));
                     cs.addToInventory(item);
                     c.announce(MaplePacketCreator.showBoughtCashItem(item, c.getAccID()));
                     cs.gift(partner.getId(), chr.getName(), text, item.getSN(), (ringid + 1));
                     cs.gainCash(toCharge, -ring.getPrice());
                     chr.addCrushRing(MapleRing.loadFromDb(ringid));
+                    MongoReporter.INSTANCE.insertReport(doc);
                     try {
                         chr.sendNote(partner.getName(), text, (byte) 1);
                     } catch (SQLException ex) {
@@ -259,6 +288,7 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
             }
             c.announce(MaplePacketCreator.showCash(c.getPlayer()));
         } else if (action == 0x23) { //Friendship :3
+            doc.put("operation","FRIENDSHIP_RING");
             if (checkBirthday(c, slea.readInt())) {
                 int payment = slea.readByte();
                 slea.skip(3); //0s
@@ -289,6 +319,13 @@ public final class CashOperationHandler extends AbstractMaplePacketHandler {
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
+                    doc.putAll(ImmutableMap.of(
+                            "price",ring.getPrice(),
+                            "char",chr.toLogFormat(),
+                            "partner",partner.toLogFormat(),
+                            "item",item.toLogFormat()
+                    ));
+                    MongoReporter.INSTANCE.insertReport(doc);
                     partner.showNote();
                 }
             } else {

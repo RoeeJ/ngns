@@ -26,16 +26,15 @@ import client.MapleClient;
 import client.inventory.Equip;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
+import com.google.common.collect.ImmutableMap;
 import net.AbstractMaplePacketHandler;
 import net.server.Server;
 import net.server.channel.Channel;
+import org.bson.Document;
 import server.MTSItemInfo;
 import server.MapleInventoryManipulator;
 import server.MapleItemInformationProvider;
-import tools.DatabaseConnection;
-import tools.FilePrinter;
-import tools.MaplePacketCreator;
-import tools.Pair;
+import tools.*;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 import java.sql.Connection;
@@ -125,10 +124,12 @@ public final class MTSHandler extends AbstractMaplePacketHandler {
         if (!c.getPlayer().getCashShop().isOpened()) {
             return;
         }
-        if(c.getPlayer() != null) c.getPlayer().updateLastActive();
+        c.getPlayer().updateLastActive();
+        Document doc = new Document("action","MTS_OPERATION");
         if (slea.available() > 0) {
             byte op = slea.readByte();
             if (op == 2) { //put item up for sale
+                doc.put("operation","SALE");
                 byte itemtype = slea.readByte();
                 int itemid = slea.readInt();
                 slea.readShort();
@@ -172,9 +173,9 @@ public final class MTSHandler extends AbstractMaplePacketHandler {
                 if (quantity < 0 || price < 110 || c.getPlayer().getItemQuantity(itemid, false) < quantity) {
                     return;
                 }
-                FilePrinter.print("mts.txt", String.format("%s->%d(%d)", c.getPlayer().getName(), itemid, quantity));
                 MapleInventoryType type = MapleItemInformationProvider.getInstance().getInventoryType(itemid);
                 Item i = c.getPlayer().getInventory(type).getItem(slot).copy();
+                doc.put("item", ImmutableMap.of("id",itemid,"quantity",quantity));
                 if (i != null && c.getPlayer().getMeso() >= 5000) {
                     Connection con = DatabaseConnection.getConnection();
                     try {
@@ -284,6 +285,7 @@ public final class MTSHandler extends AbstractMaplePacketHandler {
                     c.announce(MaplePacketCreator.enableCSUse());
                     c.announce(MaplePacketCreator.transferInventory(getTransfer(c.getPlayer().getId())));
                     c.announce(MaplePacketCreator.notYetSoldInv(getNotYetSold(c.getPlayer().getId())));
+                    MongoReporter.INSTANCE.insertReport(doc);
                 }
             } else if (op == 3) { //send offer for wanted item
             } else if (op == 4) { //list wanted item

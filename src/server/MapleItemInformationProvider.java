@@ -118,7 +118,7 @@ public class MapleItemInformationProvider {
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         String _itemName = rs.getString("itemname");
-                        return new Pair<>(itemId, _itemName);
+                        return _itemName.equals("") ? null : new Pair<>(itemId, _itemName);
                     }
                 }
             }

@@ -5,7 +5,7 @@ package server;
  */
 public enum MapleEquipSlot {
     Ae("Ae", new byte[]{-4}),
-    Af("Af", new byte[]{-2,-3}),
+    Af("Af", new byte[]{-2,-3,-5}),
     Ay("Ay", new byte[]{-3}),
     Bd("Bd", new byte[]{0x02}),
     Be("Be", new byte[]{-50}),

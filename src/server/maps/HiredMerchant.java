@@ -312,7 +312,7 @@ public class HiredMerchant extends AbstractMapleMapObject {
                 itemsWithType.add(new Pair<>(newItem, MapleInventoryType.getByType(newItem.getType())));
             }
         }
-        ItemFactory.MERCHANT.saveItems(itemsWithType, this.ownerId);
+        ItemFactory.MERCHANT.saveItems(itemsWithType, this.ownerId, DatabaseConnection.getConnection());
     }
 
     private static boolean check(MapleCharacter chr, List<MaplePlayerShopItem> items) {

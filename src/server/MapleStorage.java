@@ -134,7 +134,7 @@ public class MapleStorage {
                 itemsWithType.add(new Pair<>(item, MapleItemInformationProvider.getInstance().getInventoryType(item.getItemId())));
             }
 
-            ItemFactory.STORAGE.saveItems(itemsWithType, id);
+            ItemFactory.STORAGE.saveItems(itemsWithType, id,con);
         } catch (SQLException ex) {
             //ex.printStackTrace();
         }

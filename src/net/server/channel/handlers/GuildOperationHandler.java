@@ -21,10 +21,13 @@
 */
 package net.server.channel.handlers;
 
+import com.google.common.collect.ImmutableMap;
 import net.server.guild.MapleGuildResponse;
 import net.server.guild.MapleGuild;
 import client.MapleClient;
 import net.AbstractMaplePacketHandler;
+import org.bson.Document;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 import java.util.Iterator;
 import tools.MaplePacketCreator;
@@ -82,6 +85,7 @@ public final class GuildOperationHandler extends AbstractMaplePacketHandler {
 
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
+        Document doc = new Document("action","GUILD_OPERATION");
         if (System.currentTimeMillis() >= nextPruneTime) {
             Iterator<Invited> itr = invited.iterator();
             Invited inv;
@@ -127,6 +131,11 @@ public final class GuildOperationHandler extends AbstractMaplePacketHandler {
                 c.announce(MaplePacketCreator.showGuildInfo(mc));
                 c.getPlayer().dropMessage(1, "You have successfully created a Guild.");
                 respawnPlayer(mc);
+                doc.putAll(ImmutableMap.of(
+                        "operation","GUILD_CREATE",
+                        "guild",ImmutableMap.of("id",gid,"name",guildName),
+                        "char",mc.toLogFormat()
+                ));
                 break;
             case 0x05:
                 if (mc.getGuildId() <= 0 || mc.getGuildRank() > 2) {
@@ -142,6 +151,12 @@ public final class GuildOperationHandler extends AbstractMaplePacketHandler {
                         invited.add(inv);
                     }
                 }
+                doc.putAll(ImmutableMap.of(
+                        "operation","GUILD_INVITE",
+                        "char",mc.toLogFormat(),
+                        "recipient",name
+                ));
+                MongoReporter.INSTANCE.insertReport(doc);
                 break;
             case 0x06:
                 if (mc.getGuildId() > 0) {
@@ -182,6 +197,12 @@ public final class GuildOperationHandler extends AbstractMaplePacketHandler {
                 c.announce(MaplePacketCreator.showGuildInfo(mc));
                 mc.saveGuildStatus(); // update database
                 respawnPlayer(mc);
+                doc.putAll(ImmutableMap.of(
+                        "operation","GUILD_JOIN",
+                        "char",mc.toLogFormat(),
+                        "guild",ImmutableMap.of("name",mc.getMGC().getName(),"id",mc.getMGC().getGuildId())
+                ));
+                MongoReporter.INSTANCE.insertReport(doc);
                 break;
             case 0x07:
                 cid = slea.readInt();
@@ -191,11 +212,17 @@ public final class GuildOperationHandler extends AbstractMaplePacketHandler {
                     return;
                 }
 
+                doc.putAll(ImmutableMap.of(
+                        "operation","GUILD_LEAVE",
+                        "char",mc.toLogFormat(),
+                        "guild",ImmutableMap.of("name",mc.getMGC().getName(),"id",mc.getMGC().getGuildId())
+                ));
                 Server.getInstance().leaveGuild(mc.getMGC());
                 c.announce(MaplePacketCreator.showGuildInfo(null));
                 mc.setGuildId(0);
                 mc.saveGuildStatus();
                 respawnPlayer(mc);
+                MongoReporter.INSTANCE.insertReport(doc);
                 break;
             case 0x08:
                 cid = slea.readInt();
@@ -204,7 +231,7 @@ public final class GuildOperationHandler extends AbstractMaplePacketHandler {
                     System.out.println("[hax] " + mc.getName() + " is trying to expel without rank 1 or 2.");
                     return;
                 }
-                
+
                 Server.getInstance().expelMember(mc.getMGC(), name, cid);
                 break;
             case 0x0d:
