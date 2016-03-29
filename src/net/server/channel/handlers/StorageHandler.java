@@ -25,13 +25,16 @@ import client.MapleCharacter;
 import client.MapleClient;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
+import com.google.common.collect.ImmutableMap;
 import constants.ItemConstants;
 import net.AbstractMaplePacketHandler;
+import org.bson.Document;
 import server.MapleInventoryManipulator;
 import server.MapleItemInformationProvider;
 import server.MapleStorage;
 import tools.FilePrinter;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 /**
@@ -42,11 +45,14 @@ public final class StorageHandler extends AbstractMaplePacketHandler {
     @Override
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
+        Document doc = new Document("action","STORAGE_MANIPULATION");
+        doc.put("char",chr.toLogFormat());
         MapleItemInformationProvider ii = MapleItemInformationProvider.getInstance();
         if(c.getPlayer() != null) c.getPlayer().updateLastActive();
         byte mode = slea.readByte();
         final MapleStorage storage = chr.getStorage();
         if (mode == 4) { // take out
+            doc.put("type","WITHDRAW_ITEM");
             byte type = slea.readByte();
             byte slot = slea.readByte();
             slot = storage.getSlot(MapleInventoryType.getByType(type), slot);
@@ -71,10 +77,12 @@ public final class StorageHandler extends AbstractMaplePacketHandler {
                     
                     MapleInventoryManipulator.addFromDrop(c, item, false);
                     storage.sendTakenOut(c, ii.getInventoryType(item.getItemId()));
+                    doc.put("item",item.toLogFormat());
                 } else c.announce(MaplePacketCreator.getStorageError((byte) 0x0A));
-                FilePrinter.print("storage.txt", String.format("%s<-%d(slot:%d)", chr.getName(), item.getItemId(), item.getQuantity()));
+
             }
         } else if (mode == 5) { // store
+            doc.put("type","DEPOSIT_ITEM");
             byte slot = (byte) slea.readShort();
             int itemId = slea.readInt();
             short quantity = slea.readShort();
@@ -100,7 +108,7 @@ public final class StorageHandler extends AbstractMaplePacketHandler {
                     item.setQuantity(quantity);
                     storage.store(item);
                     storage.sendStored(c, ii.getInventoryType(itemId));
-                    FilePrinter.print("storage.txt", String.format("%s->%d(slot:%d)", chr.getName(), item.getItemId(), item.getQuantity()));
+                    doc.put("item",item.toLogFormat());
                 }
        
             }
@@ -122,7 +130,8 @@ public final class StorageHandler extends AbstractMaplePacketHandler {
                 }
                 storage.setMeso(storageMesos - meso);
                 chr.gainMeso(meso, false, true, false);
-                FilePrinter.print("storage.txt", String.format("%s->%d(%d)", chr.getName(), meso, storageMesos));
+                doc.putAll(ImmutableMap.of("type",meso > 0 ? "DEPOSIT_MESOS" : "WITHDRAW_MESOS","meso",meso));
+                MongoReporter.INSTANCE.insertReport(doc);
             } else {
                 return;
             }

@@ -27,6 +27,7 @@ import client.autoban.AutobanFactory;
 import java.awt.Point;
 import net.AbstractMaplePacketHandler;
 import net.server.world.MaplePartyCharacter;
+import org.bson.Document;
 import scripting.item.ItemScriptManager;
 import server.MapleInventoryManipulator;
 import server.MapleItemInformationProvider;
@@ -34,6 +35,7 @@ import server.MapleItemInformationProvider.scriptedItem;
 import server.maps.MapleMapItem;
 import server.maps.MapleMapObject;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 /**
@@ -44,6 +46,9 @@ public final class ItemPickupHandler extends AbstractMaplePacketHandler {
 
     @Override
     public final void handlePacket(final SeekableLittleEndianAccessor slea, final MapleClient c, int header) {
+        Document doc = new Document("action","INVENTORY_MANIPULATION");
+        doc.put("type","PICKUP");
+        doc.put("char",c.getPlayer().toLogFormat());
         slea.readInt(); //Timestamp
         slea.readByte();
         Point cpos = slea.readPos();
@@ -151,6 +156,8 @@ public final class ItemPickupHandler extends AbstractMaplePacketHandler {
                     chr.getMap().broadcastMessage(MaplePacketCreator.removeItemFromMap(mapitem.getObjectId(), 2, chr.getId()), mapitem.getPosition());
                     chr.getMap().removeMapObject(ob);
                 }
+                doc.put("item",mapitem.getItem().toLogFormat());
+                MongoReporter.INSTANCE.insertReport(doc);
             }
         }
         c.announce(MaplePacketCreator.enableActions());

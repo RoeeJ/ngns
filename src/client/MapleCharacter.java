@@ -5399,7 +5399,8 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
         return ImmutableMap.of(
                 "id",id,
                 "name",name,
-                "accountid",accountid
+                "accountid",accountid,
+                "map",map
         );
     }
 

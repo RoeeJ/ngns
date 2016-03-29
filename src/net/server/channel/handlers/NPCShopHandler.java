@@ -22,9 +22,12 @@
 package net.server.channel.handlers;
 
 import client.MapleClient;
+import com.google.common.collect.ImmutableMap;
 import net.AbstractMaplePacketHandler;
+import org.bson.Document;
 import server.MapleItemInformationProvider;
 import tools.FilePrinter;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 /**
@@ -33,18 +36,21 @@ import tools.data.input.SeekableLittleEndianAccessor;
  */
 public final class NPCShopHandler extends AbstractMaplePacketHandler {
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
+        Document doc = new Document("action","NPC_SHOP");
         byte bmode = slea.readByte();
         if (bmode == 0) { // mode 0 = buy :)
+            doc.put("type","BUY");
             short slot = slea.readShort();// slot
             int itemId = slea.readInt();
             short quantity = slea.readShort();
-            FilePrinter.print("npcshop.txt", String.format("%s->%d(s:%d,q:%d)", c.getPlayer().getName(), itemId, slot, quantity));
+            doc.put("item",new Document(ImmutableMap.of("id",itemId,"quantity",quantity)));
             if (0 > quantity || quantity > 20000) {
                 //c.getPlayer().dropMessage("nowai bruh");
                 return;
             }
             c.getPlayer().getShop().buy(c, slot, itemId, quantity);
         } else if (bmode == 1) { // sell ;)
+            doc.put("type","SELL");
             short slot = slea.readShort();
             int itemId = slea.readInt();
             short quantity = slea.readShort();
@@ -56,9 +62,11 @@ public final class NPCShopHandler extends AbstractMaplePacketHandler {
         } else if (bmode == 2) { // recharge ;)
             byte slot = (byte) slea.readShort();
             c.getPlayer().getShop().recharge(c, slot);
+            doc.put("type","RECHARGE");
         } else if (bmode == 3) // leaving :(
         {
             c.getPlayer().setShop(null);
         }
+        MongoReporter.INSTANCE.insertReport(doc);
     }
 }

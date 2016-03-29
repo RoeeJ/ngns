@@ -61,6 +61,7 @@ public final class SpecialMoveHandler extends AbstractMaplePacketHandler {
             if (GameConstants.isDisabledSkill(skillid, chr.getMapId())) {
                 return;
             }
+            if(GameConstants.isIgnoredSkill(skillid)) return;
             if(chr.hasMorphEffect() && !GameConstants.canBeUsedWithMorph(skillid)) return;
                 Point pos = null;
             int __skillLevel = slea.readByte();

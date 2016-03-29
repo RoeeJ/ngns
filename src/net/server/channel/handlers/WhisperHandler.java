@@ -27,10 +27,12 @@ import client.MapleClient;
 import client.sexbot.Muriel;
 import net.AbstractMaplePacketHandler;
 import net.server.world.World;
+import org.bson.Document;
 import server.TimerManager;
 import tools.DatabaseConnection;
 import tools.FilePrinter;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 import java.io.IOException;
@@ -47,22 +49,22 @@ public final class WhisperHandler extends AbstractMaplePacketHandler {
     public final void handlePacket(SeekableLittleEndianAccessor slea, final MapleClient c, int header) {
         byte mode = slea.readByte();
         if(c.getPlayer() != null) c.getPlayer().updateLastActive();
+        Document doc = new Document("action","WHISPER");
+        doc.put("char",c.getPlayer().toLogFormat());
         if (mode == 6) { // whisper
             String recipient = slea.readMapleAsciiString();
             final String text = slea.readMapleAsciiString();
             if (c.getChannelServer().getMuriel() != null && recipient.equalsIgnoreCase(Muriel.getCharacter(c.getChannelServer().getMuriel()).getName())) {
                 c.announce(MaplePacketCreator.getWhisperReply(Muriel.getCharacter(c.getChannelServer().getMuriel()).getName(), (byte) 1));
-                TimerManager.getInstance().schedule(new Runnable() {
-                    public void run() {
-                        String res = null;
-                        try {
-                            res = c.getChannelServer().getMuriel().handleChat(("sexbot, " + text).toLowerCase(), c.getPlayer().getName(), c.getPlayer());
-                        } catch (IOException e) {
-                            res = null;
-                        }
-                        if (res != null && res.length() > 0) {
-                            c.announce(MaplePacketCreator.getWhisper(Muriel.getCharacter(c.getChannelServer().getMuriel()).getName(), c.getChannel(), res));
-                        }
+                TimerManager.getInstance().schedule((Runnable) () -> {
+                    String res = null;
+                    try {
+                        res = c.getChannelServer().getMuriel().handleChat(("sexbot, " + text).toLowerCase(), c.getPlayer().getName(), c.getPlayer());
+                    } catch (IOException e) {
+                        res = null;
+                    }
+                    if (res != null && res.length() > 0) {
+                        c.announce(MaplePacketCreator.getWhisper(Muriel.getCharacter(c.getChannelServer().getMuriel()).getName(), c.getChannel(), res));
                     }
                 }, new Random(System.currentTimeMillis()).nextInt(4000));
                 //try {c.getWorldServer().whisper("Muriel",c.getPlayer().getName(),c.getChannel(),c.getChannelServer().getMuriel().handleChat(recipient, text, c.getPlayer()));} catch (IOException e) {}
@@ -71,31 +73,24 @@ public final class WhisperHandler extends AbstractMaplePacketHandler {
             MapleCharacter player = c.getChannelServer().getPlayerStorage().getCharacterByName(recipient);
             if (player != null) {
                 player.getClient().announce(MaplePacketCreator.getWhisper(c.getPlayer().getName(), c.getChannel(), text));
+                doc.put("target",player.toLogFormat());
 
-                ChatLog.getInstance().add("[" + ChatLog.getInstance().generateTime() + "]" + " [Whisper] " + c.getPlayer().getName() + ": " + text);
-                if (ChatLog.getInstance().getChat().size() >= 1)
-                    ChatLog.getInstance().makeLog(); //change 500 to w/e
-                try {
-                    FilePrinter.print("whisper.txt", String.format("%s->%s:%s", c.getPlayer().getName(), player.getName(), text));
-                }catch (NullPointerException ignored){
-
-                }
                 c.announce(MaplePacketCreator.getWhisperReply(recipient, (byte) 1));
             } else {// not found
+                doc.put("target",recipient);
                 World world = c.getWorldServer();
                     if (world.isConnected(recipient)) {
                         world.whisper(c.getPlayer().getName(), recipient, c.getChannel(), text);
-                        ChatLog.getInstance().add("[" + ChatLog.getInstance().generateTime() + "]" + " [Whisper] " + c.getPlayer().getName() + ": " + text);
-                        if (ChatLog.getInstance().getChat().size() >= 1)
-                            ChatLog.getInstance().makeLog(); //change 500 to w/e
                         c.announce(MaplePacketCreator.getWhisperReply(recipient, (byte) 1));
                     } else {
                         c.announce(MaplePacketCreator.getWhisperReply(recipient, (byte) 0));
                     }
             }
         } else if (mode == 5) { // - /find
+            doc.put("type","FIND");
             String recipient = slea.readMapleAsciiString();
             MapleCharacter victim = c.getChannelServer().getPlayerStorage().getCharacterByName(recipient);
+            doc.put("target", victim == null ? recipient : victim.toLogFormat());
             if (victim != null && c.getPlayer().gmLevel() >= victim.gmLevel()) {
                 if (victim.getCashShop().isOpened()) {
                     c.announce(MaplePacketCreator.getFindReply(victim.getName(), -1, 2));
@@ -131,5 +126,6 @@ public final class WhisperHandler extends AbstractMaplePacketHandler {
         } else if (mode == 0x44) {
             //Buddy find?
         }
+        MongoReporter.INSTANCE.insertReport(doc);
     }
 }

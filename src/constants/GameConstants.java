@@ -167,4 +167,23 @@ public class GameConstants {
 	public static boolean isFinisherSkill(int skillId) {
 		return skillId > 1111002 && skillId < 1111007 || skillId == 11111002 || skillId == 11111003;
 	}
+
+	public static boolean isIgnoredSkill(int skillid) {
+		switch(skillid) {
+			case 21001001:
+			case 2301001:
+			case 2201002:
+			case 2101002:
+			case 12101003:
+			case 9001002:
+			case 9101007:
+			case 8001001:
+			case 11101005:
+			case 4111006:
+			case 1410004:
+				return true;
+			default:
+				return false;
+		}
+	}
 }

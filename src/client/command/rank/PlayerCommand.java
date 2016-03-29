@@ -459,8 +459,12 @@ public class PlayerCommand extends CommandAbstract implements CommandInterface {
                     int gotomap = 0;
 
                         switch (splitted[1].toLowerCase()) {
+                            case "amoria":
+                                gotomap = 680000000;
+                                break;
                             case "temple":
-                                gotomap = gotomap = 270000100;
+                                gotomap = 270000100;
+                                break;
                             case "fm":
                                 gotomap = 910000000;
                                 break;

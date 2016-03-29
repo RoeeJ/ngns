@@ -27,8 +27,10 @@ import client.MapleClient;
 import net.AbstractMaplePacketHandler;
 import net.server.Server;
 import net.server.world.World;
+import org.bson.Document;
 import tools.FilePrinter;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 import tools.data.input.SeekableLittleEndianAccessor;
 
 public final class PartyChatHandler extends AbstractMaplePacketHandler {
@@ -42,30 +44,25 @@ public final class PartyChatHandler extends AbstractMaplePacketHandler {
             recipients[i] = slea.readInt();
         }
         String chattext = slea.readMapleAsciiString();
-            World world = c.getWorldServer();
+        Document doc = new Document("action","MULTICHAT");
+        doc.put("text",chattext);
+        World world = c.getWorldServer();
             if (type == 0) {
                 world.buddyChat(recipients, player.getId(), player.getName(), chattext);
-                FilePrinter.print("buddy.txt",String.format("%s:%s",player.getName(),chattext));
-                ChatLog.getInstance().add("["+ChatLog.getInstance().generateTime()+"]" + " [Buddy] " + c.getPlayer().getName() + ": " + chattext);
-                if (ChatLog.getInstance().getChat().size() >= 1) ChatLog.getInstance().makeLog(); //change 500 to w/e
+                doc.put("type","BUDDY");
             } else if (type == 1 && player.getParty() != null) {
                 world.partyChat(player.getParty(), chattext, player.getName());
-                FilePrinter.print("party.txt",String.format("%s:%s",player.getName(),chattext));
-                ChatLog.getInstance().add("["+ChatLog.getInstance().generateTime()+"]" + " [Party] " + c.getPlayer().getName() + ": " + chattext);
-                if (ChatLog.getInstance().getChat().size() >= 1) ChatLog.getInstance().makeLog(); //change 500 to w/e
+                doc.put("type","PARTY");
             } else if (type == 2 && player.getGuildId() > 0) {
-                FilePrinter.print("guild.txt",String.format("%s:%s",player.getName(),chattext));
                 Server.getInstance().guildChat(player.getGuildId(), player.getName(), player.getId(), chattext);
-                ChatLog.getInstance().add("["+ChatLog.getInstance().generateTime()+"]" + " [Guild] " + c.getPlayer().getName() + ": " + chattext);
-                if (ChatLog.getInstance().getChat().size() >= 1) ChatLog.getInstance().makeLog(); //change 500 to w/e
+                doc.put("type","GUILD");
             } else if (type == 3 && player.getGuild() != null) {
                 int allianceId = player.getGuild().getAllianceId();
                 if (allianceId > 0) {
-                    FilePrinter.print("alliance.txt",String.format("%s:%s",player.getName(),chattext));
                     Server.getInstance().allianceMessage(allianceId, MaplePacketCreator.multiChat(player.getName(), chattext, 3), player.getId(), -1);
-                    ChatLog.getInstance().add("["+ChatLog.getInstance().generateTime()+"]" + " [Alliance] " + c.getPlayer().getName() + ": " + chattext);
-                    if (ChatLog.getInstance().getChat().size() >= 1) ChatLog.getInstance().makeLog(); //change 500 to w/e
+                    doc.put("type","ALLIANCE");
                 }
             }
+        MongoReporter.INSTANCE.insertReport(doc);
     }
 }

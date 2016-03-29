@@ -25,7 +25,9 @@ import client.MapleBuffStat;
 import client.MapleClient;
 import client.inventory.*;
 import constants.ItemConstants;
+import org.bson.Document;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 
 import java.awt.*;
 import java.util.*;
@@ -461,6 +463,10 @@ public class MapleInventoryManipulator {
             type = MapleInventoryType.EQUIPPED;
         }
         Item source = c.getPlayer().getInventory(type).getItem(src);
+        Document doc = new Document("action","INVENTORY_MANIPULATION");
+        doc.put("char",c.getPlayer().toLogFormat());
+        doc.put("type","DROP");
+        doc.put("item",source.toLogFormat());
         int itemId = source.getItemId();
         if (itemId >= 5000000 && itemId <= 5000100) {
             return;
@@ -512,6 +518,7 @@ public class MapleInventoryManipulator {
             }
                 c.getPlayer().getMap().spawnItemDrop(c.getPlayer(), c.getPlayer(), source, dropPos, true, true);
         }
+        MongoReporter.INSTANCE.insertReport(doc);
     }
 
     private static boolean isOverall(int itemId) {
