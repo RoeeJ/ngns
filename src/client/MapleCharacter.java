@@ -5400,7 +5400,7 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
                 "id",id,
                 "name",name,
                 "accountid",accountid,
-                "map",map
+                "map",mapid
         );
     }
 

@@ -25,6 +25,7 @@ import client.ChatLog;
 import client.MapleCharacter;
 import client.inventory.Item;
 import client.inventory.MapleInventoryType;
+import com.google.common.collect.ImmutableMap;
 import constants.ItemConstants;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -32,8 +33,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
+import org.bson.Document;
 import tools.MaplePacketCreator;
+import tools.MongoReporter;
 import tools.Pair;
 import tools.SlackReporter;
 
@@ -50,6 +54,7 @@ public class MapleTrade {
     boolean locked = false;
     private MapleCharacter chr;
     private byte number;
+    private static Document doc = new Document("action","TRADE");
 
     public MapleTrade(byte number, MapleCharacter c) {
         chr = c;
@@ -238,35 +243,30 @@ public class MapleTrade {
                     c.addMesosTraded(local.exchangeMeso);
                 }
             }
-            Executors.newSingleThreadExecutor().execute(new Runnable() {
-                @Override
-                public void run() {
-                    StringBuilder lsb = new StringBuilder();
-                    for(Item item: local.getItems()) {
-                        for (Pair<Integer, String> itemPair : MapleItemInformationProvider.getInstance().getAllItems()) {
-                            if (item.getItemId() == itemPair.getLeft()) {
-                                lsb.append(itemPair.getRight());
-                                lsb.append("|");
-                            }
-                        }
-                    }
-                    StringBuilder psb = new StringBuilder();
-                    for(Item item: partner.getItems()) {
-                        for (Pair<Integer, String> itemPair : MapleItemInformationProvider.getInstance().getAllItems()) {
-                            if (item.getItemId() == itemPair.getLeft()) {
-                                psb.append(item.getQuantity()+"x " + itemPair.getRight());
-                                psb.append("|");
-                            }
-                        }
-                    }
-                    //SlackReporter.getInstance().log("TradeBot","#trades",String.format("[Trade Successful]%s gave %s %d Mesos [%s], got %d Mesos and [%s] in return", local.getChr().getName(), partner.getChr().getName(),local.exchangeMeso,lsb.reverse().deleteCharAt(0).reverse().toString(),partner.exchangeMeso,psb.reverse().deleteCharAt(0).reverse().toString()));
-                }
-            });
+            doc.put("sides",local.toLogFormat());
+            MongoReporter.INSTANCE.insertReport(doc);
             local.complete2();
             partner.complete2();
             partner.getChr().setTrade(null);
             c.setTrade(null);
         }
+    }
+
+    private Document toLogFormat() {
+        Document trade = new Document();
+        trade.put("local",
+                ImmutableMap.of(
+                        "char",chr.toLogFormat(),
+                        "items",items.stream().map((Item::toLogFormat)).collect(Collectors.toList()),
+                        "meso",meso
+                ));
+        trade.put("partner",
+                ImmutableMap.of(
+                        "char",partner.getChr().toLogFormat(),
+                        "items",exchangeItems.stream().map((Item::toLogFormat)).collect(Collectors.toList()),
+                        "meso",exchangeMeso
+                ));
+        return trade;
     }
 
     public static void cancelTrade(MapleCharacter c) {

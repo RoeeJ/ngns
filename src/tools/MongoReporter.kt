@@ -12,7 +12,7 @@ object MongoReporter {
         if(unique) {
             if(collection.count(doc).toInt() == 0) collection.insertOne(doc.withTimestamp());
         } else {
-            Server.getInstance().packetCollection.insertOne(doc.withTimestamp())
+            collection.insertOne(doc.withTimestamp())
         }
     }
     fun insertReport(map: Map<String, Any>, unique: Boolean = false, packet: Boolean = false): Unit {
