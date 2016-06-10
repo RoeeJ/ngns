@@ -93,7 +93,7 @@ public final class ChangeChannelHandler extends AbstractMaplePacketHandler {
         chr.getMap().removePlayer(chr);
         chr.getClient().getChannelServer().removePlayer(chr);
         chr.saveToDB();
-        chr.getClient().updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION,c.getSessionIPAddress());
+        chr.getClient().updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION);
         FilePrinter.print("channels.txt", String.format("%s->%d(%d)", chr.getName(), channel, curchannel));
         try {
             c.announce(MaplePacketCreator.getChannelChange(InetAddress.getByName(socket[0]), Integer.parseInt(socket[1])));

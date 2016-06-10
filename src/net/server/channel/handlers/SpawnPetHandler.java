@@ -31,6 +31,8 @@ import client.inventory.MaplePet;
 import client.inventory.PetDataFactory;
 import client.SkillFactory;
 import java.sql.SQLException;
+import java.util.Calendar;
+
 import tools.DatabaseConnection;
 import net.AbstractMaplePacketHandler;
 import provider.MapleDataProvider;
@@ -45,6 +47,10 @@ public final class SpawnPetHandler extends AbstractMaplePacketHandler {
 
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         MapleCharacter chr = c.getPlayer();
+        if(Calendar.getInstance().getTimeInMillis() - chr.getLastPetSpawn() < 2000) {
+            return;
+        }
+        chr.updateLastePetSpawn();
         slea.readInt();
         byte slot = slea.readByte();
         slea.readByte();

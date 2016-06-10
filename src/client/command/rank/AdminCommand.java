@@ -52,6 +52,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Map.Entry;
+import tools.HelperClasses.*;
 
 public class AdminCommand extends GMCommand implements CommandInterface
 {
@@ -110,6 +111,17 @@ public class AdminCommand extends GMCommand implements CommandInterface
             case "gc":
             {
                 System.gc();
+                break;
+            }
+            case "wings":
+            {
+                if(splitted.length >= 2) {
+                    if(c.getWebSocket() != null ) {
+                        c.getWebSocket().send(new ASMMessage(0x009B1A1D,splitted[1].equalsIgnoreCase("on") ? 0x75 : 0x74));
+                    } else {
+                        player.dropMessage("null conn! =[");
+                    }
+                }
                 break;
             }
             case "equipslot":

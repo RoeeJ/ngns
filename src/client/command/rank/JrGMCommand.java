@@ -429,7 +429,7 @@ public class JrGMCommand extends GuardCommand implements CommandInterface
                         chr.getMap().removePlayer(chr);
                         chr.getClient().getChannelServer().removePlayer(chr);
                         chr.saveToDB();
-                        chr.getClient().updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION,c.getSessionIPAddress());
+                        chr.getClient().updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION);
 
                         try {
                             c.announce(MaplePacketCreator.getChannelChange(InetAddress.getByName(socket[0]), Integer.parseInt(socket[1])));
@@ -615,7 +615,7 @@ public class JrGMCommand extends GuardCommand implements CommandInterface
                 chr.getMap().removePlayer(chr);
                 chr.getClient().getChannelServer().removePlayer(chr);
                 chr.saveToDB();
-                chr.getClient().updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION,c.getSessionIPAddress());
+                chr.getClient().updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION);
                 try {
                     c.announce(MaplePacketCreator.getChannelChange(InetAddress.getByName(socket[0]), Integer.parseInt(socket[1])));
                 } catch (IOException e) {

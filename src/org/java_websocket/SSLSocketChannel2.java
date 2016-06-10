@@ -122,14 +122,23 @@ public class SSLSocketChannel2 implements ByteChannel, WrappedByteChannel {
         if (engineResult.getHandshakeStatus() == SSLEngineResult.HandshakeStatus.NEED_UNWRAP) {
             if (!isBlocking() || engineStatus == Status.BUFFER_UNDERFLOW) {
                 inCrypt.compact();
-                int read = socketChannel.read(inCrypt);
+                int read = -1;
+                try {
+                    read = socketChannel.read(inCrypt);
+                } catch(Exception e) {
+
+                }
                 if (read == -1) {
-                    throw new IOException("connection closed unexpectedly by peer");
+                    return;
                 }
                 inCrypt.flip();
             }
             inData.compact();
-            unwrap();
+            try {
+                unwrap();
+            } catch (SSLException ssle) {
+                return;
+            }
             if (engineResult.getHandshakeStatus() == HandshakeStatus.FINISHED) {
                 createBuffers(sslEngine.getSession());
                 return;
@@ -248,7 +257,11 @@ public class SSLSocketChannel2 implements ByteChannel, WrappedByteChannel {
 
         int transfered = transfereTo(inData, dst);
         if (transfered == 0 && isBlocking()) {
-            return read(dst); // "transfered" may be 0 when not enough bytes were received or during rehandshaking
+            try {
+                return read(dst); // "transfered" may be 0 when not enough bytes were received or during rehandshaking
+            } catch(Exception ex) {
+                return 0;
+            }
         }
         return transfered;
     }

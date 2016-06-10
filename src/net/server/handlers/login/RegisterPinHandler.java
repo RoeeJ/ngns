@@ -34,13 +34,13 @@ public final class RegisterPinHandler extends AbstractMaplePacketHandler {
     public final void handlePacket(SeekableLittleEndianAccessor slea, MapleClient c, int header) {
         byte c2 = slea.readByte();
         if (c2 == 0) {
-            c.updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN,c.getSessionIPAddress());
+            c.updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN);
         } else {
             String pin = slea.readMapleAsciiString();
             if (pin != null) {
                 c.setPin(pin);
                 c.announce(MaplePacketCreator.pinRegistered());
-                c.updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN,c.getSessionIPAddress());
+                c.updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN);
             }
         }
     }

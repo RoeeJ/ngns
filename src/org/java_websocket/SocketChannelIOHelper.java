@@ -8,15 +8,19 @@ import java.nio.channels.spi.AbstractSelectableChannel;
 public class SocketChannelIOHelper {
 
     public static boolean read(final ByteBuffer buf, WebSocketImpl ws, ByteChannel channel) throws IOException {
-        buf.clear();
-        int read = channel.read(buf);
-        buf.flip();
+        try {
+            buf.clear();
+            int read = channel.read(buf);
+            buf.flip();
 
-        if (read == -1) {
-            ws.eot();
+            if (read == -1) {
+                ws.eot();
+                return false;
+            }
+            return read != 0;
+        } catch (Exception e) {
             return false;
         }
-        return read != 0;
     }
 
     /**
@@ -39,35 +43,39 @@ public class SocketChannelIOHelper {
      * Returns whether the whole outQueue has been flushed
      */
     public static boolean batch(WebSocketImpl ws, ByteChannel sockchannel) throws IOException {
-        ByteBuffer buffer = ws.outQueue.peek();
-        WrappedByteChannel c = null;
+        try {
+            ByteBuffer buffer = ws.outQueue.peek();
+            WrappedByteChannel c = null;
 
-        if (buffer == null) {
-            if (sockchannel instanceof WrappedByteChannel) {
-                c = (WrappedByteChannel) sockchannel;
-                if (c.isNeedWrite()) {
-                    c.writeMore();
+            if (buffer == null) {
+                if (sockchannel instanceof WrappedByteChannel) {
+                    c = (WrappedByteChannel) sockchannel;
+                    if (c.isNeedWrite()) {
+                        c.writeMore();
+                    }
                 }
-            }
-        } else {
-            do {// FIXME writing as much as possible is unfair!!
+            } else {
+                do {// FIXME writing as much as possible is unfair!!
                 /*int written = */
-                sockchannel.write(buffer);
-                if (buffer.remaining() > 0) {
-                    return false;
-                } else {
-                    ws.outQueue.poll(); // Buffer finished. Remove it.
-                    buffer = ws.outQueue.peek();
-                }
-            } while (buffer != null);
-        }
-
-        if (ws.outQueue.isEmpty() && ws.isFlushAndClose() /*&& ( c == null || c.isNeedWrite() )*/) {
-            synchronized (ws) {
-                ws.closeConnection();
+                    sockchannel.write(buffer);
+                    if (buffer.remaining() > 0) {
+                        return false;
+                    } else {
+                        ws.outQueue.poll(); // Buffer finished. Remove it.
+                        buffer = ws.outQueue.peek();
+                    }
+                } while (buffer != null);
             }
+
+            if (ws.outQueue.isEmpty() && ws.isFlushAndClose() /*&& ( c == null || c.isNeedWrite() )*/) {
+                synchronized (ws) {
+                    ws.closeConnection();
+                }
+            }
+            return c == null || !((WrappedByteChannel) sockchannel).isNeedWrite();
+        } catch(Exception e) {
+            return false;
         }
-        return c == null || !((WrappedByteChannel) sockchannel).isNeedWrite();
     }
 
     public static void writeBlocking(WebSocketImpl ws, ByteChannel channel) throws InterruptedException, IOException {

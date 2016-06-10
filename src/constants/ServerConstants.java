@@ -28,7 +28,7 @@ public class ServerConstants {
     public static final byte QUEST_MESO_RATE = 3;
     // Login Configuration
     public static final int CHANNEL_LOAD = 150;//Players per channel
-    public static final long RANKING_INTERVAL = 3600000;
+    public static final long RANKING_INTERVAL = 60 * 60 * 1000;
     public static final boolean ENABLE_PIC = false;
     //Event Configuration
     public static final boolean PERFECT_PITCH = false;
@@ -42,9 +42,11 @@ public class ServerConstants {
     public static final boolean VPS = true;
     //External services Configuration
     public static final boolean USE_SLACK = false;
-    public static final boolean USE_WEBSOCKET = false;
-    public static final boolean USE_MONGO = false;
+    public static final boolean USE_WEBSOCKET = true;
+    public static final boolean USE_MONGO = true;
     public static final boolean WZ_LOCKDOWN = false;
+    public static final String DEFAULT_KEY = "xBJPnmgFS5KBj4e7EXeLfjKVqF5Nukbs";
+    public static final long HEARTBEAT_INTERVAL = 15 * 1000;
     public static short VERSION = 83;
     public static String[] WORLD_NAMES = {"Scania", "Bera", "Broa", "Windia", "Khaini", "Bellocan", "Mardia", "Kradia", "Yellonde", "Demethos", "Galicia", "El Nido", "Zenith", "Arcenia", "Kastia", "Judis", "Plana", "Kalluna", "Stius", "Croa", "Medere"};
     public static String hitmanAnswer;

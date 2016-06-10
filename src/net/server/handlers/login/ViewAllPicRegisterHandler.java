@@ -31,7 +31,7 @@ public final class ViewAllPicRegisterHandler extends AbstractMaplePacketHandler 
         if (c.getIdleTask() != null) {
             c.getIdleTask().cancel(true);
         }
-        c.updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION,c.getSessionIPAddress());
+        c.updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION);
         String[] socket = Server.getInstance().getIP(c.getWorld(), channel).split(":");
         try {
             c.announce(MaplePacketCreator.getServerIP(InetAddress.getByName(socket[0]), Integer.parseInt(socket[1]), charId));

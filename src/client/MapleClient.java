@@ -94,6 +94,12 @@ public class MapleClient {
     private int age;
     private int authByte;
     private Set<String> volumeIds = new HashSet<>();
+    private boolean disconnecting = false;
+    private static String sessionId;
+    private String sessionID = "";
+    private WebSocketImpl webSocket;
+    private long lastHeartbeat = -1;
+    public int failedHeartbeatCount = 0;
 
     public MapleClient(MapleAESOFB send, MapleAESOFB receive, IoSession session) {
         this.send = send;
@@ -118,6 +124,14 @@ public class MapleClient {
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             throw new RuntimeException("Encoding the string failed", e);
         }
+    }
+
+    public void setSessionId(String sessionId) {
+        MapleClient.sessionId = sessionId;
+    }
+
+    public static String getSessionId() {
+        return sessionId;
     }
 
     public synchronized MapleAESOFB getReceiveCrypto() {
@@ -312,7 +326,7 @@ public class MapleClient {
                 loggedIn = false;
                 return 7;
             }
-            updateLoginState(LOGIN_LOGGEDIN,getSessionIPAddress());
+            updateLoginState(LOGIN_LOGGEDIN);
         }
         return 0;
     }
@@ -561,12 +575,12 @@ public class MapleClient {
         this.accId = id;
     }
 
-    public void updateLoginState(int newstate, String sessionID) {
+    public void updateLoginState(int newstate) {
         try {
             Connection con = DatabaseConnection.getConnection();
             try (PreparedStatement  ps = con.prepareStatement("UPDATE accounts SET loggedin = ?, SessionIP = ?, lastlogin = CURRENT_TIMESTAMP() WHERE id = ?")) {
                 ps.setInt(1, newstate);
-                ps.setString(2, sessionID);
+                ps.setString(2, getSessionIPAddress());
                 ps.setInt(3, getAccID());
                 ps.executeUpdate();
             }
@@ -602,7 +616,7 @@ public class MapleClient {
             if (state == LOGIN_SERVER_TRANSITION) {
                 if (rs.getTimestamp("lastlogin").getTime() + 30000 < System.currentTimeMillis()) {
                     state = LOGIN_NOTLOGGEDIN;
-                    updateLoginState(LOGIN_NOTLOGGEDIN,getSessionIPAddress());
+                    updateLoginState(LOGIN_NOTLOGGEDIN);
                 }
             }
             rs.close();
@@ -681,8 +695,100 @@ public class MapleClient {
         }
     }
 
-    public final void disconnect(boolean shutdown, boolean cashshop) {//once per MapleClient instance
+//    public final void disconnect(boolean shutdown, boolean cashshop) {//once per MapleClient instance
+//        if (player != null && player.isLoggedin() && player.getClient() != null) {
+//            MapleMap map = player.getMap();
+//            final MapleParty party = player.getParty();
+//            final int idz = player.getId(), messengerid = player.getMessenger() == null ? 0 : player.getMessenger().getId(), fid = player.getFamilyId();
+//            final String namez = player.getName();
+//            final BuddyList bl = player.getBuddylist();
+//            final MaplePartyCharacter chrp = new MaplePartyCharacter(player);
+//            final MapleMessengerCharacter chrm = new MapleMessengerCharacter(player);
+//            final World worlda = getWorldServer();
+//            //final MapleGuildCharacter chrg = player.getMGC();
+//            try {
+//                removePlayer();
+//                player.saveToDB();
+//                if (channel == -1 || shutdown) {
+//                    player = null;
+//                    return;
+//                }
+//
+//                if (!cashshop) {
+//                    if (messengerid > 0) {
+//                        worlda.leaveMessenger(messengerid, chrm);
+//                    }
+//
+//                    /*for (MapleQuestStatus status : player.getStartedQuests()) {
+//                    MapleQuest quest = status.getQuest();
+//                    if (quest.getTimeLimit() > 0) {
+//                    MapleQuestStatus newStatus = new MapleQuestStatus(quest, MapleQuestStatus.Status.NOT_STARTED);
+//                    newStatus.setForfeited(player.getQuest(quest).getForfeited() + 1);
+//                    player.updateQuest(newStatus);
+//                    }
+//                    }*/
+//                    if (party != null) {
+//                        chrp.setOnline(false);
+//                        worlda.updateParty(party.getId(), PartyOperation.LOG_ONOFF, chrp);
+//                        if (map != null && party.getLeader().getId() == idz) {
+//                            MaplePartyCharacter lchr = null;
+//                            for (MaplePartyCharacter pchr : party.getMembers()) {
+//                                if (pchr != null && map.getCharacterById(pchr.getId()) != null && (lchr == null || lchr.getLevel() < pchr.getLevel())) {
+//                                    lchr = pchr;
+//                                }
+//                            }
+//                            if (lchr != null) {
+//                                worlda.updateParty(party.getId(), PartyOperation.CHANGE_LEADER, lchr);
+//                            }
+//                        }
+//                    }
+//                    if (bl != null) {
+//                        if (!this.serverTransition) {
+//                            worlda.loggedOff(player.getName(), player.getId(), channel, player.getBuddylist().getBuddyIds());
+//                        } else {
+//                            worlda.loggedOn(player.getName(), player.getId(), channel, player.getBuddylist().getBuddyIds());
+//                        }
+//                    }
+//                } else {
+//                    if (party != null) {
+//                        chrp.setOnline(false);
+//                        worlda.updateParty(party.getId(), PartyOperation.LOG_ONOFF, chrp);
+//                    }
+//                    if (!this.serverTransition) {
+//                        worlda.loggedOff(player.getName(), player.getId(), channel, player.getBuddylist().getBuddyIds());
+//                    } else {
+//                        worlda.loggedOn(player.getName(), player.getId(), channel, player.getBuddylist().getBuddyIds());
+//                    }
+//                }
+//            } catch (final Exception e) {
+//                FilePrinter.printError(FilePrinter.ACCOUNT_STUCK, e);
+//            } finally {
+//                getChannelServer().removePlayer(player);
+//                if (!this.serverTransition) {
+//                    worlda.removePlayer(player);
+//                    if (player != null) {//no idea, occur :(
+//                        player.empty(false);
+//                    }
+//                    player.logOff();
+//                }
+//                player = null;
+//            }
+//        }
+//        if (!serverTransition && isLoggedIn()) {
+//            updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN,getSessionIPAddress());
+//            session.removeAttribute(MapleClient.CLIENT_KEY); // prevents double dcing during login
+//            session.close(true);
+//        }
+//        engines.clear();
+//    }
+public final void disconnect(boolean shutdown, boolean cashshop) {//once per MapleClient instance
+    try {
+        if (disconnecting) {
+            return;
+        }
+        disconnecting = true;
         if (player != null && player.isLoggedin() && player.getClient() != null) {
+            long DCStartTime = Calendar.getInstance().getTimeInMillis();
             MapleMap map = player.getMap();
             final MapleParty party = player.getParty();
             final int idz = player.getId(), messengerid = player.getMessenger() == null ? 0 : player.getMessenger().getId(), fid = player.getFamilyId();
@@ -758,16 +864,25 @@ public class MapleClient {
                     player.logOff();
                 }
                 player = null;
+                if(getWebSocket() != null) {
+                    getWebSocket().setClient(null);
+                    setWebSocket(null);
+                }
             }
         }
         if (!serverTransition && isLoggedIn()) {
-            updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN,getSessionIPAddress());
+            updateLoginState(MapleClient.LOGIN_NOTLOGGEDIN);
             session.removeAttribute(MapleClient.CLIENT_KEY); // prevents double dcing during login
-            session.close(true);
+            session.close();
         }
         engines.clear();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        getSession().close(true);
+        if(getPlayer() != null) getPlayer().getMap().removePlayer(getPlayer());
     }
-
+}
     private void clear() {
         this.accountName = null;
         this.macs = null;
@@ -1051,15 +1166,6 @@ public class MapleClient {
         muted = !b;
     }
 
-    public void setRemote(boolean remote, WebSocketImpl conn) {
-        this.remote = remote;
-        this.conn = conn;
-    }
-
-    public WebSocketImpl getConn() {
-        return conn;
-    }
-
     public int getAge() {
         return age;
     }
@@ -1132,6 +1238,31 @@ public class MapleClient {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public String getSessionID() {
+        return sessionID;
+    }
+
+    public void setSessionID(String sessionID) {
+        this.sessionID = sessionID;
+    }
+
+    public void setWebSocket(WebSocketImpl webSocket) {
+        this.webSocket = webSocket;
+    }
+
+    public WebSocketImpl getWebSocket() {
+        return webSocket;
+    }
+
+    public long getLastHeartbeat() {
+        return lastHeartbeat;
+    }
+
+    public void doHeartbeat() {
+        this.lastHeartbeat = Calendar.getInstance().getTimeInMillis();
+        failedHeartbeatCount=0;
     }
 
     private static class CharNameAndId {

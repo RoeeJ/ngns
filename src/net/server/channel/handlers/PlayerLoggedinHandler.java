@@ -101,7 +101,7 @@ public final class PlayerLoggedinHandler extends AbstractMaplePacketHandler {
             c.announce(MaplePacketCreator.getAfterLoginError(7));
             return;
         }
-        c.updateLoginState(MapleClient.LOGIN_LOGGEDIN,c.getSessionIPAddress());
+        c.updateLoginState(MapleClient.LOGIN_LOGGEDIN);
 
         cserv.addPlayer(player);
         List<PlayerBuffValueHolder> buffs = server.getPlayerBuffStorage().getBuffsFromStorage(cid);

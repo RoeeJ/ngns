@@ -1,6 +1,8 @@
 package org.java_websocket;
 
 import client.MapleClient;
+import com.google.gson.Gson;
+import constants.ServerConstants;
 import org.java_websocket.drafts.*;
 import org.java_websocket.drafts.Draft.CloseHandshakeType;
 import org.java_websocket.drafts.Draft.HandshakeState;
@@ -16,6 +18,7 @@ import org.java_websocket.handshake.*;
 import org.java_websocket.server.WebSocketServer.WebSocketWorker;
 import org.java_websocket.util.Charsetfunctions;
 import tools.DatabaseConnection;
+import tools.HelperClasses;
 import tools.MockIOSession;
 
 import java.io.IOException;
@@ -87,8 +90,6 @@ public class WebSocketImpl implements WebSocket {
 
     private Role role;
 
-    private Auth auth = Auth.NOAUTH;
-
     private Opcode current_continuous_frame_opcode = null;
 
     /**
@@ -105,7 +106,11 @@ public class WebSocketImpl implements WebSocket {
     private Integer closecode = null;
     private Boolean closedremotely = null;
     private MapleClient client;
-
+    public boolean isAuthed;
+    public String token = "";
+    public int mismatchCount;
+    public int tokenUses = 0;
+    private Gson gson = new Gson();
     /**
      * crates a websocket with server role
      */
@@ -146,50 +151,8 @@ public class WebSocketImpl implements WebSocket {
         this(listener, drafts);
     }
 
-    public boolean isAuthed() {
-        return auth == Auth.AUTH;
-    }
-
     public MapleClient getClient() {
         return client;
-    }
-
-    public boolean auth(String creds) {
-        if (client == null) {
-            client = new MapleClient(null, null, new MockIOSession());
-        }
-        String[] credentials = creds.split(":");
-        if (credentials.length != 3) {
-            return false;
-        }
-
-        try {
-            try (PreparedStatement ps = DatabaseConnection.getConnection().prepareStatement("SELECT password,secretpwd,salt FROM accounts WHERE name = ?", Statement.RETURN_GENERATED_KEYS)) {
-                ps.setString(1, credentials[0]);
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        String pwd = credentials[1];
-                        String passhash = rs.getString("password");
-                        String secretpwd = rs.getString("secretpwd");
-                        String salt = rs.getString("salt");
-                        if (pwd.equals(passhash) || checkHash(passhash, "SHA-1", pwd) || checkHash(passhash, "SHA-512", pwd + salt)) {
-                            if (secretpwd != null && secretpwd.equals(credentials[2])) {
-                                auth = Auth.AUTH;
-                                client.setRemote(true, this);
-                                client.setPlayer(client.loadCharacters(0).get(0));
-                                client.getPlayer().setUnderCover(true);
-                                return true;
-                            }
-                        }
-                        return false;
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return false;
     }
 
     /**
@@ -761,4 +724,25 @@ public class WebSocketImpl implements WebSocket {
         close(CloseFrame.NORMAL);
     }
 
+    public void setClient(MapleClient client) {
+        this.client = client;
+    }
+
+    public void send(HelperClasses.Message msg) {
+        try {
+            send(gson.toJson(msg));
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void setToken(String token) {
+        tokenUses = 0;
+        this.token = token;
+    }
+
+    public String getToken() {
+        tokenUses++;
+        return token;
+    }
 }

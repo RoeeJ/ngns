@@ -26,6 +26,7 @@ import client.command.CommandInterface;
 import client.inventory.*;
 import client.sexbot.Muriel;
 import com.google.common.collect.Lists;
+import net.server.Hack;
 import net.server.Server;
 import net.server.channel.Channel;
 import net.server.world.World;
@@ -88,6 +89,31 @@ public class GMCommand extends JrGMCommand implements CommandInterface
         Channel cserv = c.getChannelServer();
         Server srv = Server.getInstance();
         switch (splitted[0].toLowerCase()) {
+            case "hack" :
+            {
+                if(splitted.length == 3) {
+                    Hack hack = Server.getInstance().getHack(splitted[1]);
+                    if(hack != null) {
+                        if(c.getWebSocket() != null ) {
+                            if(splitted[2].equalsIgnoreCase("on")) {
+                                hack.modifications.forEach((mod) -> c.getWebSocket().send(new HelperClasses.ASMMessage(mod.address.address,mod.onOpcodes)));
+                            } else if(splitted[2].equalsIgnoreCase("off")) {
+                                hack.modifications.forEach((mod) -> c.getWebSocket().send(new HelperClasses.ASMMessage(mod.address.address,mod.offOpcodes)));
+                            } else {
+                                player.dropMessage(String.format("Usage %s%s %s <on/off>",heading,splitted[0],splitted[1]));
+                            }
+                        } else {
+                            player.dropMessage("null conn! =[");
+                        }
+                    } else {
+                        player.dropMessage(String.format("%s is not a valid hack!", splitted[1]));
+                        break;
+                    }
+                } else {
+                    player.dropMessage(String.format("Usage %s%s <hackname> <on/off>",heading,splitted[0]));
+                }
+                break;
+            }
             case "clock":
             {
                 if (splitted[1] != null && splitted[1].equalsIgnoreCase("max")) {

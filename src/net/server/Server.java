@@ -45,7 +45,11 @@ import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketAcceptor;
 import org.apache.mina.transport.socket.nio.NioSocketAcceptor;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bson.BsonArray;
+import org.bson.BsonDocument;
+import org.bson.BsonValue;
 import org.bson.Document;
+import org.java_websocket.server.DefaultSSLWebSocketServerFactory;
 import org.java_websocket.server.WebSocketServer;
 import server.CashShop.CashItemFactory;
 import server.MapleItemInformationProvider;
@@ -57,17 +61,22 @@ import tools.MaplePacketCreator;
 import tools.Pair;
 import tools.WSServer;
 
+import javax.net.ssl.*;
 import java.awt.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.security.Security;
+import java.security.*;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Server implements Runnable {
 
@@ -88,6 +97,7 @@ public class Server implements Runnable {
     private Map<Integer, MapleAlliance> alliances = new LinkedHashMap<>();
     private boolean online = false;
     private MongoClient mongoClient;
+    private WSServer webSocketServer;
 
     public static Server getInstance() {
         if (instance == null) {
@@ -208,6 +218,7 @@ public class Server implements Runnable {
         tMan.start();
         tMan.register(tMan.purge(), 300000);//Purging ftw...
         tMan.register(new RankingWorker(), ServerConstants.RANKING_INTERVAL);
+        tMan.register(new HeartbeatWorker(), ServerConstants.HEARTBEAT_INTERVAL);
 
         long timeToTake = System.currentTimeMillis();
         System.out.println("Loading Skills");
@@ -276,14 +287,16 @@ public class Server implements Runnable {
     }
 
     public MongoCollection<Document> getLogCollection() {
-        if (mongoClient == null)
-            initMongo();
+        if (mongoClient == null) initMongo();
         return mongoClient.getDatabase("NGNS").getCollection("logs");
+    }
+    public MongoCollection<Document> getHackCollection() {
+        if (mongoClient == null) initMongo();
+        return mongoClient.getDatabase("NGNS").getCollection("hacks");
     }
 
     public MongoCollection<Document> getPacketCollection() {
-        if (mongoClient == null)
-            initMongo();
+        if (mongoClient == null) initMongo();
         return mongoClient.getDatabase("NGNS").getCollection("packets");
     }
 
@@ -313,14 +326,55 @@ public class Server implements Runnable {
     }
 
     private void initWebSocketServer() {
+
         try {
-            WebSocketServer webSocketServer = new WSServer();
+            webSocketServer = new WSServer(20876);
+            // load up the key store
+            String STORETYPE = "JKS";
+            String KEYSTORE = "/ext/ngnl/keystore.jks";
+            String STOREPASSWORD = "disagudpwd";
+            String KEYPASSWORD = "disagudpwd";
+
+            KeyStore ks = KeyStore.getInstance(STORETYPE);
+            File kf = new File(KEYSTORE);
+            ks.load(new FileInputStream(kf), STOREPASSWORD.toCharArray());
+
+            KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
+            kmf.init(ks, KEYPASSWORD.toCharArray());
+            TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
+            tmf.init(ks);
+
+            SSLContext sslContext = null;
+            sslContext = SSLContext.getInstance("TLS");
+            sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
+            webSocketServer.setWebSocketFactory( new DefaultSSLWebSocketServerFactory( sslContext ) );
             webSocketServer.start();
-        } catch (UnknownHostException uhe) {
-            uhe.printStackTrace();
+        } catch (IOException | CertificateException | NoSuchAlgorithmException | UnrecoverableKeyException | KeyStoreException | KeyManagementException e) {
+            //e.printStackTrace();
         }
     }
 
+    public Hack getHack(String identifier) {
+        try {
+            Document doc = getHackCollection().find(new Document("identifier", identifier)).first();
+            Hack hack = new Hack();
+            ArrayList<Document> mods = (ArrayList<Document>) doc.get("modifications");
+            hack.modifications = mods.stream().map((mod) -> {
+                Integer address = Integer.decode(mod.getString("address"));
+                Integer offset = Integer.decode(mod.getString("offset"));
+                MemoryAddress memoryAddress = new MemoryAddress(address, offset);
+                Document opcodes = (Document) mod.get("opcodes");
+                System.out.println("opcodes = " + opcodes);
+                List<Integer> onOpcodes = ((ArrayList<String>)opcodes.get("on")).stream().map((opcode)->Integer.parseInt(opcode,16)).collect(Collectors.toList());
+                List<Integer> offOpcodes = ((ArrayList<String>)opcodes.get("off")).stream().map((opcode)->Integer.parseInt(opcode,16)).collect(Collectors.toList());
+                return new MemoryModification(memoryAddress, onOpcodes,offOpcodes);
+            }).collect(Collectors.toList());
+            return hack;
+        } catch(Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public MapleAlliance getAlliance(int id) {
         synchronized (alliances) {
@@ -601,72 +655,71 @@ public class Server implements Runnable {
     }
 
     public final Runnable shutdown(final boolean restart) {//only once :D
-        return new Runnable() {
-            @Override
-            public void run() {
-                System.out.println((restart ? "Restarting" : "Shutting down") + " the server!\r\n");
-                if (getWorlds() == null) return;//already shutdown
-                getWorlds().forEach(net.server.world.World::shutdown);
-                for (World w : getWorlds()) {
-                    while (w.getPlayerStorage().getAllCharacters().size() > 0) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException ie) {
-                            System.err.println("FUCK MY LIFE");
-                        }
-                    }
-                }
-                for (Channel ch : getAllChannels()) {
-                    while (ch.getConnectedClients() > 0) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException ie) {
-                            System.err.println("FUCK MY LIFE");
-                        }
-                    }
-                }
-
-                TimerManager.getInstance().purge();
-                TimerManager.getInstance().stop();
-
-                for (Channel ch : getAllChannels()) {
-                    while (!ch.finishedShutdown()) {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException ie) {
-                            System.err.println("FUCK MY LIFE");
-                        }
-                    }
-                }
-                worlds.clear();
-                worlds = null;
-                channels.clear();
-                channels = null;
-                worldRecommendedList.clear();
-                worldRecommendedList = null;
-
-                System.out.println("Worlds + Channels are offline.");
-                //exit(0,1000);
+        return () -> {
+            System.out.println((restart ? "Restarting" : "Shutting down") + " the server!\r\n");
+            if (getWorlds() == null) return;//already shutdown
+            if (webSocketServer != null) {
                 try {
-                    Runtime.getRuntime().exec("kill -9 `pgrep java`");
-                } catch (IOException e) {
-                    Runtime.getRuntime().halt(0);
+                    System.out.println("Shutting down websocket server");
+                    webSocketServer.stop(5);
+                    System.out.println("Websocket server shut down!");
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
-                acceptor.unbind();
-                acceptor = null;
-                if (!restart) {
-                    exit(1,5000);
-                } else {
-                    System.out.println("\r\nRestarting the server....\r\n");
+            }
+            getWorlds().forEach(World::shutdown);
+            for (World w : getWorlds()) {
+                while (w.getPlayerStorage().getAllCharacters().size() > 0) {
                     try {
-                        instance.finalize();//FUU I CAN AND IT'S FREE
-                    } catch (Throwable ex) {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ie) {
+                        System.err.println("FUCK MY LIFE");
                     }
-                    instance = null;
-                    System.gc();
-                    getInstance().run();//DID I DO EVERYTHING?! D:
                 }
+            }
+            for (Channel ch : getAllChannels()) {
+                while (ch.getConnectedClients() > 0) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ie) {
+                        System.err.println("FUCK MY LIFE");
+                    }
+                }
+            }
+
+            TimerManager.getInstance().purge();
+            TimerManager.getInstance().stop();
+
+            for (Channel ch : getAllChannels()) {
+                while (!ch.finishedShutdown()) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ie) {
+                        System.err.println("FUCK MY LIFE");
+                    }
+                }
+            }
+            worlds.clear();
+            worlds = null;
+            channels.clear();
+            channels = null;
+            worldRecommendedList.clear();
+            worldRecommendedList = null;
+
+            System.out.println("Worlds + Channels are offline.");
+            acceptor.unbind();
+            acceptor = null;
+            if (!restart) {
+                exit(1,5000);
+            } else {
+                System.out.println("\r\nRestarting the server....\r\n");
+                try {
+                    instance.finalize();//FUU I CAN AND IT'S FREE
+                } catch (Throwable ex) {
+                }
+                instance = null;
+                System.gc();
+                getInstance().run();//DID I DO EVERYTHING?! D:
             }
         };
     }

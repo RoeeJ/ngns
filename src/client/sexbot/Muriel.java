@@ -581,7 +581,7 @@ public class Muriel
                 }
             }
 
-            c.updateLoginState(MapleClient.LOGIN_LOGGEDIN,c.getSessionIPAddress());
+            c.updateLoginState(MapleClient.LOGIN_LOGGEDIN);
 		}
 
 		Channel cserv = c.getChannelServer();

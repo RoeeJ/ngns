@@ -32,6 +32,7 @@ import net.server.world.MaplePartyCharacter;
 import org.apache.mina.core.buffer.IoBuffer;
 import org.apache.mina.core.buffer.SimpleBufferAllocator;
 import org.apache.mina.core.session.IdleStatus;
+import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.ProtocolCodecFilter;
 import org.apache.mina.transport.socket.SocketAcceptor;
 import org.apache.mina.transport.socket.SocketSessionConfig;
@@ -61,7 +62,7 @@ public final class Channel {
     public MapleMap eventMap;
     private PlayerStorage players = new PlayerStorage();
     private int world, channel;
-    private SocketAcceptor acceptor;
+    private NioSocketAcceptor acceptor;
     private String ip, serverMessage;
     private MapleMapFactory mapFactory;
     private EventScriptManager eventSM;
@@ -95,7 +96,7 @@ public final class Channel {
             acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 30);
             acceptor.getFilterChain().addLast("codec", new ProtocolCodecFilter(new MapleCodecFactory()));
             acceptor.bind(new InetSocketAddress(port));
-            ((SocketSessionConfig) acceptor.getSessionConfig()).setTcpNoDelay(true);
+            acceptor.getSessionConfig().setTcpNoDelay(true);
 
             eventSM.init();
             System.out.println("    Channel " + getId() + ": Listening on port " + port);
@@ -111,7 +112,13 @@ public final class Channel {
             closeAllMerchants();
             System.out.println(String.format("Closed all merchants on channel %d on world %d",channel,world));
             players.disconnectAll();
+            System.out.println(String.format("Unbinding on channel %d", channel));
+            acceptor.setCloseOnDeactivation(true);
+            new Thread(()->{
+                acceptor.getManagedSessions().values().parallelStream().forEach((conn) -> conn.close(true));
+            }).start();
             acceptor.unbind();
+            acceptor.dispose();
 
             finishedShutdown = true;
             System.out.println("Successfully shut down Channel " + channel + " on World " + world + "\r\n");

@@ -218,6 +218,7 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     private transient MapleCharacter watcher;
     private transient MapleCharacter send;
     private Date lastActive;
+    private long lastPetSpawn;
 
     private MapleCharacter() {
         setStance(0);
@@ -1887,8 +1888,8 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     }
 
     public void dropMessage(String message) {
-        if (getClient().isRemote() && getClient().getConn() != null) {
-            getClient().getConn().send(message);
+        if (getClient().isRemote() && getClient().getWebSocket() != null) {
+            //TODO:dropMessage
         } else {
             dropMessage(6, message);
         }
@@ -3424,8 +3425,8 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
     }
 
     public void yellowMessage(String m) {
-        if (getClient().isRemote() && getClient().getConn() != null) {
-            getClient().getConn().send(m);
+        if (getClient().isRemote() && getClient().getWebSocket() != null) {
+            //TODO:yellowMessage
         } else {
             announce(MaplePacketCreator.sendYellowTip(m));
         }
@@ -5402,6 +5403,13 @@ public class MapleCharacter extends AbstractAnimatedMapleMapObject {
                 "accountid",accountid,
                 "map",mapid
         );
+    }
+    public long getLastPetSpawn() {
+        return lastPetSpawn;
+    }
+
+    public void updateLastePetSpawn() {
+        this.lastPetSpawn = Calendar.getInstance().getTimeInMillis();
     }
 
     public enum FameStatus {

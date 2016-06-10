@@ -86,18 +86,18 @@ public class PlayerStorage {
 
     public final void disconnectAll() {
         System.out.println("Disconnecting all players!");
-        wlock.lock();
-        try {
-            final Iterator<MapleCharacter> chrit = storage.values().iterator();
-            while (chrit.hasNext()) {
-                MapleCharacter chr = chrit.next();
-                System.out.println(String.format("Disconnecting %s", chr.getName()));
-                chr.getClient().disconnect(true, false);
-                chr = null;
-                chrit.remove();
+        if(wlock.tryLock()) {
+            try {
+                final Iterator<MapleCharacter> chrit = storage.values().iterator();
+                while (chrit.hasNext()) {
+                    chrit.next().getClient().disconnect(true, false);
+                    chrit.remove();
+                }
+            } finally {
+                wlock.unlock();
             }
-        } finally {
-            wlock.unlock();
+        } else {
+            System.out.println("Failed acquiring lock!");
         }
     }
 }

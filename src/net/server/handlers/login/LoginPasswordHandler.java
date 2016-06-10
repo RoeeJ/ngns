@@ -109,12 +109,7 @@ public final class LoginPasswordHandler implements MaplePacketHandler {
                 //SlackReporter.getInstance().log("LoginBot","#logins",String.format("[Login Successful]%s:%s ~ %s",login,pwd, c.getSession().getRemoteAddress().toString()));
                 c.announce(MaplePacketCreator.getAuthSuccess(c));//why the fk did I do c.getAccountName()?
                 final MapleClient client = c;
-                c.setIdleTask(TimerManager.getInstance().schedule(new Runnable() {
-                    @Override
-                    public void run() {
-                        client.disconnect(false, false);
-                    }
-                }, 600000));
+                c.setIdleTask(TimerManager.getInstance().schedule(() -> client.disconnect(false, false), 600000));
             } else {
                 c.announce(MaplePacketCreator.getLoginFailed(7));
             }

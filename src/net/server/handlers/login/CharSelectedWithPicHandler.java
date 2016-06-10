@@ -27,7 +27,7 @@ public class CharSelectedWithPicHandler extends AbstractMaplePacketHandler {
             if (c.getIdleTask() != null) {
                 c.getIdleTask().cancel(true);
             }
-            c.updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION,c.getSessionIPAddress());
+            c.updateLoginState(MapleClient.LOGIN_SERVER_TRANSITION);
 
             String[] socket = Server.getInstance().getIP(c.getWorld(), c.getChannel()).split(":");
             try {
